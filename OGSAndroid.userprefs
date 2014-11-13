@@ -1,0 +1,25 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.SelectDevice" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="OGSAndroid\SGFTree.cs">
+    <Files>
+      <File FileName="OGSAndroid\MainActivity.cs" Line="10" Column="10" />
+      <File FileName="OGSAndroid\BoardView.cs" Line="1" Column="1" />
+      <File FileName="OGSAndroid\BoardTouch.cs" Line="1" Column="1" />
+      <File FileName="OGSAndroid\Resources\AboutResources.txt" Line="1" Column="1" />
+      <File FileName="OGSAndroid\Resources\Resource.designer.cs" Line="1" Column="1" />
+      <File FileName="OGSAndroid\SGFView.cs" Line="1" Column="1" />
+      <File FileName="OGSAndroid\Move.cs" Line="1" Column="1" />
+      <File FileName="OGSAndroid\Stone.cs" Line="1" Column="1" />
+      <File FileName="OGSAndroid\SGFParser.cs" Line="1" Column="1" />
+      <File FileName="OGSAndroid\SGFTree.cs" Line="9" Column="9" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches>
+    <Watch file="OGSAndroid\SGFView.cs" line="65" offsetX="242" offsetY="1024" expression="Moves" liveUpdate="False" />
+    <Watch file="OGSAndroid\BoardView.cs" line="131" offsetX="340" offsetY="2080" expression="s" liveUpdate="False" />
+  </MonoDevelop.Ide.DebuggingService.PinnedWatches>
+  <MonoDevelop.Ide.ItemProperties.OGSAndroid MonoForAntroid.PreferredDevice="Nexus 4" MonoForAntroid.PreferredTheme="Theme.DeviceDefault.NoActionBar" />
+</Properties>
