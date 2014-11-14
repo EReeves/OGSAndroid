@@ -28,9 +28,10 @@ namespace OGSAndroid
         {
             return this.GetEnumerator();
         }
+
     }
 
-    public class Node<T> : IEnumerable<Node<T>>
+    public class Node<T>
     {
         private List<Node<T>> children;
         public T Data { get; set; }
@@ -56,26 +57,25 @@ namespace OGSAndroid
             return children.Last();
         }
 
-        public IEnumerator<Node<T>> GetEnumerator()
-        { 
-            return children.GetEnumerator();
-        }
+ 
 
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-        {
-            return this.GetEnumerator();
-        }
 
         public override string ToString()
         {
-            string str = "";
-            foreach (var n in children) 
-            {
-                str += n.Data + "\n";
-                str += n.ToString() + "\n";
-            }
+            return Data.ToString();
+        }
 
-            return str;
+        public static IEnumerable<Node<T>> Next(Node<T> node)
+        {
+            yield return node;
+
+            foreach (var n in node.children) 
+            {            
+                foreach (var nn in Node<T>.Next(n))
+                {
+                    yield return nn;
+                }
+            }
         }
     }
 }

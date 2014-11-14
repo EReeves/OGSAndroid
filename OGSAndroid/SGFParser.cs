@@ -25,6 +25,8 @@ namespace OGSAndroid
                 switch(sgf[i])
                 {
                     case '[':
+                        if (sgf[i - 1] == '\\')
+                            break;
                         temp = SortMove(sgf, i, temp);
                         break;
                     case '(':
@@ -113,6 +115,9 @@ namespace OGSAndroid
 
         public void InsertMove(Move mv, ref SGF<Move> sg)
         {
+            if (mv == null)
+                return; //pass or error
+
             if (currPos.Count == 0)
             {
                 sg.Tree.AddItem(mv);

@@ -24,6 +24,8 @@ namespace OGSAndroid
 
         public static Move LettersToMove(string letter, Stone colour)
         {
+            if (String.IsNullOrEmpty(letter))
+                return null; //pass
             var x = letter[0] % 32;
             var y = letter[1] % 32;
             return new Move(colour, x, y);
