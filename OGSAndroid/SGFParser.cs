@@ -68,8 +68,8 @@ namespace OGSAndroid
                         var mw = Move.LettersToMove(data, Stone.White);
                         InsertMove(mw, ref temp);
                         break;
-                    case "AB": //Handicap stones.
-                       
+                    case "AB": //Handicap stones. //Todo: WB, white stones.
+                        GrabHandicapStones(sgf, bPos, ref temp, Stone.Black);
                         break;
                     case "C": //Chat message
 
@@ -138,6 +138,38 @@ namespace OGSAndroid
                     break;
             }
 
+        }
+
+        private void GrabHandicapStones(string sgf, int bPos, ref SGF<Move> sg, Stone colour)
+        {
+            var data = "";
+            var i=bPos;
+
+            while( i == bPos || !(sgf[i] == ']' && sgf[i+1] != '[') )   
+            {
+                data += sgf[i];
+                if (i + 1 >= sgf.Length)
+                    break;
+                i++;
+            }
+
+            var splt = data.Split(new[]{ '[', ']' }, StringSplitOptions.RemoveEmptyEntries);
+            var ncr = splt.Where(c => c != "\r");
+            foreach (var mv in ncr) 
+            {
+                //Add each handicap stone as new child.
+                var m = Move.LettersToMove(mv, colour);
+
+                if (currPos.Count == 0)
+                {
+                    sg.Tree.AddItem(m);
+                    currPos.Push(sg.Tree.First());
+                    continue;
+                }
+
+                var node = currPos.Peek().AddChild(m);
+                currPos.Push(node);
+            }
         }
     }
 }

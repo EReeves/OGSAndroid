@@ -131,6 +131,7 @@ C[Rvzy: you nearly came back with my mistake at the end :p
                 Console.WriteLine(node.ToString());
             }
 
+            int turnPos = 0;
 
             //Console.WriteLine(sgf.Tree.First());
 
@@ -140,6 +141,7 @@ C[Rvzy: you nearly came back with my mistake at the end :p
 			
 			button.Click += delegate {
                 bv.ClearBoard();
+                turnPos = 0;
 			};
 
             Button button1 = FindViewById<Button> (Resource.Id.button1);
@@ -160,13 +162,13 @@ C[Rvzy: you nearly came back with my mistake at the end :p
 
             Button next = FindViewById<Button>(Resource.Id.button5);
             Node<Move>[] cnode = Node<Move>.Next(sgf.Tree.First()).ToArray();
-            int i = 0;
+
 
             next.Click += (sender, e) =>  {
 
-                if(i>cnode.Count()-1) return;            
-                bv.PlaceStone(cnode[i].Data);
-                i++;
+                if(turnPos>cnode.Count()-1) return;            
+                bv.PlaceStone(cnode[turnPos].Data);
+                turnPos++;
             };
 		}
 
