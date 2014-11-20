@@ -12,7 +12,7 @@ namespace OGSAndroid
     public class SGFView : BoardView
     {
         public SGF<Move> Moves = new SGF<Move>();
-        public MatchInfo Info = new MatchInfo();
+        public int CurrentMove = 1;
 
         public SGFView(Context context, IAttributeSet attrs)
             : base(context, attrs)
@@ -20,47 +20,59 @@ namespace OGSAndroid
         
         }
 
-
-        private static bool ContainsNotEscaped(char contains, string str)
+        public void SetSGF(SGF<Move> s)
         {
-            for (var i = 0; i < str.Length; i++)
+            Moves = s;
+            CurrentMove = Convert.ToInt32(s.Info.Handicap);
+            ToStart();
+        }
+
+        public void PlaceUpTo(int max)
+        {
+            ClearBoard();
+            for(int i=0;i<max;i++)
             {
-                if (str[i] != contains) continue;
-                if (i == 0) return true;
-                if (str[i - 1] != '\\') return true;
-            }
-            return false;
-        }
+                if (i > Moves.Tree.Nodes.Count-1)
+                    return;
 
-        private string[] GrabData(string line)
-        {
-            var splt = line.Split(new[]{ '[', ']' }, StringSplitOptions.RemoveEmptyEntries);
-            var ncr = splt.Where(c => c != "\r");
-            return ncr.Skip(1).ToArray(); //Skip definition, e.g. PB from PB[Rvzy]          
-        }
+                var node = Moves.Tree.Nodes[i];
 
-        private void GrabHandicapStones(string line)
-        {
-            var strs = GrabData(line);
-           
-            //foreach (var s in strs)
-                //Moves.Add(LettersToMove(s, Stone.Black));
-        }
-
-        public void PlaceToEnd()
-        {
-            foreach (var m in Moves.Tree)
-            {
-                switch (m.Data.MType)
+                while(node.Data.MType == Move.Type.Chat)
                 {
-                    case Move.Type.Chat:
-                        break;
-
-                    case Move.Type.Place:
-                        //PlaceStone(m);
-                        break;
+                    i++;
+                    if (i > Moves.Tree.Nodes.Count-1)
+                    return;
+                    node = Moves.Tree.Nodes[i];
                 }
+
+                PlaceStone(node.Data);
+
             }
+        }
+
+        public void ToEnd()
+        {
+            PlaceUpTo(Moves.Tree.Nodes.Count);
+        }
+
+        public void ToStart()
+        {
+            CurrentMove = Convert.ToInt32(Moves.Info.Handicap);
+            PlaceUpTo(CurrentMove);
+        }
+
+        public void Next()
+        {
+            CurrentMove++;
+            PlaceUpTo(CurrentMove);
+        }
+
+        public void Previous()
+        {
+            if(CurrentMove == 1) return;
+
+            CurrentMove--;
+            PlaceUpTo(CurrentMove);
         }
     }
 }

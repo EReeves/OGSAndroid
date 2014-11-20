@@ -28,12 +28,13 @@ namespace OGSAndroid
 
     public class SGF<T>
     {
-        public MatchInfo Info {get; set;}
+        public MatchInfo Info;
         public SGFTree<T> Tree {get; set;}
 
         public SGF()
         {
         	Tree = new SGFTree<T>();
+            Info = new MatchInfo();
         }
     }
 }

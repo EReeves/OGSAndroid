@@ -15,6 +15,7 @@ namespace OGSAndroid
     [Activity (Label = "Go", MainLauncher = true, Icon = "@drawable/icon", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
 	public class MainActivity : Activity
 	{
+        private SGFView bv;
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -25,7 +26,7 @@ namespace OGSAndroid
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Main);
 
-            SGFView bv = FindViewById<SGFView>(Resource.Id.SGFView);
+            bv = FindViewById<SGFView>(Resource.Id.SGFView);
 
             OGSAndroid.SGFParser ps = new SGFParser();
 
@@ -124,28 +125,21 @@ C[Rvzy: you nearly came back with my mistake at the end :p
 )
                 "
                 );
-            //bv.PlaceAllSGFMoves();
 
-            foreach (var node in Node<Move>.Next(sgf.Tree.First()))
-            {
-                Console.WriteLine(node.ToString());
-            }
-
-            int turnPos = 0;
-
-            //Console.WriteLine(sgf.Tree.First());
+            bv.SetSGF(sgf);
 
 			// Get our button from the layout resource,
 			// and attach an event to it
 			Button button = FindViewById<Button> (Resource.Id.myButton);
 			
+            //Clear Board
 			button.Click += delegate {
                 bv.ClearBoard();
-                turnPos = 0;
+                bv.ToStart();
 			};
 
+            //Debug Pass
             Button button1 = FindViewById<Button> (Resource.Id.button1);
-
             button1.Click += delegate {
 
                 Stone[] stones = bv.stones.Select(x => (Stone)x.Clone()).ToArray();
@@ -156,27 +150,35 @@ C[Rvzy: you nearly came back with my mistake at the end :p
                 bv.Invalidate();
             };
 
+            //MatchInfo
             TextView tv = FindViewById<TextView>(Resource.Id.statText);
-            tv.Text = bv.Info.String();
+            tv.Text = bv.Moves.Info.String();
             tv.Invalidate();
 
+
+            //NextMove
             Button next = FindViewById<Button>(Resource.Id.button5);
-            Node<Move>[] cnode = Node<Move>.Next(sgf.Tree.First()).ToArray();
+            next.Click += (sender, e) =>  bv.Next();
+
+            //Previous
+            Button prev = FindViewById<Button>(Resource.Id.button3);
+            prev.Click += (sender, e) =>  bv.Previous();
+
+            //Start
+            Button start = FindViewById<Button>(Resource.Id.button2);
+            start.Click += (sender, e) =>  bv.ToStart();
+            
+            //End
+            Button end = FindViewById<Button>(Resource.Id.button6);
+            end.Click += (sender, e) =>  bv.ToEnd();            
 
 
-            next.Click += (sender, e) =>  {
 
-                if(turnPos>cnode.Count()-1) return;            
-                bv.PlaceStone(cnode[turnPos].Data);
-                turnPos++;
-            };
+
+
+
 		}
-
-
-
-
 	}
-
 }
 
 

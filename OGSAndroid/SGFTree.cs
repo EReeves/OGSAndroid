@@ -5,28 +5,19 @@ using System.Linq;
 
 namespace OGSAndroid
 {
-    public class SGFTree<T> : IEnumerable<Node<T>>
+    public class SGFTree<T>
     {
-        private List<Node<T>> nodes;
+        public Node<T> FirstNode;
+        public List<Node<T>> Nodes = new List<Node<T>>();
 
         public SGFTree()
         {
-            nodes = new List<Node<T>>();
+            Nodes = new List<Node<T>>();
         }
-
-        public void AddItem(T item)
+                 
+        public void PopulateNodesList()
         {
-            nodes.Add(new Node<T>(item));
-        }
-
-        public IEnumerator<Node<T>> GetEnumerator()
-        {
-            return nodes.GetEnumerator();
-        }
-
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-        {
-            return this.GetEnumerator();
+            Nodes = Node<T>.Enumerator(FirstNode).ToList();
         }
 
     }
@@ -34,6 +25,7 @@ namespace OGSAndroid
     public class Node<T>
     {
         private List<Node<T>> children;
+        public SGFTree<T> Parent;
         public T Data { get; set; }
 
         public bool HasVariation
@@ -45,33 +37,31 @@ namespace OGSAndroid
             private set { }
         }
 
-        public Node(T item)
+        public Node(T item, SGFTree<T> parent)
         {
             children = new List<Node<T>>();
+            Parent = parent;
             Data = item;
         }
 
         public Node<T> AddChild(T item)
         {
-            children.Add(new Node<T>(item));
+            children.Add(new Node<T>(item, Parent));
             return children.Last();
         }
-
- 
-
 
         public override string ToString()
         {
             return Data.ToString();
         }
 
-        public static IEnumerable<Node<T>> Next(Node<T> node)
+        public static IEnumerable<Node<T>> Enumerator(Node<T> node)
         {
             yield return node;
 
             foreach (var n in node.children) 
             {            
-                foreach (var nn in Node<T>.Next(n))
+                foreach (var nn in Node<T>.Enumerator(n))
                 {
                     yield return nn;
                 }

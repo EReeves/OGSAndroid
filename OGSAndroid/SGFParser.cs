@@ -41,6 +41,7 @@ namespace OGSAndroid
                 }
             }
 
+            temp.Tree.PopulateNodesList();
             return temp;
         }
 
@@ -75,37 +76,37 @@ namespace OGSAndroid
 
                         break;
                     case "PB":
-
+                        temp.Info.Black = GrabData(sgf,bPos)[0];            
                         break;
                     case "BR":
-
+                        temp.Info.BlackRank = GrabData(sgf,bPos)[0]; 
                         break;
                     case "PW":
-
+                        temp.Info.White = GrabData(sgf,bPos)[0]; 
                         break;
                     case "WR":
-
+                        temp.Info.WhiteRank = GrabData(sgf,bPos)[0]; 
                         break;
                     case "SZ":
-
+                        temp.Info.Size = GrabData(sgf,bPos)[0]; 
                         break;
                     case "KM":
-
+                        temp.Info.Komi = GrabData(sgf,bPos)[0]; 
                         break;
                     case "RE":
-
+                        temp.Info.Result = GrabData(sgf,bPos)[0]; 
                         break;
                     case "HA":
-
+                        temp.Info.Handicap = GrabData(sgf,bPos)[0];
                         break;
                     case "RU":
-
+                        temp.Info.Ruleset = GrabData(sgf,bPos)[0]; 
                         break;
                     case "DT":
-
+                        temp.Info.Date = GrabData(sgf,bPos)[0]; 
                         break;
                     case "PC":
-
+                        temp.Info.Link = GrabData(sgf,bPos)[0]; 
                         break;
             }
 
@@ -120,8 +121,8 @@ namespace OGSAndroid
 
             if (currPos.Count == 0)
             {
-                sg.Tree.AddItem(mv);
-                currPos.Push(sg.Tree.First());
+                sg.Tree.FirstNode = new Node<Move>(mv, sg.Tree);
+                currPos.Push(sg.Tree.FirstNode);
                 return;
             }
 
@@ -140,7 +141,7 @@ namespace OGSAndroid
 
         }
 
-        private void GrabHandicapStones(string sgf, int bPos, ref SGF<Move> sg, Stone colour)
+         private string[] GrabData(string sgf, int bPos)
         {
             var data = "";
             var i=bPos;
@@ -154,7 +155,15 @@ namespace OGSAndroid
             }
 
             var splt = data.Split(new[]{ '[', ']' }, StringSplitOptions.RemoveEmptyEntries);
-            var ncr = splt.Where(c => c != "\r");
+            var ncr = splt.Where(c => c != "\r");       
+
+            return ncr.ToArray();
+        }
+
+        private void GrabHandicapStones(string sgf, int bPos, ref SGF<Move> sg, Stone colour)
+        {
+            var ncr = GrabData(sgf,bPos);
+
             foreach (var mv in ncr) 
             {
                 //Add each handicap stone as new child.
@@ -162,8 +171,8 @@ namespace OGSAndroid
 
                 if (currPos.Count == 0)
                 {
-                    sg.Tree.AddItem(m);
-                    currPos.Push(sg.Tree.First());
+                    sg.Tree.FirstNode = new Node<Move>(m, sg.Tree);
+                    currPos.Push(sg.Tree.FirstNode);
                     continue;
                 }
 
