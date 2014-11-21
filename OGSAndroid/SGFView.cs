@@ -24,6 +24,7 @@ namespace OGSAndroid
         {
             Moves = s;
             CurrentMove = Convert.ToInt32(s.Info.Handicap);
+            Lines = Convert.ToInt32(s.Info.Size);
             ToStart();
         }
 

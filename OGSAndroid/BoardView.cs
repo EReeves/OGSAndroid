@@ -17,7 +17,7 @@ namespace OGSAndroid
 	public class BoardView : View
 	{
         public int Padding { get; private set; }
-        public int Lines { get; private set; }
+        public int Lines { get; set; }
         public int Size { get; private set; }
         public int Spacing { get; private set; }
 
@@ -65,7 +65,7 @@ namespace OGSAndroid
 
             Console.WriteLine("Color" + Color.SandyBrown);
  
-			DrawBoard(canvas, 13, 40);
+			DrawBoard(canvas, Lines, 40);
 
             foreach (var s in stones)
             {

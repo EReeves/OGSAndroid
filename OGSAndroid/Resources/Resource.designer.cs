@@ -84,14 +84,23 @@ namespace OGSAndroid
 			// aapt resource value: 0x7f05000a
 			public const int button6 = 2131034122;
 			
+			// aapt resource value: 0x7f05000d
+			public const int gameList = 2131034125;
+			
 			// aapt resource value: 0x7f050005
 			public const int linearLayout1 = 2131034117;
 			
 			// aapt resource value: 0x7f050001
 			public const int myButton = 2131034113;
 			
+			// aapt resource value: 0x7f05000b
+			public const int pNameText = 2131034123;
+			
 			// aapt resource value: 0x7f050000
 			public const int relativeLayout1 = 2131034112;
+			
+			// aapt resource value: 0x7f05000c
+			public const int searchButton = 2131034124;
 			
 			// aapt resource value: 0x7f050004
 			public const int statText = 2131034116;
@@ -111,6 +120,9 @@ namespace OGSAndroid
 			
 			// aapt resource value: 0x7f030000
 			public const int Main = 2130903040;
+			
+			// aapt resource value: 0x7f030001
+			public const int PlayerGameList = 2130903041;
 			
 			static Layout()
 			{

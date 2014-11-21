@@ -12,10 +12,10 @@ using Android.OS;
 
 namespace OGSAndroid
 {
-    [Activity (Label = "Go", MainLauncher = true, Icon = "@drawable/icon", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity (Label = "Main", Icon = "@drawable/icon", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
 	public class MainActivity : Activity
 	{
-        private SGFView bv;
+        public SGFView BoardView;
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -26,9 +26,9 @@ namespace OGSAndroid
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Main);
 
-            bv = FindViewById<SGFView>(Resource.Id.SGFView);
+            BoardView = FindViewById<SGFView>(Resource.Id.SGFView);
 
-            OGSAndroid.SGFParser ps = new SGFParser();
+           /* OGSAndroid.SGFParser ps = new SGFParser();
 
             var sgf = ps.Parse(
                 @"
@@ -126,7 +126,9 @@ C[Rvzy: you nearly came back with my mistake at the end :p
                 "
                 );
 
-            bv.SetSGF(sgf);
+            BoardView.SetSGF(sgf);*/
+
+            BoardView.SetSGF(PlayerGameListActivity.CurrentSGF);
 
 			// Get our button from the layout resource,
 			// and attach an event to it
@@ -134,47 +136,51 @@ C[Rvzy: you nearly came back with my mistake at the end :p
 			
             //Clear Board
 			button.Click += delegate {
-                bv.ClearBoard();
-                bv.ToStart();
+                BoardView.ClearBoard();
+                BoardView.ToStart();
 			};
 
             //Debug Pass
             Button button1 = FindViewById<Button> (Resource.Id.button1);
             button1.Click += delegate {
 
-                Stone[] stones = bv.stones.Select(x => (Stone)x.Clone()).ToArray();
+                Stone[] stones =  BoardView.stones.Select(x => (Stone)x.Clone()).ToArray();
                 foreach(Stone bs in stones)
                 {
-                    bv.CapturePass(bs);
+                    BoardView.CapturePass(bs);
                 }
-                bv.Invalidate();
+                BoardView.Invalidate();
             };
 
             //MatchInfo
             TextView tv = FindViewById<TextView>(Resource.Id.statText);
-            tv.Text = bv.Moves.Info.String();
+            tv.Text =  BoardView.Moves.Info.String();
             tv.Invalidate();
 
 
             //NextMove
             Button next = FindViewById<Button>(Resource.Id.button5);
-            next.Click += (sender, e) =>  bv.Next();
+            next.Click += (sender, e) =>   BoardView.Next();
 
             //Previous
             Button prev = FindViewById<Button>(Resource.Id.button3);
-            prev.Click += (sender, e) =>  bv.Previous();
+            prev.Click += (sender, e) =>   BoardView.Previous();
 
             //Start
             Button start = FindViewById<Button>(Resource.Id.button2);
-            start.Click += (sender, e) =>  bv.ToStart();
+            start.Click += (sender, e) =>   BoardView.ToStart();
             
             //End
             Button end = FindViewById<Button>(Resource.Id.button6);
-            end.Click += (sender, e) =>  bv.ToEnd();            
+            end.Click += (sender, e) =>   BoardView.ToEnd();            
 
 
 
+            var pid = OGSAPI.GetPlayerID("Rvzy");
+            Console.WriteLine(pid);
 
+            var arr = OGSAPI.PlayerGameList(pid);
+            Console.WriteLine(arr.Count());
 
 
 		}

@@ -35,6 +35,8 @@ namespace OGSAndroid
                         break;
                     case ')':
                         //Move back in tree.
+                        if (currPos.Count() == 0)
+                            break;
                         currPos.Pop();
                         state = TreeState.Continue;
                         break;

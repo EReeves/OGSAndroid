@@ -55,6 +55,10 @@
     <Compile Include="SGFTree.cs" />
     <Compile Include="SGF.cs" />
     <Compile Include="SGFView.cs" />
+    <Compile Include="OGSAPI.cs" />
+    <Compile Include="SimpleJSON.cs" />
+    <Compile Include="OGSGame.cs" />
+    <Compile Include="PlayerGameListActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -66,6 +70,7 @@
     <AndroidResource Include="Resources\values\Strings.xml" />
     <AndroidResource Include="Resources\drawable\Icon.png" />
     <AndroidResource Include="Resources\drawable\woodtex.jpg" />
+    <AndroidResource Include="Resources\layout\PlayerGameList.axml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ProjectExtensions>
