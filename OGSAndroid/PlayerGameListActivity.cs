@@ -28,6 +28,8 @@ namespace OGSAndroid
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.PlayerGameList);
 
+            FlatUI.FlatUI.SetActivityTheme(this, FlatUI.FlatTheme.Dark());
+
             var gameList = FindViewById<ListView>(Resource.Id.gameList);
             var pNameText = FindViewById<EditText>(Resource.Id.pNameText);
             var searchButton = FindViewById<Button> (Resource.Id.searchButton);
@@ -37,7 +39,7 @@ namespace OGSAndroid
             searchButton.Click += (sender, e) =>  
             {
                     var pid = OGSAPI.GetPlayerID(pNameText.Text);
-                    gameArray = OGSAPI.PlayerGameList(pid);
+                    gameArray = OGSAPI.PlayerGameList(pid,1);
 
                     var lst = new List<string>();
 
@@ -56,6 +58,8 @@ namespace OGSAndroid
                 CurrentSGF = OGSAPI.IDToSGF(gameArray[gamePos].ID);
                 StartActivity(typeof(MainActivity));
             };
+
+
 
         }
     }

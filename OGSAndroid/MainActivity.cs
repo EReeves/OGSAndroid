@@ -23,10 +23,14 @@ namespace OGSAndroid
 
             RequestWindowFeature(WindowFeatures.NoTitle); //Remove title.
 
+
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Main);
 
+            FlatUI.FlatUI.SetActivityTheme(this, FlatUI.FlatTheme.Dark());
+
             BoardView = FindViewById<SGFView>(Resource.Id.SGFView);
+
 
            /* OGSAndroid.SGFParser ps = new SGFParser();
 
@@ -141,7 +145,7 @@ C[Rvzy: you nearly came back with my mistake at the end :p
 			};
 
             //Debug Pass
-            Button button1 = FindViewById<Button> (Resource.Id.button1);
+           /* Button button1 = FindViewById<Button> (Resource.Id.button1);
             button1.Click += delegate {
 
                 Stone[] stones =  BoardView.stones.Select(x => (Stone)x.Clone()).ToArray();
@@ -150,11 +154,12 @@ C[Rvzy: you nearly came back with my mistake at the end :p
                     BoardView.CapturePass(bs);
                 }
                 BoardView.Invalidate();
-            };
+            };*/
 
             //MatchInfo
             TextView tv = FindViewById<TextView>(Resource.Id.statText);
             tv.Text =  BoardView.Moves.Info.String();
+            tv.SetTextColor(Android.Graphics.Color.ParseColor("#c2c2c2"));
             tv.Invalidate();
 
 
@@ -179,7 +184,7 @@ C[Rvzy: you nearly came back with my mistake at the end :p
             var pid = OGSAPI.GetPlayerID("Rvzy");
             Console.WriteLine(pid);
 
-            var arr = OGSAPI.PlayerGameList(pid);
+            var arr = OGSAPI.PlayerGameList(pid,1);
             Console.WriteLine(arr.Count());
 
 

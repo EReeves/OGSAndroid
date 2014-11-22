@@ -8,18 +8,25 @@
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
-        android:layout_height="42.1dp"
-        android:id="@+id/linearLayout1">
-        <EditText
-            android:layout_width="294.6dp"
+        android:layout_height="49.9dp"
+        android:id="@+id/linearLayout1"
+        android:layout_marginTop="4.5dp"
+        android:layout_marginLeft="4.5dp"
+        android:layout_marginRight="4.5dp"
+        android:layout_marginBottom="4.5dp">
+        <FlatUI.FlatEditText
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/pNameText"
             android:hint="Player Name(Case Sensitive)" />
-        <Button
+        <FlatUI.FlatButton
             android:text="Search"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/searchButton" />
+            android:id="@+id/searchButton"
+            android:padding="4dp"
+            android:layout_marginLeft="11.2dp"
+            android:layout_marginTop="0.0dp" />
     </LinearLayout>
     <ListView
         android:minWidth="25px"

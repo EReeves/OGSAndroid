@@ -21,7 +21,7 @@ namespace OGSAndroid
                 return
                     "Black: " + Black + " (" + BlackRank + ")" + "\t\t White: " + White + " (" + WhiteRank + ")" + "\n" +
                     "Ruleset: " + Ruleset + "\t\t Date: " + Date + "\n" +
-                    "Komi: " + Komi + " \t\t\t\t        Result: " + Result;
+                    "Komi: " + Komi + " \t\t\t        Result: " + Result;
             }
         }
 

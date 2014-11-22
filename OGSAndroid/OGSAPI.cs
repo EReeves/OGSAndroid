@@ -27,12 +27,12 @@ namespace OGSAndroid
                 throw new Exception("Player not found:" + username );
             }
 
-            public static OGSGame[] PlayerGameList(string id)
+            public static OGSGame[] PlayerGameList(string id, int page)
             {
                 var gameList = new List<OGSGame>();
                 ///Just do the first page for now.
 
-                var url = "http://online-go.com/api/v1/players/" + id + "/games";
+                var url = "http://online-go.com/api/v1/players/" + id + "/games?ordering=-id&page=" + page;
                 var ds = JsonGet(url);
                 var games = ds["results"].AsArray;
 
