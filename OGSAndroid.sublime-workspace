@@ -4,6 +4,26 @@
 		"selected_items":
 		[
 			[
+				"Json",
+				"JSONNode"
+			],
+			[
+				"JSon",
+				"SimpleJSON	SimpleJSON"
+			],
+			[
+				"exce",
+				"Exception	Exception"
+			],
+			[
+				"j",
+				"JSON	JSON"
+			],
+			[
+				"OG",
+				"OGSAPI()	OGSAPI()"
+			],
+			[
 				"wi",
 				"WhiteRank	string"
 			],
@@ -47,7 +67,7 @@
 			"file": "OGSAndroid/SGFParser.cs",
 			"settings":
 			{
-				"buffer_size": 5730,
+				"buffer_size": 5815,
 				"line_ending": "Windows"
 			}
 		},
@@ -92,10 +112,29 @@
 			}
 		},
 		{
+			"contents": "using System;\nusing System.Net;\nusing System.IO;\nusing System.Collections.Generic;\nusing SimpleJSON;\n\nnamespace OGSAndroid\n{\n    public class OGSAPI\n    {\n        public OGSAPI()\n        {\n        }\n\n        	public string GetPlayerID(string username)\n        	{\n                var url = \"https://online-go.com/api/v1/players?username=\" + username;\n                var ds = JsonGet(url);\n\n                if(ds[\"results\"].AsArray[0][\"id\"] != null)\n                {\n                    var id = ds[\"results\"].AsArray[0][\"id\"].Value;\n                    return id;\n                }\n                \n                throw new Exception(\"Player not found:\" + username );\n            }\n\n            public OGSGame[] PlayerGameList(string id)\n            {\n                var gameList = new List<OGSGame>();\n                ///Just do the first page for now.\n\n                var url = \"http://online-go.com/api/v1/players/\" + id + \"/games\";\n                var ds = JsonGet(url);\n                var games = ds[\"results\"].AsArray;\n\n                foreach(JSONNode g in games)\n                {\n                    OGSGame temp = new OGSGame;\n                    \n                }\n            }\n\n            private SimpleJSON.JSONNode JsonGet(string url)\n            {\n                WebRequest wr = WebRequest.Create(url);\n\n                string json;\n\n                using( var hr = (HttpWebResponse)wr.GetResponse() )\n                using( var stream = hr.GetResponseStream() )\n                using( var reader = new StreamReader(stream) )\n                    json = reader.ReadToEnd();\n\n                return SimpleJSON.JSON.Parse(json);\n            }\n    }\n}\n\n",
 			"file": "OGSAndroid/OGSAPI.cs",
+			"file_size": 3549,
+			"file_write_time": 130611002528047043,
 			"settings":
 			{
-				"buffer_size": 225,
+				"buffer_size": 1672,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/c/Users/Evan/Documents/Projects/OGSAndroid/OGSAndroid/SimpleJSON.cs",
+			"settings":
+			{
+				"buffer_size": 35849,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "OGSAndroid/OGSGame.cs",
+			"settings":
+			{
+				"buffer_size": 700,
 				"line_ending": "Windows"
 			}
 		},
@@ -111,7 +150,7 @@
 			"file": "/C/Users/Evan/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 			"settings":
 			{
-				"buffer_size": 188,
+				"buffer_size": 190,
 				"line_ending": "Unix"
 			}
 		},
@@ -143,7 +182,7 @@
 			"file": "OGSAndroid/OGSAndroid.csproj",
 			"settings":
 			{
-				"buffer_size": 4492,
+				"buffer_size": 5099,
 				"line_ending": "Windows"
 			}
 		},
@@ -166,7 +205,7 @@
 			"file": "OGSAndroid/SGF.cs",
 			"settings":
 			{
-				"buffer_size": 1046,
+				"buffer_size": 1044,
 				"line_ending": "Windows"
 			}
 		},
@@ -190,16 +229,8 @@
 			"file": "OGSAndroid/MainActivity.cs",
 			"settings":
 			{
-				"buffer_size": 3353,
+				"buffer_size": 3839,
 				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/Users/Evan/AppData/Roaming/Sublime Text 3/Packages/Terminal/Default (Windows).sublime-keymap",
-			"settings":
-			{
-				"buffer_size": 139,
-				"line_ending": "Unix"
 			}
 		},
 		{
@@ -214,7 +245,7 @@
 			"file": "OGSAndroid/SGFView.cs",
 			"settings":
 			{
-				"buffer_size": 1752,
+				"buffer_size": 1802,
 				"line_ending": "Windows"
 			}
 		},
@@ -230,7 +261,7 @@
 			"file": "OGSAndroid/Resources/layout/Main.axml",
 			"settings":
 			{
-				"buffer_size": 3180,
+				"buffer_size": 3319,
 				"line_ending": "Unix"
 			}
 		}
@@ -306,6 +337,8 @@
 	],
 	"file_history":
 	[
+		"/C/Users/Evan/Documents/Projects/OGSAndroid/OGSAndroid/SimpleJSON.cs",
+		"/C/Users/Evan/AppData/Roaming/Sublime Text 3/Packages/Terminal/Default (Windows).sublime-keymap",
 		"/C/Users/Evan/Documents/visual studio 2013/Projects/thanks/ogstest/ogstest/SimpleJSON.cs",
 		"/C/Users/Evan/Documents/visual studio 2013/Projects/thanks/ogstest/ogstest/bin/Debug/test",
 		"/C/Users/Evan/Desktop/players",
@@ -339,6 +372,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"parse",
+			";\n",
+			"\n    	\n\n\n        publ",
 			"clutch",
 			"open_terminal",
 			"using System;\nusing System.Collections.Generic;\n\nnamespace OGSAndroid\n{\n    public class SGFParser<T>\n    {\n        public SGFParser()\n        {\n        }\n\n        public SGF<T> Parse(string sgf)\n        {\n            foreach(char c in sgf)\n            {\n                switch(c)\n                {\n                    case '[':\n                    case ']':\n                    case '(':\n                        case ')':\n\n                }\n            }\n        }\n    }\n}\n\n",
@@ -369,15 +405,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5730,
+						"buffer_size": 5815,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2994,
-								2994
+								0,
+								0
 							]
 						],
 						"settings":
@@ -390,7 +426,7 @@
 						"translation.y": 1224.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 10,
 					"type": "text"
 				},
 				{
@@ -420,7 +456,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
@@ -448,7 +484,7 @@
 						"translation.y": 252.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
@@ -476,7 +512,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
@@ -504,7 +540,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
@@ -532,7 +568,7 @@
 						"translation.y": 913.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
@@ -541,15 +577,75 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 225,
+						"buffer_size": 1672,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								225,
-								225
+								1162,
+								1162
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 108.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/c/Users/Evan/Documents/Projects/OGSAndroid/OGSAndroid/SimpleJSON.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 35849,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								35753,
+								35753
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 23341.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "OGSAndroid/OGSGame.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 700,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
 							]
 						],
 						"settings":
@@ -560,11 +656,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 9,
 					"file": "/C/Users/Evan/Desktop/smus/SMUS/README.md",
 					"semi_transient": false,
 					"settings":
@@ -588,16 +684,16 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 15,
+					"stack_index": 17,
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 10,
 					"file": "/C/Users/Evan/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 188,
+						"buffer_size": 190,
 						"regions":
 						{
 						},
@@ -616,11 +712,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 17,
+					"stack_index": 19,
 					"type": "text"
 				},
 				{
-					"buffer": 9,
+					"buffer": 11,
 					"file": "/C/Users/Evan/Desktop/Parser.cs",
 					"semi_transient": false,
 					"settings":
@@ -646,11 +742,11 @@
 						"translation.y": 7839.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 13,
+					"stack_index": 15,
 					"type": "text"
 				},
 				{
-					"buffer": 10,
+					"buffer": 12,
 					"file": ".gitignore",
 					"semi_transient": false,
 					"settings":
@@ -674,11 +770,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 11,
 					"type": "text"
 				},
 				{
-					"buffer": 11,
+					"buffer": 13,
 					"file": "/C/Users/Evan/AppData/Roaming/Sublime Text 3/Packages/Terminal/Terminal.sublime-settings",
 					"semi_transient": false,
 					"settings":
@@ -702,16 +798,16 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 16,
+					"stack_index": 18,
 					"type": "text"
 				},
 				{
-					"buffer": 12,
+					"buffer": 14,
 					"file": "OGSAndroid/OGSAndroid.csproj",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4492,
+						"buffer_size": 5099,
 						"regions":
 						{
 						},
@@ -732,11 +828,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 13,
+					"buffer": 15,
 					"file": "OGSAndroid/Move.cs",
 					"semi_transient": false,
 					"settings":
@@ -762,11 +858,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 18,
+					"stack_index": 20,
 					"type": "text"
 				},
 				{
-					"buffer": 14,
+					"buffer": 16,
 					"semi_transient": false,
 					"settings":
 					{
@@ -790,39 +886,41 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 22,
+					"stack_index": 23,
 					"type": "text"
 				},
 				{
-					"buffer": 15,
+					"buffer": 17,
 					"file": "OGSAndroid/SGF.cs",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1046,
+						"buffer_size": 1044,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1001,
-								1001
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/C#/C#.tmLanguage"
+							"syntax": "Packages/C#/C#.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 216.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 19,
+					"stack_index": 21,
 					"type": "text"
 				},
 				{
-					"buffer": 16,
+					"buffer": 18,
 					"file": "OGSAndroid/SGFTree.cs",
 					"semi_transient": false,
 					"settings":
@@ -848,11 +946,11 @@
 						"translation.y": 594.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 14,
+					"stack_index": 16,
 					"type": "text"
 				},
 				{
-					"buffer": 17,
+					"buffer": 19,
 					"file": "OGSAndroid/Stone.cs",
 					"semi_transient": false,
 					"settings":
@@ -878,24 +976,24 @@
 						"translation.y": 432.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 20,
+					"stack_index": 22,
 					"type": "text"
 				},
 				{
-					"buffer": 18,
+					"buffer": 20,
 					"file": "OGSAndroid/MainActivity.cs",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3353,
+						"buffer_size": 3839,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3314,
-								3314
+								0,
+								0
 							]
 						],
 						"settings":
@@ -905,42 +1003,14 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2430.0,
+						"translation.y": 2646.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 11,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 19,
-					"file": "/C/Users/Evan/AppData/Roaming/Sublime Text 3/Packages/Terminal/Default (Windows).sublime-keymap",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 139,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								137,
-								61
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 21,
-					"type": "text"
-				},
-				{
-					"buffer": 20,
+					"buffer": 21,
 					"file": "/C/Users/Evan/AppData/Roaming/Sublime Text 3/Packages/User/C#.sublime-settings",
 					"semi_transient": false,
 					"settings":
@@ -964,7 +1034,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 23,
+					"stack_index": 24,
 					"type": "text"
 				}
 			]
@@ -974,20 +1044,20 @@
 			"sheets":
 			[
 				{
-					"buffer": 21,
+					"buffer": 22,
 					"file": "OGSAndroid/SGFView.cs",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1752,
+						"buffer_size": 1802,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1227,
-								1227
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1000,11 +1070,11 @@
 						"translation.y": 294.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
+					"stack_index": 12,
 					"type": "text"
 				},
 				{
-					"buffer": 22,
+					"buffer": 23,
 					"file": "/C/Users/Evan/Downloads/1035215-061-sashaib-Rvzy.sgf",
 					"semi_transient": false,
 					"settings":
@@ -1028,24 +1098,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 10,
+					"stack_index": 13,
 					"type": "text"
 				},
 				{
-					"buffer": 23,
+					"buffer": 24,
 					"file": "OGSAndroid/Resources/layout/Main.axml",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3180,
+						"buffer_size": 3319,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1152,
-								1152
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1058,7 +1128,7 @@
 						"translation.y": 486.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 12,
+					"stack_index": 14,
 					"type": "text"
 				}
 			]

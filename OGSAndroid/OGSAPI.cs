@@ -60,6 +60,10 @@ namespace OGSAndroid
                     else
                         temp.Result = "B+" + outcome;
 
+                    //Change icon size to 256px.
+                    temp.Black.Icon = temp.Black.Icon.Replace("32.png", "256.png");
+                    temp.White.Icon = temp.White.Icon.Replace("32.png", "256.png");
+
                     gameList.Add(temp);
                 }
 

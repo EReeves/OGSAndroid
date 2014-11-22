@@ -18,6 +18,7 @@ namespace OGSAndroid
     public class PlayerGameListActivity : Activity
     {
         public static SGF<Move> CurrentSGF;
+        public static OGSGame CurrentGame;
 
         protected override void OnCreate (Bundle bundle)
         {
@@ -56,6 +57,7 @@ namespace OGSAndroid
                 var gamePos = e.Position;
 
                 CurrentSGF = OGSAPI.IDToSGF(gameArray[gamePos].ID);
+                CurrentGame = gameArray[gamePos];
                 StartActivity(typeof(MainActivity));
             };
 

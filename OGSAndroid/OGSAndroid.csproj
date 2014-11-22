@@ -64,6 +64,15 @@
     <Compile Include="SimpleJSON.cs" />
     <Compile Include="OGSGame.cs" />
     <Compile Include="PlayerGameListActivity.cs" />
+    <Compile Include="External\UrlImageHelper\DownloaderAsyncTask.cs" />
+    <Compile Include="External\UrlImageHelper\ExtensionMethods.cs" />
+    <Compile Include="External\UrlImageHelper\Hashset.cs" />
+    <Compile Include="External\UrlImageHelper\LRUCache.cs" />
+    <Compile Include="External\UrlImageHelper\SoftReference.cs" />
+    <Compile Include="External\UrlImageHelper\SoftReferenceHashTable.cs" />
+    <Compile Include="External\UrlImageHelper\UrlImageCache.cs" />
+    <Compile Include="External\UrlImageHelper\UrlImageViewCallback.cs" />
+    <Compile Include="External\UrlImageHelper\UrlImageViewHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -94,5 +103,9 @@
       <Version>1.0</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="External\" />
+    <Folder Include="External\UrlImageHelper\" />
   </ItemGroup>
 </Project>

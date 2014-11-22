@@ -23,6 +23,16 @@ namespace OGSAndroid
                     "Ruleset: " + Ruleset + "\t\t Date: " + Date + "\n" +
                     "Komi: " + Komi + " \t\t\t        Result: " + Result;
             }
+
+            public string LeftString()
+            {
+            return "Black: " + Black + " (" + BlackRank + ")" + "\nRuleset: " + Ruleset + "\nKomi: " + Komi;
+            }
+
+            public string RightString()
+            {
+                return "White: " + White + " (" + WhiteRank + ")" + "\nDate: " + Date + "\nResult: " + Result;
+            }
         }
 
 

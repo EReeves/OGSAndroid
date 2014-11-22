@@ -9,10 +9,13 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Android.Graphics;
+
+using UrlImageViewHelper;
 
 namespace OGSAndroid
 {
-    [Activity (Label = "Main", Icon = "@drawable/icon", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity (Label = "Main", Theme = "@android:style/Theme.Holo.Light", Icon = "@drawable/icon", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
 	public class MainActivity : Activity
 	{
         public SGFView BoardView;
@@ -26,6 +29,13 @@ namespace OGSAndroid
 
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Main);
+
+            var customJabbrTheme = new FlatUI.FlatTheme () {
+                DarkAccentColor = Android.Graphics.Color.ParseColor("#7F5E42"),
+                BackgroundColor = Android.Graphics.Color.ParseColor("#0A6887"),
+                LightAccentColor = Android.Graphics.Color.ParseColor("#875018"),
+                VeryLightAccentColor = Android.Graphics.Color.ParseColor("#52DB64")
+            };
 
             FlatUI.FlatUI.SetActivityTheme(this, FlatUI.FlatTheme.Dark());
 
@@ -157,10 +167,22 @@ C[Rvzy: you nearly came back with my mistake at the end :p
             };*/
 
             //MatchInfo
-            TextView tv = FindViewById<TextView>(Resource.Id.statText);
-            tv.Text =  BoardView.Moves.Info.String();
-            tv.SetTextColor(Android.Graphics.Color.ParseColor("#c2c2c2"));
-            tv.Invalidate();
+            TextView tvl = FindViewById<TextView>(Resource.Id.textBlack);
+            tvl.Text = BoardView.Moves.Info.LeftString();
+            tvl.SetTextColor(Android.Graphics.Color.Black);
+            tvl.Invalidate();
+
+            TextView tvr = FindViewById<TextView>(Resource.Id.textWhite);
+            tvr.Text = BoardView.Moves.Info.RightString();
+            tvr.SetTextColor(Android.Graphics.Color.Black);
+            tvr.Invalidate();
+
+            //Avatar
+            var bimg = FindViewById<ImageView>(Resource.Id.blackImage);
+            var wimg = FindViewById<ImageView>(Resource.Id.whiteImage);
+
+            bimg.SetUrlDrawable(PlayerGameListActivity.CurrentGame.Black.Icon, Resource.Drawable.Icon);
+            wimg.SetUrlDrawable(PlayerGameListActivity.CurrentGame.White.Icon, Resource.Drawable.Icon);
 
 
             //NextMove
@@ -177,7 +199,8 @@ C[Rvzy: you nearly came back with my mistake at the end :p
             
             //End
             Button end = FindViewById<Button>(Resource.Id.button6);
-            end.Click += (sender, e) =>   BoardView.ToEnd();            
+            end.Click += (sender, e) =>  BoardView.ToEnd();  
+
 
 
 
@@ -186,7 +209,6 @@ C[Rvzy: you nearly came back with my mistake at the end :p
 
             var arr = OGSAPI.PlayerGameList(pid,1);
             Console.WriteLine(arr.Count());
-
 
 		}
 	}

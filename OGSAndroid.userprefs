@@ -1,35 +1,36 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.01498FC01800C00B" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="OGSAndroid\MainActivity.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.SelectDevice" />
+  <MonoDevelop.Ide.Workbench>
     <Files>
-      <File FileName="OGSAndroid\MainActivity.cs" Line="64" Column="64" />
+      <File FileName="OGSAndroid\MainActivity.cs" Line="7" Column="7" />
       <File FileName="OGSAndroid\BoardView.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\BoardTouch.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\Resources\AboutResources.txt" Line="1" Column="1" />
       <File FileName="OGSAndroid\Resources\Resource.designer.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\SGFView.cs" Line="9" Column="9" />
+      <File FileName="OGSAndroid\SGFView.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\Move.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\Stone.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\SGFParser.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\SGFTree.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\OGSAPI.cs" Line="14" Column="14" />
+      <File FileName="OGSAndroid\OGSAPI.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\SimpleJSON.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\OGSGame.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\PlayerGameListActivity.cs" Line="48" Column="48" />
-      <File FileName="OGSAndroid\obj\Debug\android\src\mono\android\support\v4\app\FragmentManager_OnBackStackChangedListenerImplementor.java" Line="68" Column="68" />
-      <File FileName="..\..\..\..\..\Program Files (x86)\MSBuild\Xamarin\Android\Xamarin.Android.Common.targets" Line="21" Column="21" />
-      <File FileName="OGSAndroid\SGF.cs" Line="47" Column="47" />
+      <File FileName="OGSAndroid\PlayerGameListActivity.cs" Line="1" Column="1" />
+      <File FileName="OGSAndroid\obj\Debug\android\src\mono\android\support\v4\app\FragmentManager_OnBackStackChangedListenerImplementor.java" Line="1" Column="1" />
+      <File FileName="..\..\..\..\..\Program Files (x86)\MSBuild\Xamarin\Android\Xamarin.Android.Common.targets" Line="1" Column="1" />
+      <File FileName="OGSAndroid\SGF.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="OGSAndroid" expanded="True">
             <Node name="References" expanded="True" />
-            <Node name="ComponentReferenceFolder" expanded="True" />
+            <Node name="ComponentReferenceFolder" expanded="True">
+              <Node name="ComponentReference" selected="True" />
+            </Node>
             <Node name="Resources" expanded="True">
               <Node name="layout" expanded="True" />
             </Node>
-            <Node name="MainActivity.cs" selected="True" />
           </Node>
         </State>
       </Pad>

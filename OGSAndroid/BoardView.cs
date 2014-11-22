@@ -16,10 +16,11 @@ namespace OGSAndroid
 {
 	public class BoardView : View
 	{
-        public int Padding { get; private set; }
+        public int Padding { get; set; }
         public int Lines { get; set; }
         public int Size { get; private set; }
         public int Spacing { get; private set; }
+        public int ExtPad { get; private set; }
 
         private readonly Paint blackPaint;
         private readonly Paint whitePaint;
@@ -29,6 +30,8 @@ namespace OGSAndroid
         public readonly List<Stone> stones = new List<Stone>();
 
         public Stone CurrentTurn = Stone.Black;
+
+        private bool firstDraw = true;
 
 
 		public BoardView(Context context, IAttributeSet attrs) : base(context)
@@ -43,7 +46,7 @@ namespace OGSAndroid
             whitePaint = new Paint
             {
                 AntiAlias = true,
-                Color = new Color(235,235,235),
+                Color = new Color(180,180,180),
             };
 
             bgPaint = new Paint
@@ -54,18 +57,26 @@ namespace OGSAndroid
             Bitmap bmp = BitmapFactory.DecodeResource(Resources, Resource.Drawable.woodtex);
 
             bgPaint.SetShader(new BitmapShader(bmp,Shader.TileMode.Repeat,Shader.TileMode.Repeat));
-    
 
             boardTouch = new BoardTouch(this);
+
+            Padding = 20;
+
+            Invalidate();
+
 		}
 
 		protected override void OnDraw(Canvas canvas)
 		{
 			base.OnDraw (canvas);   
+           
+            //Could remove these from every draw if we need to optimize;
+            Size = Math.Min(canvas.Width, canvas.Height);
+            ExtPad = this.PaddingLeft; //Make sure padding top/left are always the same.
+            Spacing = (Size-((ExtPad+Padding)*2)) / (Lines-1);
+            Padding = (Spacing / 2) + 2;
 
-            Console.WriteLine("Color" + Color.SandyBrown);
- 
-			DrawBoard(canvas, Lines, 40);
+            DrawBoard(canvas);
 
             foreach (var s in stones)
             {
@@ -77,31 +88,34 @@ namespace OGSAndroid
                 DrawStone(canvas, boardTouch.ConfirmStone, false);
             }
 
+
+            if (firstDraw) //Draw again to fix padding/spacing dependency on eachother.
+            {
+                firstDraw = false;
+                OnDraw(canvas);
+            }
+
+
 		}
 
-        private void DrawBoard(Canvas canvas, int _lines, int _padding)
+        private void DrawBoard(Canvas canvas)
 		{
-            Lines = _lines;
-            Padding = _padding;
-
-            Size = Math.Min(canvas.Width, canvas.Height);
-            Spacing = (Size-(Padding*2)) / (Lines-1);
-                    
             //Draw background.
             var rect = new Rect(0, 0, Size, Size);
             canvas.DrawRect(rect, bgPaint);
                    
             DrawGrid(canvas, blackPaint);
             DrawStarPoints(canvas);
+
 		}
 
         private void DrawGrid(Canvas canvas, Paint paint)
 		{
 			for (var i = 0; i < Lines; i++) 
             {
-                var xy = (Spacing * i) + Padding;
-                canvas.DrawLine (Padding, xy, Padding+(Lines-1)*Spacing, xy, paint);
-                canvas.DrawLine (xy, Padding, xy, Padding+(Lines-1)*Spacing, paint);
+                var xy = (Spacing * i) + Padding + ExtPad; 
+                canvas.DrawLine (Padding + ExtPad, xy,ExtPad + Padding+(Lines-1)*Spacing, xy, paint);
+                canvas.DrawLine (xy, Padding + ExtPad, xy,ExtPad + Padding+(Lines-1)*Spacing, paint);
 			}
                 
 		}
@@ -111,14 +125,14 @@ namespace OGSAndroid
             if (Lines < 9)
                 return;
 
-            var radius = Spacing / 8;
+            var radius = (Spacing / 8) + 1;
 
             //All boards > 9x have these.
-            canvas.DrawCircle(Padding + (3 * Spacing), Padding + (3 * Spacing), radius, blackPaint); //TopLeft
-            canvas.DrawCircle(Padding + ((Lines-4) * Spacing), Padding + (3 * Spacing), radius, blackPaint); //TopRight
-            canvas.DrawCircle(Padding + (3 * Spacing), Padding + ((Lines-4) * Spacing), radius, blackPaint); //BottomLeft
-            canvas.DrawCircle(Padding + ((Lines-4) * Spacing), Padding + ((Lines-4) * Spacing), radius, blackPaint); //BottomRight
-            canvas.DrawCircle(Padding + ((Lines/2) * Spacing), Padding + ((Lines/2) * Spacing), radius, blackPaint); //Middle
+            canvas.DrawCircle(ExtPad + Padding + (3 * Spacing), ExtPad + Padding + (3 * Spacing), radius, blackPaint); //TopLeft
+            canvas.DrawCircle(ExtPad + Padding + ((Lines-4) * Spacing), ExtPad + Padding + (3 * Spacing), radius, blackPaint); //TopRight
+            canvas.DrawCircle(ExtPad + Padding + (3 * Spacing), ExtPad + Padding + ((Lines-4) * Spacing), radius, blackPaint); //BottomLeft
+            canvas.DrawCircle(ExtPad + Padding + ((Lines-4) * Spacing), ExtPad + Padding + ((Lines-4) * Spacing), radius, blackPaint); //BottomRight
+            canvas.DrawCircle(ExtPad + Padding + ((Lines/2) * Spacing), ExtPad + Padding + ((Lines/2) * Spacing), radius, blackPaint); //Middle
 
             //Todo: 19x points.
 
@@ -185,18 +199,18 @@ namespace OGSAndroid
             if (stone)
             {
                 col = blackPaint;
-                col.SetShader(new RadialGradient(Padding + ((stone.x - 1.2f) * Spacing), Padding + ((stone.y - 1.3f) * Spacing), 40, new Color(30, 30, 30), col.Color, Shader.TileMode.Mirror));
+                col.SetShader(new RadialGradient(ExtPad + Padding + ((stone.x - 1.2f) * Spacing), ExtPad + Padding + ((stone.y - 1.3f) * Spacing), 40, new Color(45, 45, 45), col.Color, Shader.TileMode.Mirror));
             }
             else
             {
                 col = whitePaint;
-                col.SetShader(new RadialGradient(Padding + ((stone.x - 1.2f) * Spacing), Padding + ((stone.y - 1.3f) * Spacing), 40, new Color(255, 255, 255), col.Color, Shader.TileMode.Mirror));
+                col.SetShader(new RadialGradient(ExtPad + Padding + ((stone.x - 1.2f) * Spacing),ExtPad +  Padding + ((stone.y - 1.3f) * Spacing), 40, new Color(240, 240, 240), col.Color, Shader.TileMode.Mirror));
             }
 
             if (!alpha)
                 col.Alpha = 100;
 
-            canvas.DrawCircle(Padding + ((stone.x-1) * Spacing), Padding + ((stone.y-1) * Spacing), Spacing / 2.1f, col);
+            canvas.DrawCircle(ExtPad + Padding + ((stone.x-1) * Spacing), ExtPad + Padding + ((stone.y-1) * Spacing), (Spacing / 2), col);
             col.Alpha = 255;
         }
                         
