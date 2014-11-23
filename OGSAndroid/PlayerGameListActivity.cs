@@ -11,6 +11,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Android.Views.InputMethods;
 
 namespace OGSAndroid
 {
@@ -39,6 +40,9 @@ namespace OGSAndroid
 
             searchButton.Click += (sender, e) =>  
             {
+                    InputMethodManager mgr = (InputMethodManager)GetSystemService (Context.InputMethodService);
+                    mgr.HideSoftInputFromWindow(pNameText.WindowToken, HideSoftInputFlags.ImplicitOnly);
+
                     var pid = OGSAPI.GetPlayerID(pNameText.Text);
                     gameArray = OGSAPI.PlayerGameList(pid,1);
 
@@ -49,7 +53,7 @@ namespace OGSAndroid
                         lst.Add(g.ToString());
                     }
 
-                    gameList.Adapter = new ArrayAdapter<string>(this,Android.Resource.Layout.SimpleListItem1,lst.ToArray());
+                    gameList.Adapter = new ArrayAdapter<string>(this,Android.Resource.Layout.SimpleListItem1,lst.ToArray());                                    
             };
 
             gameList.ItemClick += (o,e) =>

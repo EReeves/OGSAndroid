@@ -26,12 +26,12 @@ namespace OGSAndroid
 
             public string LeftString()
             {
-            return "Black: " + Black + " (" + BlackRank + ")" + "\nRuleset: " + Ruleset + "\nKomi: " + Komi;
+            return Black + " (" + BlackRank + ")";// + "\nRuleset: " + Ruleset + "\nKomi: " + Komi;
             }
 
             public string RightString()
             {
-                return "White: " + White + " (" + WhiteRank + ")" + "\nDate: " + Date + "\nResult: " + Result;
+            return White + " (" + WhiteRank + ")";// + "\nDate: " + Date + "\nResult: " + Result;
             }
         }
 

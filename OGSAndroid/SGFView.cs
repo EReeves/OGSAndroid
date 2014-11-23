@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Android.Content;
 using Android.Util;
+using Android.Views;
+using Android.Widget;
 using OGSAndroid;
 using System.Text.RegularExpressions;
 
@@ -12,7 +14,19 @@ namespace OGSAndroid
     public class SGFView : BoardView
     {
         public SGF<Move> Moves = new SGF<Move>();
-        public int CurrentMove = 1;
+        public TextView MoveNumberText;
+
+        private int currentMove = 1;
+        public int CurrentMove { get { return currentMove; }
+
+            set 
+            { 
+                if (MoveNumberText == null)
+                    throw new Exception("SGFView needs a MoveNumber TextView set on MoveNumberText");
+                currentMove = value;
+                MoveNumberText.Text = value.ToString();
+            }
+        }
 
         public SGFView(Context context, IAttributeSet attrs)
             : base(context, attrs)
@@ -24,7 +38,7 @@ namespace OGSAndroid
         {
             Moves = s;
             CurrentMove = Convert.ToInt32(s.Info.Handicap);
-            Lines = Convert.ToInt32(s.Info.Size);
+            Initialize(Convert.ToInt32(s.Info.Size));
             ToStart();
         }
 
@@ -33,18 +47,13 @@ namespace OGSAndroid
             ClearBoard();
             for(int i=0;i<max;i++)
             {
-                if (i > Moves.Tree.Nodes.Count-1)
+                if (i > Moves.Tree.Nodes.Count - 1)
+                {
+                    CurrentMove = Moves.Tree.Nodes.Count - 1;
                     return;
+                }
 
                 var node = Moves.Tree.Nodes[i];
-
-                while(node.Data.MType == Move.Type.Chat)
-                {
-                    i++;
-                    if (i > Moves.Tree.Nodes.Count-1)
-                    return;
-                    node = Moves.Tree.Nodes[i];
-                }
 
                 PlaceStone(node.Data);
 
@@ -65,8 +74,10 @@ namespace OGSAndroid
 
         public void Next()
         {
+            if (currentMove > Moves.Tree.Nodes.Count()-1)
+                return;
+            PlaceStone(Moves.Tree.Nodes[CurrentMove].Data);
             CurrentMove++;
-            PlaceUpTo(CurrentMove);
         }
 
         public void Previous()
