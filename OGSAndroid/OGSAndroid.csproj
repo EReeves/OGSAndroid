@@ -86,6 +86,9 @@
     <AndroidResource Include="Resources\drawable\Icon.png" />
     <AndroidResource Include="Resources\drawable\woodtex.jpg" />
     <AndroidResource Include="Resources\layout\PlayerGameList.axml" />
+    <AndroidResource Include="Resources\drawable\BlackBorder.xml" />
+    <AndroidResource Include="Resources\drawable\WhiteBorder.xml" />
+    <AndroidResource Include="Resources\drawable\GradientDither.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ProjectExtensions>
