@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 using Android.App;
 using Android.Content;
@@ -13,6 +14,7 @@ using Android.Views;
 using Android.Widget;
 using Android.Views.InputMethods;
 
+
 namespace OGSAndroid
 {
     [Activity (Label = "PlayerGameListActivity", Theme = "@android:style/Theme.Holo.Light", MainLauncher = true, Icon = "@drawable/icon", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]		
@@ -20,6 +22,7 @@ namespace OGSAndroid
     {
         public static SGF<Move> CurrentSGF;
         public static OGSGame CurrentGame;
+        public static RelativeLayout LoadingPanel;
 
         protected override void OnCreate (Bundle bundle)
         {
@@ -35,34 +38,47 @@ namespace OGSAndroid
             var gameList = FindViewById<ListView>(Resource.Id.gameList);
             var pNameText = FindViewById<EditText>(Resource.Id.pNameText);
             var searchButton = FindViewById<Button> (Resource.Id.searchButton);
+            LoadingPanel = FindViewById<RelativeLayout>(Resource.Id.loadingPanel);
 
             OGSGame[] gameArray = null;
 
-            searchButton.Click += (sender, e) =>  
+            searchButton.Click += (sender, e) => 
             {
+                    var lst = new List<string>();
+
+                    LoadingPanel.Visibility = ViewStates.Visible;
+                                   
                     InputMethodManager mgr = (InputMethodManager)GetSystemService (Context.InputMethodService);
                     mgr.HideSoftInputFromWindow(pNameText.WindowToken, HideSoftInputFlags.ImplicitOnly);
 
-                    var pid = OGSAPI.GetPlayerID(pNameText.Text);
-                    gameArray = OGSAPI.PlayerGameList(pid,1);
+                    ThreadPool.QueueUserWorkItem( o =>{
+                       
+                        var pid = OGSAPI.GetPlayerID(pNameText.Text);
+                        gameArray = OGSAPI.PlayerGameList(pid,1);
 
-                    var lst = new List<string>();
+                        foreach( var g in gameArray)
+                        {
+                            lst.Add(g.ToString());
+                        }
 
-                    foreach( var g in gameArray)
-                    {
-                        lst.Add(g.ToString());
-                    }
-
-                    gameList.Adapter = new ArrayAdapter<string>(this,Android.Resource.Layout.SimpleListItem1,lst.ToArray());                                    
+                        RunOnUiThread( () => { 
+                            gameList.Adapter = new ArrayAdapter<string>(this,Android.Resource.Layout.SimpleListItem1,lst.ToArray());
+                            LoadingPanel.Visibility = ViewStates.Gone;
+                        });   
+                    });
+                               
             };
 
             gameList.ItemClick += (o,e) =>
             {
-                var gamePos = e.Position;
+                    LoadingPanel.Visibility = ViewStates.Visible;
 
-                CurrentSGF = OGSAPI.IDToSGF(gameArray[gamePos].ID);
-                CurrentGame = gameArray[gamePos];
-                StartActivity(typeof(MainActivity));
+                    ThreadPool.QueueUserWorkItem( thr => {
+                    var gamePos = e.Position;
+                    CurrentSGF = OGSAPI.IDToSGF(gameArray[gamePos].ID);
+                    CurrentGame = gameArray[gamePos];
+                        RunOnUiThread( () => StartActivity(typeof(MainActivity)));  
+                    });                       
             };
 
 

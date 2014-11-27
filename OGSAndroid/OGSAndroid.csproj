@@ -73,6 +73,7 @@
     <Compile Include="External\UrlImageHelper\UrlImageCache.cs" />
     <Compile Include="External\UrlImageHelper\UrlImageViewCallback.cs" />
     <Compile Include="External\UrlImageHelper\UrlImageViewHelper.cs" />
+    <Compile Include="HoldButtonRepeat.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

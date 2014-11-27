@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 using Android.App;
 using Android.Content;
@@ -59,7 +60,12 @@ namespace OGSAndroid
 
             //NextMove
             Button next = FindViewById<Button>(Resource.Id.button5);
-            next.Click += (sender, e) =>   BoardView.Next();
+            HoldButtonRepeat hbr = new HoldButtonRepeat(next, 400);
+            hbr.Invoke += () =>
+            {
+                    RunOnUiThread(() => BoardView.Next());
+                //BoardView.Invalidate();//Weird bug, need to invaliate again.
+            };
 
             //Previous
             Button prev = FindViewById<Button>(Resource.Id.button3);
@@ -76,6 +82,9 @@ namespace OGSAndroid
             //toolbar temp
             Button tbb = FindViewById<Button>(Resource.Id.toolbarButton);
             tbb.Text = "ToolbarTemp";
+
+            //Loading done, remove loading panel in PlayerGameListActivity.
+            PlayerGameListActivity.LoadingPanel.Visibility = ViewStates.Gone;
 
 
 		}

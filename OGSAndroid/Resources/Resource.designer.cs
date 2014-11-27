@@ -207,8 +207,8 @@ namespace OGSAndroid
 			// aapt resource value: 0x7f06000c
 			public const int flat = 2131099660;
 			
-			// aapt resource value: 0x7f060025
-			public const int gameList = 2131099685;
+			// aapt resource value: 0x7f060026
+			public const int gameList = 2131099686;
 			
 			// aapt resource value: 0x7f060001
 			public const int light = 2131099649;
@@ -224,6 +224,9 @@ namespace OGSAndroid
 			
 			// aapt resource value: 0x7f060019
 			public const int linearLayout4 = 2131099673;
+			
+			// aapt resource value: 0x7f060025
+			public const int loadingPanel = 2131099685;
 			
 			// aapt resource value: 0x7f06000f
 			public const int main = 2131099663;
