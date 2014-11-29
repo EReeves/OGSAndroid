@@ -160,6 +160,8 @@ namespace OGSAndroid
             if (!alpha)
                 col.Alpha = 100;
 
+            col.AntiAlias = true;
+
             canvas.DrawCircle(ExtPad + Padding + ((stone.x-1) * Spacing), ExtPad + Padding + ((stone.y-1) * Spacing), (Spacing / 2), col);
             col.Alpha = 255;
         }

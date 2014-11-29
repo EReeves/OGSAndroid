@@ -11,6 +11,8 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Android.Graphics;
+using Android.Animation;
+using Android.Views.Animations;
 
 using UrlImageViewHelper;
 
@@ -20,6 +22,8 @@ namespace OGSAndroid
 	public class MainActivity : Activity
 	{
         public SGFView BoardView;
+
+        private ChatDrawer chatDrawer;
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -83,11 +87,22 @@ namespace OGSAndroid
             Button tbb = FindViewById<Button>(Resource.Id.toolbarButton);
             tbb.Text = "ToolbarTemp";
 
-            //Loading done, remove loading panel in PlayerGameListActivity.
-            PlayerGameListActivity.LoadingPanel.Visibility = ViewStates.Gone;
-
+            //Chat drawer
+            var chatDrawerHandle = FindViewById<Button>(Resource.Id.rightDrawerHandle);
+            var chatDrawerView = FindViewById<SlidingDrawer>(Resource.Id.rightDrawer);
+            chatDrawer = new ChatDrawer(chatDrawerView);
 
 		}
+
+        public override bool OnTouchEvent(MotionEvent e)
+        {
+            chatDrawer.InvokeMotionEvent(e);
+
+            return base.OnTouchEvent(e);
+        }
+           
+
+
 	}
 }
 

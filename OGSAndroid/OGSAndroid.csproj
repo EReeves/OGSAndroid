@@ -74,6 +74,7 @@
     <Compile Include="External\UrlImageHelper\UrlImageViewCallback.cs" />
     <Compile Include="External\UrlImageHelper\UrlImageViewHelper.cs" />
     <Compile Include="HoldButtonRepeat.cs" />
+    <Compile Include="ChatDrawer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

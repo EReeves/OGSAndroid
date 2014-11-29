@@ -1,13 +1,13 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.01498FC01800C00B" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="OGSAndroid\MainActivity.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="OGSAndroid\PlayerGameListActivity.cs">
     <Files>
-      <File FileName="OGSAndroid\MainActivity.cs" Line="68" Column="68" />
+      <File FileName="OGSAndroid\MainActivity.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\BoardView.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\BoardTouch.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\Resources\AboutResources.txt" Line="1" Column="1" />
       <File FileName="OGSAndroid\Resources\Resource.designer.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\SGFView.cs" Line="10" Column="10" />
+      <File FileName="OGSAndroid\SGFView.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\Move.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\Stone.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\SGFParser.cs" Line="1" Column="1" />
@@ -15,11 +15,11 @@
       <File FileName="OGSAndroid\OGSAPI.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\SimpleJSON.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\OGSGame.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\PlayerGameListActivity.cs" Line="21" Column="21" />
+      <File FileName="OGSAndroid\PlayerGameListActivity.cs" Line="23" Column="23" />
       <File FileName="OGSAndroid\obj\Debug\android\src\mono\android\support\v4\app\FragmentManager_OnBackStackChangedListenerImplementor.java" Line="1" Column="1" />
       <File FileName="..\..\..\..\..\Program Files (x86)\MSBuild\Xamarin\Android\Xamarin.Android.Common.targets" Line="1" Column="1" />
       <File FileName="OGSAndroid\SGF.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\HoldButtonRepeat.cs" Line="45" Column="45" />
+      <File FileName="OGSAndroid\HoldButtonRepeat.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

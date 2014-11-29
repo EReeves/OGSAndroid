@@ -15,10 +15,11 @@
         android:layout_marginRight="4.5dp"
         android:layout_marginBottom="4.5dp">
         <FlatUI.FlatEditText
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/pNameText"
-            android:hint="Player Name(Case Sensitive)" />
+            android:hint="Player Name(Case Sensitive)"
+            android:layout_weight="1" />
         <FlatUI.FlatButton
             android:text="Search"
             android:layout_width="match_parent"
@@ -26,7 +27,8 @@
             android:id="@+id/searchButton"
             android:padding="4dp"
             android:layout_marginLeft="11.2dp"
-            android:layout_marginTop="0.0dp" />
+            android:layout_marginTop="0.0dp"
+            android:layout_weight="3" />
     </LinearLayout>
     <RelativeLayout
         android:id="@+id/loadingPanel"

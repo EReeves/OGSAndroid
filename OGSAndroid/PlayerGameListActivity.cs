@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
+using System.Diagnostics;
+
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
@@ -75,7 +77,7 @@ namespace OGSAndroid
 
                     ThreadPool.QueueUserWorkItem( thr => {
                     var gamePos = e.Position;
-                    CurrentSGF = OGSAPI.IDToSGF(gameArray[gamePos].ID);
+                        CurrentSGF = OGSAPI.IDToSGF(gameArray[gamePos].ID);
                     CurrentGame = gameArray[gamePos];
                         RunOnUiThread( () => StartActivity(typeof(MainActivity)));  
                     });                       
@@ -83,6 +85,12 @@ namespace OGSAndroid
 
 
 
+        }
+
+        protected override void OnResume()
+        {
+            LoadingPanel.Visibility = ViewStates.Gone;
+            base.OnResume();
         }
     }
 }
