@@ -59,8 +59,8 @@ namespace OGSAndroid
             var bimg = FindViewById<ImageView>(Resource.Id.blackImage);
             var wimg = FindViewById<ImageView>(Resource.Id.whiteImage);
 
-            bimg.SetUrlDrawable(PlayerGameListActivity.CurrentGame.Black.Icon, Resource.Drawable.Icon);
-            wimg.SetUrlDrawable(PlayerGameListActivity.CurrentGame.White.Icon, Resource.Drawable.Icon);
+            bimg.SetUrlDrawable(PlayerGameListActivity.CurrentGame.Black.Icon, Resource.Drawable.defaultuser);
+            wimg.SetUrlDrawable(PlayerGameListActivity.CurrentGame.White.Icon, Resource.Drawable.defaultuser);
 
             //NextMove
             Button next = FindViewById<Button>(Resource.Id.button5);

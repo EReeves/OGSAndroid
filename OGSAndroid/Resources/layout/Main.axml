@@ -130,7 +130,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
                     <ImageView
-                        android:src="@android:drawable/ic_menu_gallery"
+                        android:src="@drawable/defaultuser"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:scaleType="center"
@@ -147,7 +147,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
                     <ImageView
-                        android:src="@android:drawable/ic_menu_gallery"
+                        android:src="@drawable/defaultuser"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:scaleType="center"

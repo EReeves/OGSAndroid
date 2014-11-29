@@ -126,19 +126,22 @@ namespace OGSAndroid
 			public const int BlackBorder = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int GradientDither = 2130837505;
+			public const int defaultuser = 2130837505;
 			
 			// aapt resource value: 0x7f020002
-			public const int Icon = 2130837506;
+			public const int GradientDither = 2130837506;
 			
 			// aapt resource value: 0x7f020003
-			public const int monoandroidsplash = 2130837507;
+			public const int Icon = 2130837507;
 			
 			// aapt resource value: 0x7f020004
-			public const int WhiteBorder = 2130837508;
+			public const int monoandroidsplash = 2130837508;
 			
 			// aapt resource value: 0x7f020005
-			public const int woodtex = 2130837509;
+			public const int WhiteBorder = 2130837509;
+			
+			// aapt resource value: 0x7f020006
+			public const int woodtex = 2130837510;
 			
 			static Drawable()
 			{
@@ -233,6 +236,9 @@ namespace OGSAndroid
 			
 			// aapt resource value: 0x7f06002b
 			public const int loadingPanel = 2131099691;
+			
+			// aapt resource value: 0x7f06002d
+			public const int loadingPanelInfinite = 2131099693;
 			
 			// aapt resource value: 0x7f06000f
 			public const int main = 2131099663;

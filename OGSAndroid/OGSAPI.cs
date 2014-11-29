@@ -24,11 +24,14 @@ namespace OGSAndroid
                     return id;
                 }
                 
-                throw new Exception("Player not found:" + username );
+                return ""; //not found
             }
 
             public static OGSGame[] PlayerGameList(string id, int page)
             {
+                if (string.IsNullOrEmpty(id))
+                    return null;
+
                 var gameList = new List<OGSGame>();
                 ///Just do the first page for now.
 

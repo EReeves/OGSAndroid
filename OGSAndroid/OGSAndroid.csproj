@@ -75,6 +75,7 @@
     <Compile Include="External\UrlImageHelper\UrlImageViewHelper.cs" />
     <Compile Include="HoldButtonRepeat.cs" />
     <Compile Include="ChatDrawer.cs" />
+    <Compile Include="ListViewInfiniteScroll.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -91,6 +92,7 @@
     <AndroidResource Include="Resources\drawable\BlackBorder.xml" />
     <AndroidResource Include="Resources\drawable\WhiteBorder.xml" />
     <AndroidResource Include="Resources\drawable\GradientDither.xml" />
+    <AndroidResource Include="Resources\drawable\defaultuser.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ProjectExtensions>

@@ -26,7 +26,7 @@ namespace OGSAndroid
 
         public override string ToString()
         {
-            return Name + " - " + Black.Username + " vs " + White.Username + " Result: " + Result; 
+            return Name + "  -  " + Black.Username + " vs " + White.Username + "   Result: " + Result; 
         }
     }
 }
