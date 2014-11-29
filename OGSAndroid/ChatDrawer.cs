@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 using Android.App;
 using Android.Content;
@@ -14,29 +16,60 @@ using Android.Gestures;
 
 namespace OGSAndroid
 {
-    public class ChatDrawer : Java.Lang.Object, GestureDetector.IOnGestureListener
+    public class ChatDrawer : Java.Lang.Object, GestureDetector.IOnGestureListener, View.IOnTouchListener
     {
-    
         private GestureDetector gDetector;
-        private const int VELOCITY_MAXMIN = 300;
+        private const int VELOCITY_MAXMIN = 200;
         private SlidingDrawer drawer;
+        private TextView chatText;
 
         public bool Open { get { return drawer.IsOpened; } private set { } }
+        public GestureDetector GestureDetector { get { return gDetector; } private set { } }
 
-        public ChatDrawer(SlidingDrawer _drawer)
+        public string ChatText
+        {
+            get
+            {
+                return chatText.Text;
+            }
+            set
+            {
+                chatText.Text = value;
+            }
+        }
+
+        public ChatDrawer(SlidingDrawer _drawer, TextView _chatText)
         {
             drawer = _drawer;
+            chatText = _chatText;
+
             gDetector = new GestureDetector(this);
 
+            drawer.AnimationStart += (object sender, Animation.AnimationStartEventArgs e) => e.Animation.ScaleCurrentDuration(10000); //Does this not work?
+
+        }
+
+        public static string StringListToString(List<String> l)
+        {
+            if (l == null)
+                return string.Empty;
+            StringBuilder sb = new StringBuilder();
+            foreach (var str in l)
+            {
+                sb.Append(str);
+            }
+            return sb.ToString();
         }
     
         public void InvokeMotionEvent(MotionEvent e)
         {
-            gDetector.OnTouchEvent(e);
+            OnTouchEvent(e);
         }
 
         public bool OnFling(MotionEvent one, MotionEvent two, float vX, float vY)
         {
+            if (Math.Abs(vY) > VELOCITY_MAXMIN*4) //Probably scrolling, don't animate.
+                return false;
 
             if (!drawer.IsOpened && vX < -VELOCITY_MAXMIN)
             {
@@ -47,8 +80,21 @@ namespace OGSAndroid
                 drawer.AnimateClose();
             }
 
-            return false;;
+            return false;
+        }      
+
+        public bool OnTouch(View v, MotionEvent e)
+        { 
+            OnTouchEvent(e);
+            return false;
         }
+
+        public bool OnTouchEvent(MotionEvent e)
+        {
+            gDetector.OnTouchEvent(e);
+            return false;
+        }
+
 
         //We don't care about these.
         public bool OnDown(MotionEvent e) { return false; }       

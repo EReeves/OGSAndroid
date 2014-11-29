@@ -82,9 +82,7 @@ namespace OGSAndroid
                         RunOnUiThread( () => StartActivity(typeof(MainActivity)));  
                     });                       
             };
-
-
-
+                    
         }
 
         protected override void OnResume()

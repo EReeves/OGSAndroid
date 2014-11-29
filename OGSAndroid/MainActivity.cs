@@ -88,20 +88,25 @@ namespace OGSAndroid
             tbb.Text = "ToolbarTemp";
 
             //Chat drawer
-            var chatDrawerHandle = FindViewById<Button>(Resource.Id.rightDrawerHandle);
+            var chatDrawerScroll = FindViewById<ScrollView>(Resource.Id.rightDrawerScroll);
             var chatDrawerView = FindViewById<SlidingDrawer>(Resource.Id.rightDrawer);
-            chatDrawer = new ChatDrawer(chatDrawerView);
+            var chatDrawerText = FindViewById<TextView>(Resource.Id.chatText);
+            chatDrawer = new ChatDrawer(chatDrawerView, chatDrawerText);
 
+            //Apply chat text.
+            chatDrawer.ChatText = ChatDrawer.StringListToString(PlayerGameListActivity.CurrentSGF.Info.ChatMessages);
+
+            //Stop scrollview from consuming gesture events.
+            chatDrawerScroll.SetOnTouchListener(chatDrawer);
+ 
 		}
 
         public override bool OnTouchEvent(MotionEvent e)
         {
             chatDrawer.InvokeMotionEvent(e);
-
-            return base.OnTouchEvent(e);
+            base.OnTouchEvent(e);
+            return false;
         }
-           
-
 
 	}
 }

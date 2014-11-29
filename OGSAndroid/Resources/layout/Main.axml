@@ -217,17 +217,27 @@
                 android:id="@+id/linearLayout5"
                 android:background="#424242"
                 android:padding="8dp">
-                <TextView
-                    android:text="Chat will go here. aaaaaaaaaaaah"
-                    android:id="@+id/chatText"
+                <ScrollView
+                    android:minWidth="25px"
+                    android:minHeight="25px"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:autoText="false"
-                    android:password="false"
-                    android:phoneNumber="false"
-                    android:inputType="none"
-                    android:textSize="24dp"
-                    android:textColor="#ffffffff" />
+                    android:layout_height="match_parent"
+                    android:id="@+id/rightDrawerScroll"
+                    android:scrollbars="vertical"
+                    android:scrollbarStyle="insideInset"
+                    android:overScrollMode="ifContentScrolls">
+                    <TextView
+                        android:text="Chat will go here. aaaaaaaaaaaah"
+                        android:id="@+id/chatText"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:autoText="false"
+                        android:password="false"
+                        android:phoneNumber="false"
+                        android:inputType="none"
+                        android:textSize="24dp"
+                        android:textColor="#ffffffff" />
+                </ScrollView>
             </LinearLayout>
         </LinearLayout>
     </SlidingDrawer>

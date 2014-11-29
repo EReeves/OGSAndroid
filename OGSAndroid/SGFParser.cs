@@ -74,8 +74,8 @@ namespace OGSAndroid
                     case "AB": //Handicap stones. //Todo: WB, white stones.
                         GrabHandicapStones(sgf, bPos, ref temp, Stone.Black);
                         break;
-                    case "C": //Chat message
-
+                    case "\nC": case "C": //Chat message
+                        temp.Info.ChatMessages.Add(GrabData(sgf, bPos)[0]);
                         break;
                     case "PB":
                         temp.Info.Black = GrabData(sgf,bPos)[0];            

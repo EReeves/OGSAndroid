@@ -192,8 +192,8 @@ namespace OGSAndroid
 			// aapt resource value: 0x7f060018
 			public const int button6 = 2131099672;
 			
-			// aapt resource value: 0x7f060027
-			public const int chatText = 2131099687;
+			// aapt resource value: 0x7f060028
+			public const int chatText = 2131099688;
 			
 			// aapt resource value: 0x7f060000
 			public const int dark = 2131099648;
@@ -210,8 +210,8 @@ namespace OGSAndroid
 			// aapt resource value: 0x7f06000c
 			public const int flat = 2131099660;
 			
-			// aapt resource value: 0x7f06002b
-			public const int gameList = 2131099691;
+			// aapt resource value: 0x7f06002c
+			public const int gameList = 2131099692;
 			
 			// aapt resource value: 0x7f060001
 			public const int light = 2131099649;
@@ -231,8 +231,8 @@ namespace OGSAndroid
 			// aapt resource value: 0x7f060026
 			public const int linearLayout5 = 2131099686;
 			
-			// aapt resource value: 0x7f06002a
-			public const int loadingPanel = 2131099690;
+			// aapt resource value: 0x7f06002b
+			public const int loadingPanel = 2131099691;
 			
 			// aapt resource value: 0x7f06000f
 			public const int main = 2131099663;
@@ -246,8 +246,8 @@ namespace OGSAndroid
 			// aapt resource value: 0x7f060002
 			public const int none = 2131099650;
 			
-			// aapt resource value: 0x7f060028
-			public const int pNameText = 2131099688;
+			// aapt resource value: 0x7f060029
+			public const int pNameText = 2131099689;
 			
 			// aapt resource value: 0x7f06000a
 			public const int regular = 2131099658;
@@ -264,8 +264,11 @@ namespace OGSAndroid
 			// aapt resource value: 0x7f060024
 			public const int rightDrawerHandle = 2131099684;
 			
-			// aapt resource value: 0x7f060029
-			public const int searchButton = 2131099689;
+			// aapt resource value: 0x7f060027
+			public const int rightDrawerScroll = 2131099687;
+			
+			// aapt resource value: 0x7f06002a
+			public const int searchButton = 2131099690;
 			
 			// aapt resource value: 0x7f060021
 			public const int textBlack = 2131099681;

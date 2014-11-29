@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace OGSAndroid
 {
-	    public struct MatchInfo
+	    public class MatchInfo
         {
             public string Black;
             public string BlackRank;
@@ -15,6 +16,7 @@ namespace OGSAndroid
             public string Ruleset;
             public string Date;
             public string Link;
+            public List<string> ChatMessages = new List<string>();
 
             public string String()
             {
@@ -26,12 +28,12 @@ namespace OGSAndroid
 
             public string LeftString()
             {
-            return Black + " (" + BlackRank + ")";// + "\nRuleset: " + Ruleset + "\nKomi: " + Komi;
+                return Black + " (" + BlackRank + ")";// + "\nRuleset: " + Ruleset + "\nKomi: " + Komi;
             }
 
             public string RightString()
             {
-            return White + " (" + WhiteRank + ")";// + "\nDate: " + Date + "\nResult: " + Result;
+                return White + " (" + WhiteRank + ")";// + "\nDate: " + Date + "\nResult: " + Result;
             }
         }
 
