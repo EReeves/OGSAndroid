@@ -1,36 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
+﻿#region
 
 using Android.App;
-using Android.Content;
 using Android.Content.PM;
-using Android.Runtime;
+using Android.Graphics;
+using Android.OS;
 using Android.Views;
 using Android.Widget;
-using Android.OS;
-using Android.Graphics;
-using Android.Animation;
-using Android.Views.Animations;
-
+using FlatUI;
 using UrlImageViewHelper;
+
+#endregion
 
 namespace OGSAndroid
 {
-    [Activity (Label = "Main", Theme = "@android:style/Theme.Holo.Light", Icon = "@drawable/icon", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-	public class MainActivity : Activity
-	{
+    [Activity(Label = "Main", Theme = "@android:style/Theme.Holo.Light", Icon = "@drawable/icon",
+        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    public class MainActivity : Activity
+    {
         public SGFView BoardView;
 
         private ChatDrawer chatDrawer;
 
-		protected override void OnCreate (Bundle bundle)
-		{
-			base.OnCreate (bundle);
+        protected override void OnCreate(Bundle bundle)
+        {
+            base.OnCreate(bundle);
             RequestWindowFeature(WindowFeatures.NoTitle); //Remove title. 
-            SetContentView (Resource.Layout.Main);                    
-            FlatUI.FlatUI.SetActivityTheme(this, FlatUI.FlatTheme.Dark());
+            SetContentView(Resource.Layout.Main);
+            FlatUI.FlatUI.SetActivityTheme(this, FlatTheme.Dark());
 
             BoardView = FindViewById<SGFView>(Resource.Id.SGFView);
             //BoardView move text.
@@ -39,20 +35,20 @@ namespace OGSAndroid
             BoardView.SetSGF(PlayerGameListActivity.CurrentSGF);
             moveText.TextChanged += (sender, e) =>
             {
-                int i = 0;
+                var i = 0;
                 if (int.TryParse(moveText.Text, out i))
                     BoardView.PlaceUpTo(i);
             };
 
             //MatchInfo
-            TextView tvl = FindViewById<TextView>(Resource.Id.textBlack);
+            var tvl = FindViewById<TextView>(Resource.Id.textBlack);
             tvl.Text = BoardView.Moves.Info.LeftString();
-            tvl.SetTextColor(Android.Graphics.Color.Black);
+            tvl.SetTextColor(Color.Black);
             tvl.Invalidate();
 
-            TextView tvr = FindViewById<TextView>(Resource.Id.textWhite);
+            var tvr = FindViewById<TextView>(Resource.Id.textWhite);
             tvr.Text = BoardView.Moves.Info.RightString();
-            tvr.SetTextColor(Android.Graphics.Color.Black);
+            tvr.SetTextColor(Color.Black);
             tvr.Invalidate();
 
             //Avatar
@@ -63,28 +59,24 @@ namespace OGSAndroid
             wimg.SetUrlDrawable(PlayerGameListActivity.CurrentGame.White.Icon, Resource.Drawable.defaultuser);
 
             //NextMove
-            Button next = FindViewById<Button>(Resource.Id.button5);
-            HoldButtonRepeat hbr = new HoldButtonRepeat(next, 400);
-            hbr.Invoke += () =>
-            {
-                    RunOnUiThread(() => BoardView.Next());
-                //BoardView.Invalidate();//Weird bug, need to invaliate again.
-            };
+            var next = FindViewById<Button>(Resource.Id.button5);
+            var hbr = new HoldButtonRepeat(next, 400);
+            hbr.Invoke += () => RunOnUiThread(() => BoardView.Next());
 
             //Previous
-            Button prev = FindViewById<Button>(Resource.Id.button3);
-            prev.Click += (sender, e) =>   BoardView.Previous();
+            var prev = FindViewById<Button>(Resource.Id.button3);
+            prev.Click += (sender, e) => BoardView.Previous();
 
             //Start
-            Button start = FindViewById<Button>(Resource.Id.button2);
-            start.Click += (sender, e) =>   BoardView.ToStart();
-            
+            var start = FindViewById<Button>(Resource.Id.button2);
+            start.Click += (sender, e) => BoardView.ToStart();
+
             //End
-            Button end = FindViewById<Button>(Resource.Id.button6);
-            end.Click += (sender, e) =>  BoardView.ToEnd();  
+            var end = FindViewById<Button>(Resource.Id.button6);
+            end.Click += (sender, e) => BoardView.ToEnd();
 
             //toolbar temp
-            Button tbb = FindViewById<Button>(Resource.Id.toolbarButton);
+            var tbb = FindViewById<Button>(Resource.Id.toolbarButton);
             tbb.Text = "ToolbarTemp";
 
             //Chat drawer
@@ -98,8 +90,7 @@ namespace OGSAndroid
 
             //Stop scrollview from consuming gesture events.
             chatDrawerScroll.SetOnTouchListener(chatDrawer);
- 
-		}
+        }
 
         public override bool OnTouchEvent(MotionEvent e)
         {
@@ -107,8 +98,5 @@ namespace OGSAndroid
             base.OnTouchEvent(e);
             return false;
         }
-
-	}
+    }
 }
-
-

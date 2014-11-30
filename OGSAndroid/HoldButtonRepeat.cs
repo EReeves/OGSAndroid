@@ -1,22 +1,21 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Timers;
-using Android.App;
-using Android.Content;
-using Android.Content.PM;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using Android.OS;
-using Android.Graphics;
+using Object = Java.Lang.Object;
+
+#endregion
 
 namespace OGSAndroid
 {
     public class HoldButtonRepeat
     {
-        private Button button;
-        private Timer timer;
-        private OnTouchListener onTouchListener;
+        private readonly OnTouchListener onTouchListener;
+        private readonly Timer timer;
         public Action Invoke;
+        private Button button;
 
         //param name="interval">Invoke interval in ms.</param>
         public HoldButtonRepeat(Button _button, double interval)
@@ -26,36 +25,33 @@ namespace OGSAndroid
             onTouchListener = new OnTouchListener();
             button.SetOnTouchListener(onTouchListener);
 
-            timer = new Timer(interval);
-            timer.AutoReset = false;
+            timer = new Timer(interval) {AutoReset = false};
 
-            timer.Elapsed += (sender, e) => 
+            timer.Elapsed += (sender, e) =>
             {
-                    if(!onTouchListener.Pressed) 
-                    {
-                        timer.Stop();
-                        return;
-                    }
-                    if(Invoke != null)                     
-                        Invoke.Invoke();
-                    timer.Start();
+                if (!onTouchListener.Pressed)
+                {
+                    timer.Stop();
+                    return;
+                }
+                if (Invoke != null)
+                    Invoke.Invoke();
+                timer.Start();
             };
 
             onTouchListener.Down += () =>
             {
-                 timer.Stop();
-                 timer.Start();
-                 if(Invoke != null)                     
-                     Invoke.Invoke();
+                timer.Stop();
+                timer.Start();
+                if (Invoke != null)
+                    Invoke.Invoke();
             };
-
-
         }
 
-        private class OnTouchListener : Java.Lang.Object, View.IOnTouchListener 
+        private class OnTouchListener : Object, View.IOnTouchListener
         {
-            public bool Pressed;
             public Action Down;
+            public bool Pressed;
 
             public bool OnTouch(View v, MotionEvent e)
             {
@@ -74,10 +70,5 @@ namespace OGSAndroid
                 return false; //return folse otherwise we consume OnTouch.        
             }
         }
-
-
-
-
     }
 }
-

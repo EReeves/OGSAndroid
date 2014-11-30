@@ -1,7 +1,9 @@
-﻿using System;
+﻿#region
+
 using System.Collections.Generic;
-using System.Collections;
 using System.Linq;
+
+#endregion
 
 namespace OGSAndroid
 {
@@ -14,34 +16,30 @@ namespace OGSAndroid
         {
             Nodes = new List<Node<T>>();
         }
-                 
+
         public void PopulateNodesList()
         {
             Nodes = Node<T>.Enumerator(FirstNode).ToList();
         }
-
     }
 
     public class Node<T>
     {
-        private List<Node<T>> children;
+        private readonly List<Node<T>> children;
         public SGFTree<T> Parent;
-        public T Data { get; set; }
-
-        public bool HasVariation
-        {
-            get
-            {
-                return children.Count > 0;
-            }
-            private set { }
-        }
 
         public Node(T item, SGFTree<T> parent)
         {
             children = new List<Node<T>>();
             Parent = parent;
             Data = item;
+        }
+
+        public T Data { get; set; }
+
+        public bool HasVariation
+        {
+            get { return children.Count > 0; }
         }
 
         public Node<T> AddChild(T item)
@@ -59,14 +57,10 @@ namespace OGSAndroid
         {
             yield return node;
 
-            foreach (var n in node.children) 
-            {            
-                foreach (var nn in Node<T>.Enumerator(n))
-                {
-                    yield return nn;
-                }
+            foreach (var nn in node.children.SelectMany(Enumerator))
+            {
+                yield return nn;
             }
         }
     }
 }
-

@@ -1,22 +1,14 @@
+#region
 
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Android.Util;
 
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
+#endregion
 
 namespace UrlImageViewHelper
 {
-	public class SoftReferenceHashTable<TKey, TValue>
-	{
-		/*
+    public class SoftReferenceHashTable<TKey, TValue>
+    {
+        /*
 		Dictionary<TKey, SoftReference<TValue>> table = new Dictionary<TKey, SoftReference<TValue>>();
 		
 		public TValue Put(TKey key, TValue value)
@@ -49,42 +41,43 @@ namespace UrlImageViewHelper
 		}
 		 */
 
-		object cacheLock = new object();
-		LRUCache<TKey, TValue> cache = new LRUCache<TKey, TValue>(100);
+        private readonly LRUCache<TKey, TValue> cache = new LRUCache<TKey, TValue>(100);
+        private readonly object cacheLock = new object();
 
-		public TValue Put(TKey key, TValue value)
-		{
-			//var newVal = new SoftReference<TValue>(value);
-			lock (cacheLock)
-			{
-				if (cache.ContainsKey(key))
-					cache[key] = value;
-				else
-					cache.Add(key, value);
+        public TValue Put(TKey key, TValue value)
+        {
+            //var newVal = new SoftReference<TValue>(value);
+            lock (cacheLock)
+            {
+                if (cache.ContainsKey(key))
+                    cache[key] = value;
+                else
+                    cache.Add(key, value);
 
-				return value;
-			}
-		}
+                return value;
+            }
+        }
 
-		public TValue Get(TKey key)
-		{
-			lock (cacheLock)
-			{
-				if (!cache.ContainsKey(key))
-					return default(TValue);
+        public TValue Get(TKey key)
+        {
+            lock (cacheLock)
+            {
+                if (!cache.ContainsKey(key))
+                    return default(TValue);
 
-				var val = cache[key];
+                TValue val = cache[key];
 
-				if (val == null)
-				{
-					Android.Util.Log.Debug(UrlImageViewHelper.LOGTAG, key.ToString() + " Lost Reference");
-					cache.Remove(key);
-					return default(TValue);
-				}
+                if (val == null)
+                {
+                    Log.Debug(UrlImageViewHelper.LOGTAG, key + " Lost Reference");
+                    cache.Remove(key);
+                    return default(TValue);
+                }
 
-				return val;
-			}
-		}
+                return val;
+            }
+        }
+
 //		
 //		 Hashtable<K, SoftReference<V>> mTable = new Hashtable<K, SoftReference<V>>();
 //    
@@ -104,6 +97,5 @@ namespace UrlImageViewHelper
 //            mTable.remove(key);
 //        return ret;
 //    }
-	}
+    }
 }
-

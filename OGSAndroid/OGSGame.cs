@@ -1,33 +1,26 @@
-﻿using System;
-
-namespace OGSAndroid
+﻿namespace OGSAndroid
 {
-	//Game representation taken from JSON.
+    //Game representation taken from JSON.
     public class OGSGame
     {
-    	//There is a lot more but it can be grabbed from the SGF.
-    	public string Name;
-    	public string ID;
+        //There is a lot more but it can be grabbed from the SGF.
+        public Player Black;
+        public string ID;
+        public string Name;
         public string Result;
-    	public Player Black;
-    	public Player White;
+        public Player White;
 
-        public OGSGame()
+        public override string ToString()
         {
+            return Name + "  -  " + Black.Username + " vs " + White.Username + "   Result: " + Result;
         }
 
         public struct Player
         {
-        	public string Username;
             public string Country;
             public string Icon;
             public string Id;
-        }
-
-        public override string ToString()
-        {
-            return Name + "  -  " + Black.Username + " vs " + White.Username + "   Result: " + Result; 
+            public string Username;
         }
     }
 }
-

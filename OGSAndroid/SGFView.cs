@@ -1,37 +1,39 @@
+#region
+
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Android.Content;
 using Android.Util;
-using Android.Views;
 using Android.Widget;
-using OGSAndroid;
-using System.Text.RegularExpressions;
+
+#endregion
 
 namespace OGSAndroid
 {
     // ReSharper disable once InconsistentNaming
     public class SGFView : BoardView
     {
-        public SGF<Move> Moves = new SGF<Move>();
         public TextView MoveNumberText;
+        public SGF<Move> Moves = new SGF<Move>();
 
         private int currentMove = 1;
-        public int CurrentMove { get { return currentMove; }
 
-            set 
-            { 
+        public SGFView(Context context, IAttributeSet attrs)
+            : base(context, attrs)
+        {
+        }
+
+        public int CurrentMove
+        {
+            get { return currentMove; }
+
+            set
+            {
                 if (MoveNumberText == null)
                     throw new Exception("SGFView needs a MoveNumber TextView set on MoveNumberText");
                 currentMove = value;
                 MoveNumberText.Text = value.ToString();
             }
-        }
-
-        public SGFView(Context context, IAttributeSet attrs)
-            : base(context, attrs)
-        {
-        
         }
 
         public void SetSGF(SGF<Move> s)
@@ -45,7 +47,7 @@ namespace OGSAndroid
         public void PlaceUpTo(int max)
         {
             ClearBoard();
-            for(int i=0;i<max;i++)
+            for (var i = 0; i < max; i++)
             {
                 if (i > Moves.Tree.Nodes.Count - 1)
                 {
@@ -53,10 +55,9 @@ namespace OGSAndroid
                     return;
                 }
 
-                var node = Moves.Tree.Nodes[i];
+                Node<Move> node = Moves.Tree.Nodes[i];
 
                 PlaceStone(node.Data);
-
             }
         }
 
@@ -74,7 +75,7 @@ namespace OGSAndroid
 
         public void Next()
         {
-            if (currentMove > Moves.Tree.Nodes.Count()-1)
+            if (currentMove > Moves.Tree.Nodes.Count() - 1)
                 return;
             PlaceStone(Moves.Tree.Nodes[CurrentMove].Data);
             CurrentMove++;
@@ -82,12 +83,10 @@ namespace OGSAndroid
 
         public void Previous()
         {
-            if(CurrentMove == 1) return;
+            if (CurrentMove == 1) return;
 
             CurrentMove--;
             PlaceUpTo(CurrentMove);
         }
     }
 }
-
-
