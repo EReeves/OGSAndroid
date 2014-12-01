@@ -11,6 +11,13 @@ namespace OGSAndroid
 {
     public class OGSAPI
     {
+        private string authToken;
+
+        public void Authenticate(string clientid, string secret)
+        {
+            //Authenticate and store auth token.
+        }
+
         public static string GetPlayerID(string username)
         {
             string url = "https://online-go.com/api/v1/players?username=" + username;
@@ -85,6 +92,12 @@ namespace OGSAndroid
         {
             var parser = new SGFParser();
             return parser.Parse(DownloadSGF(gid));
+        }
+
+        public void AuthedPost(string url, string content)
+        {
+            var wr = WebRequest.Create(url);
+            wr.Headers.Add("Authorization: Bearer ");
         }
 
         private static string DownloadSGF(string gid)

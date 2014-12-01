@@ -14,7 +14,7 @@ using FlatUI;
 
 namespace OGSAndroid
 {
-    [Activity(Label = "PlayerGameListActivity", Theme = "@android:style/Theme.Holo.Light", MainLauncher = true,
+    [Activity(Label = "PlayerGameListActivity", Theme = "@android:style/Theme.Holo.Light",
         Icon = "@drawable/icon", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class PlayerGameListActivity : Activity
     {

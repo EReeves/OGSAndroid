@@ -20,6 +20,7 @@ namespace OGSAndroid
         public string Size;
         public string White;
         public string WhiteRank;
+        public string ID;
 
         public string String()
         {

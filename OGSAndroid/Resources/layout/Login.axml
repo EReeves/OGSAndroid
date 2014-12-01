@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="35dp"
+    android:background="@android:color/background_light">
+    <TextView
+        android:text="Login"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/loginTextView1"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="8.9dp" />
+    <FlatUI.FlatEditText
+        android:inputType="textNoSuggestions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/clientIdText"
+        android:hint="Client Id"
+        android:layout_marginBottom="8.1dp" />
+    <FlatUI.FlatEditText
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText2"
+        android:hint="Secret"
+        android:layout_marginBottom="3.2dp" />
+    <RelativeLayout
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relativeLayout1">
+        <CheckBox
+            android:text="Save details (With device accounts)"
+            android:layout_width="match_parent"
+            android:layout_height="25.4dp"
+            android:id="@+id/saveDetailsCheckBox"
+            android:layout_marginTop="3.2dp"
+            android:button="@drawable/checkbox"
+            android:textColor="@android:color/black" />
+        <TextView
+            android:text="The app doesnt store your details itself but for maximum security, leave this unchecked."
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/saveDetailsCheckBox"
+            android:id="@+id/loginTextView2"
+            android:textSize="12dp"
+            android:layout_marginBottom="8.1dp" />
+    </RelativeLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout1"
+        android:layout_marginTop="8.1dp">
+        <FlatUI.FlatButton
+            android:text="Log In"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/loginButton"
+            android:layout_marginRight="0.0dp"
+            android:layout_weight="10" />
+        <FlatUI.FlatButton
+            android:text="Guest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/loginGuestButton"
+            android:gravity="center"
+            android:layout_marginLeft="8.9dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout2"
+        android:layout_marginTop="4.0dp">
+        <TextView
+            android:text="@string/HelpLoginUrl"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView1"
+            android:layout_marginRight="4.8dp"
+            android:textColor="#000fdb" />
+        <TextView
+            android:text="@string/RegisterLoginUrl"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView2"
+            android:textColor="#000fdb" />
+    </LinearLayout>
+</LinearLayout>

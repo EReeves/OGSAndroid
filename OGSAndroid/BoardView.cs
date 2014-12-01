@@ -16,7 +16,7 @@ namespace OGSAndroid
     {
         private readonly Paint bgPaint;
         private readonly Paint blackPaint;
-        private readonly BoardTouch boardTouch;
+        protected readonly BoardTouch boardTouch;
         private readonly Paint whitePaint;
         public Stone CurrentTurn = Stone.Black;
         private bool firstDraw = true;
@@ -171,7 +171,7 @@ namespace OGSAndroid
             col.Alpha = 255;
         }
 
-        public void PlaceStone(Stone s)
+        public virtual void PlaceStone(Stone s)
         {
             CurrentTurn = CurrentTurn ? Stone.White : Stone.Black;
 
@@ -181,7 +181,7 @@ namespace OGSAndroid
             Invalidate();
             CapturePass(s);
         }
-
+        
         public void ClearBoard()
         {
             CurrentTurn = Stone.Black;

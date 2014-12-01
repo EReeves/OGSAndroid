@@ -3,4 +3,6 @@
 <resources>
   <string name="hello">Hello World, Click Me!</string>
   <string name="app_name">OGSAndroid</string>
+  <string name="RegisterLoginUrl">"<u>Register</u>"</string>
+  <string name="HelpLoginUrl">"<u>Help</u>"</string>
 </resources>

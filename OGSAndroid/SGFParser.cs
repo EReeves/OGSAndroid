@@ -13,18 +13,20 @@ namespace OGSAndroid
         private readonly Stack<Node<Move>> currPos = new Stack<Node<Move>>();
         private TreeState state = TreeState.Continue;
 
+        private int sgfCounter;
+
         public SGF<Move> Parse(string sgf)
         {
             var temp = new SGF<Move>();
 
-            for (var i = 0; i < sgf.Length; i++)
+            for (sgfCounter = 0; sgfCounter < sgf.Length; sgfCounter++)
             {
-                switch (sgf[i])
+                switch (sgf[sgfCounter])
                 {
                     case '[':
-                        if (sgf[i - 1] == '\\')
+                        if (sgf[sgfCounter - 1] == '\\')
                             break;
-                        temp = SortMove(sgf, i, temp);
+                        temp = SortMove(sgf, sgfCounter, temp);
                         break;
                     case '(':
                         //Create variation on next move.
@@ -73,7 +75,9 @@ namespace OGSAndroid
                     break;
                 case "\nC":
                 case "C": //Chat message
-                    temp.Info.ChatMessages.Add(GrabData(sgf, bPos)[0]);
+                    int chatEnd;
+                    temp.Info.ChatMessages.Add(GrabData(sgf, bPos, out chatEnd)[0]);
+                    sgfCounter = chatEnd;
                     break;
                 case "PB":
                     temp.Info.Black = GrabData(sgf, bPos)[0];
@@ -139,7 +143,7 @@ namespace OGSAndroid
             }
         }
 
-        private static string[] GrabData(string sgf, int bPos)
+        private static string[] GrabData(string sgf, int bPos, out int endpos)
         {
             string data = "";
             int i = bPos;
@@ -152,10 +156,18 @@ namespace OGSAndroid
                 i++;
             }
 
+            endpos = i;
+
             string[] splt = data.Split(new[] {'[', ']'}, StringSplitOptions.RemoveEmptyEntries);
             IEnumerable<string> ncr = splt.Where(c => c != "\r");
 
             return ncr.ToArray();
+        }
+
+        private static string[] GrabData(string sgf, int bPos)
+        {
+            int outDummy;
+            return GrabData(sgf, bPos, out outDummy);
         }
 
         private void GrabHandicapStones(string sgf, int bPos, ref SGF<Move> sg, Stone colour)
