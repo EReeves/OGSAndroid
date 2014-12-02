@@ -3,7 +3,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using SimpleJSON;
+using Org.Json;
+using Newtonsoft.Json.Linq;
 
 #endregion
 
@@ -21,10 +22,10 @@ namespace OGSAndroid
         public static string GetPlayerID(string username)
         {
             string url = "https://online-go.com/api/v1/players?username=" + username;
-            JSONNode ds = JsonGet(url);
+            JObject ds = JsonGet(url);
             
             //Player not found : Player found
-            return ds["results"].AsArray[0]["id"] == null ? "" : ds["results"].AsArray[0]["id"].Value;
+            return ds["results"][0]["id"] == null ? "" : ds["results"][0]["id"].ToString();
         }
 
         public static OGSGame[] PlayerGameList(string id, int page)
@@ -36,34 +37,34 @@ namespace OGSAndroid
             //Just do the first page for now.
 
             string url = "http://online-go.com/api/v1/players/" + id + "/games?ordering=-id&page=" + page;
-            JSONNode ds = JsonGet(url);
-            JSONArray games = ds["results"].AsArray;
+            JObject ds = JsonGet(url);
+            var games = ds["results"];
 
-            foreach (JSONNode g in games)
+            foreach (var g in games.Children())
             {
                 var temp = new OGSGame
                 {
-                    Name = g["name"].Value,
-                    ID = g["id"].Value,
+                    Name = g["name"].ToString(),
+                    ID = g["id"].ToString(),
                     Black =
                     {
-                        Username = g["players"]["black"]["username"],
-                        Id = g["players"]["black"]["id"],
-                        Country = g["players"]["black"]["country"],
-                        Icon = g["players"]["black"]["icon"]
+                        Username = g["players"]["black"]["username"].ToString(),
+                        Id = g["players"]["black"]["id"].ToString(),
+                        Country = g["players"]["black"]["country"].ToString(),
+                        Icon = g["players"]["black"]["icon"].ToString()
                     },
                     White =
                     {
-                        Username = g["players"]["white"]["username"],
-                        Id = g["players"]["white"]["id"],
-                        Country = g["players"]["white"]["country"],
-                        Icon = g["players"]["white"]["icon"]
+                        Username = g["players"]["white"]["username"].ToString(),
+                        Id = g["players"]["white"]["id"].ToString(),
+                        Country = g["players"]["white"]["country"].ToString(),
+                        Icon = g["players"]["white"]["icon"].ToString()
                     }
                 };
 
                 //Find result.
-                bool white = g["black_lost"].AsBool;
-                string outcome = g["outcome"].Value;
+                var white = (bool)g["black_lost"];
+                var outcome = g["outcome"].ToString();
 
                 if (white)
                     temp.Result = "W+" + outcome;
@@ -80,12 +81,12 @@ namespace OGSAndroid
             return gameList.ToArray();
         }
 
-        private static JSONNode JsonGet(string url)
+        private static JObject JsonGet(string url)
         {
             var wr = WebRequest.Create(url);
             string json = WebRequestWrapper(url);
 
-            return JSON.Parse(json);
+            return JObject.Parse(json);
         }
 
         public static SGF<Move> IDToSGF(string gid)

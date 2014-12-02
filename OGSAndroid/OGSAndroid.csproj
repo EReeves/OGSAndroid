@@ -39,6 +39,9 @@
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\Components\json.net-4.5.11.1\lib\android\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -63,7 +66,6 @@
     <Compile Include="SGF.cs" />
     <Compile Include="SGFView.cs" />
     <Compile Include="OGSAPI.cs" />
-    <Compile Include="SimpleJSON.cs" />
     <Compile Include="OGSGame.cs" />
     <Compile Include="PlayerGameListActivity.cs" />
     <Compile Include="External\UrlImageHelper\DownloaderAsyncTask.cs" />
@@ -117,6 +119,10 @@
     <XamarinComponentReference Include="FlatUI">
       <Version>1.0</Version>
       <Visible>False</Visible>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="json.net">
+      <Visible>False</Visible>
+      <Version>4.5.11.1</Version>
     </XamarinComponentReference>
   </ItemGroup>
   <ItemGroup />
