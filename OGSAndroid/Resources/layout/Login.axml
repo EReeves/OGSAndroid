@@ -19,14 +19,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/clientIdText"
-        android:hint="Client Id"
+        android:hint="Username"
         android:layout_marginBottom="8.1dp" />
     <FlatUI.FlatEditText
         android:inputType="textPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/editText2"
-        android:hint="Secret"
+        android:hint="Password"
         android:layout_marginBottom="3.2dp" />
     <RelativeLayout
         android:minWidth="25px"

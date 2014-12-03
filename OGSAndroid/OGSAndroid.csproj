@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CorrespondenceView.cs" />
+    <Compile Include="Data.cs" />
     <Compile Include="LoginActivity.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
@@ -125,5 +126,7 @@
       <Version>4.5.11.1</Version>
     </XamarinComponentReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\raw\data.txt" />
+  </ItemGroup>
 </Project>
