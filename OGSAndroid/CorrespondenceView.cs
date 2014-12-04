@@ -27,9 +27,10 @@ namespace OGSAndroid
 
         }
 
-        private void SendMove()
+        private void SendMove(Move mv)
         {
             var gid = Moves.Info.ID;
+            OGSAPI.SendMove(mv,gid);
 
         }
                     

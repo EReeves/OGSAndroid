@@ -15,6 +15,8 @@ namespace OGSAndroid
 {
     public class OGSAPI
     {
+        //We only ever want one person authed.
+
         private static string authToken;
 
         public static void Authenticate(string clientid, string secret, string user, string pass)
@@ -31,17 +33,10 @@ namespace OGSAndroid
 
             //Authenticate and store auth token.
             var url = "http://private-anon-e536afebe-ogs.apiary-mock.com/oauth2/access_token";
-            var wr = WebRequest.Create(url);
-            wr.Method = "POST";
 
-            using(var str = wr.GetRequestStream())
-            using (var sw = new StreamWriter(str))
-                sw.Write(stringB.ToString());
+            var resp = UnAuthedPost(url, stringB.ToString());
 
-            using(var response = (HttpWebResponse)wr.GetResponse())
-            using(var responseStream = response.GetResponseStream())
-            using(var streamReader = new StreamReader(responseStream))
-                Console.WriteLine(streamReader.ReadToEnd());
+            //TODO:Parse and set token.
 
         }
 
@@ -120,10 +115,38 @@ namespace OGSAndroid
             return parser.Parse(DownloadSGF(gid));
         }
 
-        public void AuthedPost(string url, string content)
+        private static string AuthedPost(string url, string content)
         {
             var wr = WebRequest.Create(url);
-            wr.Headers.Add("Authorization: Bearer ");
+            wr.Headers.Add("Authorization: Bearer " + authToken);
+            wr.Method = "POST";
+
+            using (var str = wr.GetRequestStream())
+            using (var sw = new StreamWriter(str))
+                sw.Write(content);
+
+            using (var response = (HttpWebResponse)wr.GetResponse())
+            using (var responseStream = response.GetResponseStream())
+            using (var streamReader = new StreamReader(responseStream))
+                return streamReader.ReadToEnd();
+            
+        }
+
+
+        private static string UnAuthedPost(string url, string content)
+        {
+            var wr = WebRequest.Create(url);
+            wr.Method = "POST";
+
+            using (var str = wr.GetRequestStream())
+            using (var sw = new StreamWriter(str))
+                sw.Write(content);
+
+            using (var response = (HttpWebResponse)wr.GetResponse())
+            using (var responseStream = response.GetResponseStream())
+            using (var streamReader = new StreamReader(responseStream))
+                return streamReader.ReadToEnd();
+
         }
 
         private static string DownloadSGF(string gid)
@@ -154,6 +177,20 @@ namespace OGSAndroid
             var stream = hr.GetResponseStream();
             var reader = new StreamReader(stream);
             return reader;
+        }
+
+        public static void SendMove(Move mv, string id)
+        {
+            //TODO: before this is implemented anywhere put a timer on it for something crazy like 1 hour until socket api is implemented.
+            throw new NotImplementedException();
+
+            if (authToken == null) Console.WriteLine("Unauthed"); //TODO handle this somehow, not sure yet.
+
+            var url = "http://online-go.com/api/v1/games/" + id + "/move/";
+            var content = (char)(97 + mv.x) + (char)(97 + mv.y);
+            var json = new JObject(new JProperty("move", content));
+            AuthedPost(url,json.ToString());
+
         }
     }
 }
