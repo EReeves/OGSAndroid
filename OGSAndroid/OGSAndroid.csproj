@@ -39,8 +39,18 @@
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
+    <Reference Include="EngineIoClientDotNet">
+      <HintPath>..\Extern\EngineIoClientDotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Components\json.net-4.5.11.1\lib\android\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Quobject.Collections.Immutable">
+      <HintPath>..\Extern\Quobject.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="SocketIoClientDotNet">
+      <HintPath>..\Extern\SocketIoClientDotNet.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
@@ -50,12 +60,19 @@
     <Reference Include="FlatUI">
       <HintPath>..\Components\FlatUI-1.0\lib\android\FlatUI.dll</HintPath>
     </Reference>
+    <Reference Include="WebSocket4Net">
+      <HintPath>..\Extern\WebSocket4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit">
+      <HintPath>..\Extern\xunit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CorrespondenceView.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="LoginActivity.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="RealTimeAPI.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BoardView.cs" />
@@ -83,6 +100,7 @@
     <Compile Include="ListViewInfiniteScroll.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
@@ -129,4 +147,8 @@
   <ItemGroup>
     <AndroidResource Include="Resources\raw\data.txt" />
   </ItemGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
 </Project>

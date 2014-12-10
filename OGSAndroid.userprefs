@@ -1,5 +1,5 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.01498FC01800C00B" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.015d1689511c2608" />
   <MonoDevelop.Ide.Workbench ActiveDocument="OGSAndroid\PlayerGameListActivity.cs">
     <Files>
       <File FileName="OGSAndroid\MainActivity.cs" Line="1" Column="1" />
@@ -13,9 +13,8 @@
       <File FileName="OGSAndroid\SGFParser.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\SGFTree.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\OGSAPI.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\SimpleJSON.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\OGSGame.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\PlayerGameListActivity.cs" Line="23" Column="23" />
+      <File FileName="OGSAndroid\PlayerGameListActivity.cs" Line="8" Column="8" />
       <File FileName="OGSAndroid\obj\Debug\android\src\mono\android\support\v4\app\FragmentManager_OnBackStackChangedListenerImplementor.java" Line="1" Column="1" />
       <File FileName="..\..\..\..\..\Program Files (x86)\MSBuild\Xamarin\Android\Xamarin.Android.Common.targets" Line="1" Column="1" />
       <File FileName="OGSAndroid\SGF.cs" Line="1" Column="1" />

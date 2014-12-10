@@ -32,6 +32,11 @@ namespace OGSAndroid
             Activation.Invoke();
         }
 
+        public string ToXYString()
+        {
+            return ((char)(97 + x)).ToString() + ((char)(97 + y)).ToString();
+        }
+
         public static Move LettersToMove(string letter, Stone colour)
         {
             if (String.IsNullOrEmpty(letter))

@@ -187,7 +187,7 @@ namespace OGSAndroid
             if (authToken == null) Console.WriteLine("Unauthed"); //TODO handle this somehow, not sure yet.
 
             var url = "http://online-go.com/api/v1/games/" + id + "/move/";
-            var content = (char)(97 + mv.x) + (char)(97 + mv.y);
+            var content = mv.ToXYString();
             var json = new JObject(new JProperty("move", content));
             AuthedPost(url,json.ToString());
 

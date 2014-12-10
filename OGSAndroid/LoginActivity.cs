@@ -20,6 +20,8 @@ namespace OGSAndroid
         {
             base.OnCreate(bundle);
 
+            RealTimeAPI.I.Start();
+
             RequestWindowFeature(WindowFeatures.NoTitle); //Remove title.
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Login);
