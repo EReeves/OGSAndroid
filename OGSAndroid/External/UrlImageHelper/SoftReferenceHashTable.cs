@@ -4,7 +4,7 @@ using Android.Util;
 
 #endregion
 
-namespace UrlImageViewHelper
+namespace OGSAndroid.External.UrlImageHelper
 {
     public class SoftReferenceHashTable<TKey, TValue>
     {
@@ -65,7 +65,7 @@ namespace UrlImageViewHelper
                 if (!cache.ContainsKey(key))
                     return default(TValue);
 
-                TValue val = cache[key];
+                var val = cache[key];
 
                 if (val == null)
                 {
@@ -77,25 +77,5 @@ namespace UrlImageViewHelper
                 return val;
             }
         }
-
-//		
-//		 Hashtable<K, SoftReference<V>> mTable = new Hashtable<K, SoftReference<V>>();
-//    
-//    public V put(K key, V value) {
-//        SoftReference<V> old = mTable.put(key, new SoftReference<V>(value));
-//        if (old == null)
-//            return null;
-//        return old.get();
-//    }
-//    
-//    public V get(K key) {
-//        SoftReference<V> val = mTable.get(key);
-//        if (val == null)
-//            return null;
-//        V ret = val.get();
-//        if (ret == null)
-//            mTable.remove(key);
-//        return ret;
-//    }
     }
 }

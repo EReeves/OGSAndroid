@@ -12,11 +12,17 @@ namespace OGSAndroid
     {
         //Singleton.
         public static RealTimeAPI I = new RealTimeAPI();
-
+        private bool connected;
+        private bool connecting;
         public APIInfo Info = new APIInfo();
-        private bool connected = false;
-        private bool connecting = false;
         private Socket ogsSocket;
+
+        public RealTimeAPI()
+        {
+            Turn = Stone.Black;
+        }
+
+        public Stone Turn { get; private set; }
 
         public void Start()
         {
@@ -24,7 +30,12 @@ namespace OGSAndroid
 
             connecting = true;
             ogsSocket = IO.Socket("http://ggsbeta.online-go.com/");
-            ogsSocket.On(Socket.EVENT_CONNECT, () => { connected = true; Console.WriteLine("OGSSocket connected."); });
+            ogsSocket.On(Socket.EVENT_CONNECT, () =>
+            {
+                connected = true;
+                connecting = false;
+                Console.WriteLine("OGSSocket connected.");
+            });
         }
 
         public void Stop()

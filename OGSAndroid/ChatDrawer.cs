@@ -67,7 +67,6 @@ namespace OGSAndroid
             return false;
         }
 
-
         //We don't care about these.
         public bool OnDown(MotionEvent e)
         {

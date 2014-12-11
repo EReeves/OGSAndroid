@@ -25,8 +25,8 @@ namespace OGSAndroid
 
     public class Node<T>
     {
-        private readonly List<Node<T>> children;
         public SGFTree<T> Parent;
+        private readonly List<Node<T>> children;
 
         public Node(T item, SGFTree<T> parent)
         {

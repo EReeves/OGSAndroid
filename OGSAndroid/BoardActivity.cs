@@ -7,7 +7,8 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using FlatUI;
-using UrlImageViewHelper;
+using OGSAndroid.External.UrlImageHelper;
+
 
 #endregion
 
@@ -15,10 +16,9 @@ namespace OGSAndroid
 {
     [Activity(Label = "Main", Theme = "@android:style/Theme.Holo.Light", Icon = "@drawable/icon",
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class MainActivity : Activity
+    public class BoardActivity : Activity
     {
         public SGFView BoardView;
-
         private ChatDrawer chatDrawer;
 
         protected override void OnCreate(Bundle bundle)

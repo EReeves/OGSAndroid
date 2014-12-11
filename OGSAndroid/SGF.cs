@@ -13,6 +13,7 @@ namespace OGSAndroid
         public List<string> ChatMessages = new List<string>();
         public string Date;
         public string Handicap;
+        public string ID;
         public string Komi;
         public string Link;
         public string Result;
@@ -20,7 +21,6 @@ namespace OGSAndroid
         public string Size;
         public string White;
         public string WhiteRank;
-        public string ID;
 
         public string String()
         {

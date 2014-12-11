@@ -8,22 +8,21 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 
+
 #endregion
 
 namespace OGSAndroid
 {
     public class BoardView : View
     {
+        public Stone CurrentTurn = Stone.Black;
+        private bool firstDraw = true;
+        private bool initialized;
+        public Stone[,] stones;
         private readonly Paint bgPaint;
         private readonly Paint blackPaint;
         protected readonly BoardTouch boardTouch;
         private readonly Paint whitePaint;
-        public Stone CurrentTurn = Stone.Black;
-        private bool firstDraw = true;
-        private bool initialized;
-
-        public Stone[,] stones;
-
 
         public BoardView(Context context, IAttributeSet attrs) : base(context)
         {
@@ -37,16 +36,16 @@ namespace OGSAndroid
             whitePaint = new Paint
             {
                 AntiAlias = true,
-                Color = new Color(180, 180, 180),
+                Color = new Color(180, 180, 180)
             };
 
             bgPaint = new Paint
             {
                 AntiAlias = true,
-                Color = Color.SandyBrown,
+                Color = Color.SandyBrown
             };
 
-            Bitmap bmp = BitmapFactory.DecodeResource(Resources, Resource.Drawable.woodtex);
+            var bmp = BitmapFactory.DecodeResource(Resources, Resource.Drawable.woodtex);
             bgPaint.SetShader(new BitmapShader(bmp, Shader.TileMode.Repeat, Shader.TileMode.Repeat));
             boardTouch = new BoardTouch(this);
             Padding = 20;
@@ -115,7 +114,7 @@ namespace OGSAndroid
         {
             for (var i = 0; i < Lines; i++)
             {
-                int xy = (Spacing*i) + Padding + ExtPad;
+                var xy = (Spacing*i) + Padding + ExtPad;
                 canvas.DrawLine(Padding + ExtPad, xy, ExtPad + Padding + (Lines - 1)*Spacing, xy, paint);
                 canvas.DrawLine(xy, Padding + ExtPad, xy, ExtPad + Padding + (Lines - 1)*Spacing, paint);
             }
@@ -126,11 +125,11 @@ namespace OGSAndroid
             if (Lines < 9)
                 return;
 
-            int radius = (Spacing/8) + 1;
+            var radius = (Spacing/8) + 1;
 
             //All boards > 9x have these.
             canvas.DrawCircle(ExtPad + Padding + (3*Spacing), ExtPad + Padding + (3*Spacing), radius, blackPaint);
-                //TopLeft
+            //TopLeft
             canvas.DrawCircle(ExtPad + Padding + ((Lines - 4)*Spacing), ExtPad + Padding + (3*Spacing), radius,
                 blackPaint); //TopRight
             canvas.DrawCircle(ExtPad + Padding + (3*Spacing), ExtPad + Padding + ((Lines - 4)*Spacing), radius,
@@ -181,7 +180,7 @@ namespace OGSAndroid
             Invalidate();
             CapturePass(s);
         }
-        
+
         public void ClearBoard()
         {
             CurrentTurn = Stone.Black;
@@ -195,14 +194,14 @@ namespace OGSAndroid
         private void CapturePass(Stone s)
         {
             //Foreach adjacent stone get group and check for life.
-            Stone[] surr = SurroundingStones(s);
+            var surr = SurroundingStones(s);
             foreach (var st in surr)
             {
                 if (st == null)
                     continue;
 
                 Stone[] grp;
-                bool alive = GroupAlive(st, out grp);
+                var alive = GroupAlive(st, out grp);
 
                 if (!alive)
                 {
@@ -224,12 +223,12 @@ namespace OGSAndroid
                     if (x == 0 && y == 0)
                         continue;
 
-                    int xx = x + st.x;
-                    int yy = y + st.y;
+                    var xx = x + st.x;
+                    var yy = y + st.y;
 
                     if (!InBounds(xx - 1, yy - 1)) continue;
 
-                    Stone res = stones[xx - 1, yy - 1];
+                    var res = stones[xx - 1, yy - 1];
 
                     if (remOwn)
                     {
@@ -268,7 +267,7 @@ namespace OGSAndroid
 
         private bool GroupAlive(Stone st, out Stone[] stgrp)
         {
-            Stone[] adj = AdjacentStones(st);
+            var adj = AdjacentStones(st);
 
             var alive = false;
 
@@ -281,7 +280,7 @@ namespace OGSAndroid
 
             while (workGrp.Count > 0)
             {
-                Stone s = workGrp.Dequeue();
+                var s = workGrp.Dequeue();
 
                 if (Stone.InList(grp, s))
                     continue;

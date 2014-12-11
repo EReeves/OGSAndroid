@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 #endregion
 
-namespace UrlImageViewHelper
+namespace OGSAndroid.External.UrlImageHelper
 {
     public class HashTable<TKey, TValue>
     {
@@ -24,7 +24,7 @@ namespace UrlImageViewHelper
 
         public TValue Get(TKey key)
         {
-            TValue result = default(TValue);
+            var result = default(TValue);
 
             lock (lockObj)
             {

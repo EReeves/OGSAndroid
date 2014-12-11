@@ -6,7 +6,7 @@ using Object = Java.Lang.Object;
 
 #endregion
 
-namespace UrlImageViewHelper
+namespace OGSAndroid.External.UrlImageHelper
 {
     public class AnonymousAsyncTask<TParam, TProgress, TResult> : AsyncTask<TParam, TProgress, TResult>
     {

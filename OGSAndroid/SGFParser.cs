@@ -10,10 +10,9 @@ namespace OGSAndroid
 {
     public class SGFParser
     {
-        private readonly Stack<Node<Move>> currPos = new Stack<Node<Move>>();
-        private TreeState state = TreeState.Continue;
-
         private int sgfCounter;
+        private TreeState state = TreeState.Continue;
+        private readonly Stack<Node<Move>> currPos = new Stack<Node<Move>>();
 
         public SGF<Move> Parse(string sgf)
         {
@@ -48,10 +47,10 @@ namespace OGSAndroid
 
         public SGF<Move> SortMove(string sgf, int bPos, SGF<Move> temp)
         {
-            string type = sgf.Substring(bPos - 2, 2);
-            string data = "";
+            var type = sgf.Substring(bPos - 2, 2);
+            var data = "";
 
-            int i = bPos;
+            var i = bPos;
             while (sgf[i + 1] != ']') //Grab data between brackets.
             {
                 i++;
@@ -136,7 +135,7 @@ namespace OGSAndroid
                     break;
 
                 case TreeState.Variation:
-                    Node<Move> node = currPos.Peek().AddChild(mv);
+                    var node = currPos.Peek().AddChild(mv);
                     currPos.Push(node);
                     state = TreeState.Continue;
                     break;
@@ -145,8 +144,8 @@ namespace OGSAndroid
 
         private static string[] GrabData(string sgf, int bPos, out int endpos)
         {
-            string data = "";
-            int i = bPos;
+            var data = "";
+            var i = bPos;
 
             while (i == bPos || !(sgf[i] == ']' && sgf[i + 1] != '['))
             {
@@ -158,8 +157,8 @@ namespace OGSAndroid
 
             endpos = i;
 
-            string[] splt = data.Split(new[] {'[', ']'}, StringSplitOptions.RemoveEmptyEntries);
-            IEnumerable<string> ncr = splt.Where(c => c != "\r");
+            var splt = data.Split(new[] {'[', ']'}, StringSplitOptions.RemoveEmptyEntries);
+            var ncr = splt.Where(c => c != "\r");
 
             return ncr.ToArray();
         }
@@ -172,9 +171,9 @@ namespace OGSAndroid
 
         private void GrabHandicapStones(string sgf, int bPos, ref SGF<Move> sg, Stone colour)
         {
-            string[] ncr = GrabData(sgf, bPos);
+            var ncr = GrabData(sgf, bPos);
 
-            foreach (Move m in ncr.Select(mv => Move.LettersToMove(mv, colour)))
+            foreach (var m in ncr.Select(mv => Move.LettersToMove(mv, colour)))
             {
                 if (currPos.Count == 0)
                 {
@@ -183,7 +182,7 @@ namespace OGSAndroid
                     continue;
                 }
 
-                Node<Move> node = currPos.Peek().AddChild(m);
+                var node = currPos.Peek().AddChild(m);
                 currPos.Push(node);
             }
         }

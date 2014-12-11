@@ -1,4 +1,4 @@
-namespace UrlImageViewHelper
+namespace OGSAndroid.External.UrlImageHelper
 {
     //class SoftReference : WeakReference { public SoftReference(object target) : base(target) { NonWebCache[Guid.NewGuid().ToString()] = target; } }
 

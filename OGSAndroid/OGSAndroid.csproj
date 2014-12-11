@@ -70,8 +70,9 @@
   <ItemGroup>
     <Compile Include="CorrespondenceView.cs" />
     <Compile Include="Data.cs" />
+    <Compile Include="GameView.cs" />
     <Compile Include="LoginActivity.cs" />
-    <Compile Include="MainActivity.cs" />
+    <Compile Include="BoardActivity.cs" />
     <Compile Include="RealTimeAPI.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -114,7 +115,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml" />
-    <AndroidResource Include="Resources\values\Strings.xml" />
+    <AndroidResource Include="Resources\values\Strings.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\drawable\Icon.png" />
     <AndroidResource Include="Resources\drawable\woodtex.jpg" />
     <AndroidResource Include="Resources\layout\PlayerGameList.axml" />

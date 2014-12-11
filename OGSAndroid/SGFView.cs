@@ -13,10 +13,9 @@ namespace OGSAndroid
     // ReSharper disable once InconsistentNaming
     public class SGFView : BoardView
     {
+        private int currentMove = 1;
         public TextView MoveNumberText;
         public SGF<Move> Moves = new SGF<Move>();
-
-        private int currentMove = 1;
 
         public SGFView(Context context, IAttributeSet attrs)
             : base(context, attrs)
@@ -55,7 +54,7 @@ namespace OGSAndroid
                     return;
                 }
 
-                Node<Move> node = Moves.Tree.Nodes[i];
+                var node = Moves.Tree.Nodes[i];
 
                 PlaceStone(node.Data);
             }

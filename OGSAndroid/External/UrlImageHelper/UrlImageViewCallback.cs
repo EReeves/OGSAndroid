@@ -5,7 +5,7 @@ using Android.Widget;
 
 #endregion
 
-namespace UrlImageViewHelper
+namespace OGSAndroid.External.UrlImageHelper
 {
     public interface IUrlImageViewCallback
     {

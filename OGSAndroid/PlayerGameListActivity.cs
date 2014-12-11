@@ -10,6 +10,7 @@ using Android.Views.InputMethods;
 using Android.Widget;
 using FlatUI;
 
+
 #endregion
 
 namespace OGSAndroid
@@ -21,17 +22,15 @@ namespace OGSAndroid
         public static SGF<Move> CurrentSGF;
         public static OGSGame CurrentGame;
         public static RelativeLayout LoadingPanel;
-
-        private readonly List<OGSGame> gameList = new List<OGSGame>();
-        private readonly List<string> gameStringList = new List<string>();
         private ListView gameListView;
         private bool infiniteLoading;
         private RelativeLayout infiniteLoadingPanel;
         private ListViewInfiniteScroll infiniteScroll;
         private int pages = 1;
-
         private EditText playerNameText;
         private Button searchButton;
+        private readonly List<OGSGame> gameList = new List<OGSGame>();
+        private readonly List<string> gameStringList = new List<string>();
 
         public int Pages
         {
@@ -71,10 +70,10 @@ namespace OGSAndroid
 
                 ThreadPool.QueueUserWorkItem(thr =>
                 {
-                    int gamePos = e.Position;
+                    var gamePos = e.Position;
                     CurrentSGF = OGSAPI.IDToSGF(gameList[gamePos].ID);
                     CurrentGame = gameList[gamePos];
-                    RunOnUiThread(() => StartActivity(typeof (MainActivity)));
+                    RunOnUiThread(() => StartActivity(typeof (BoardActivity)));
                 });
             };
 
@@ -104,7 +103,7 @@ namespace OGSAndroid
 
             ThreadPool.QueueUserWorkItem(o =>
             {
-                string pid = OGSAPI.GetPlayerID(playerNameText.Text);
+                var pid = OGSAPI.GetPlayerID(playerNameText.Text);
                 if (string.IsNullOrEmpty(pid))
                 {
                     RunOnUiThread(() =>
@@ -123,7 +122,7 @@ namespace OGSAndroid
 
                 RunOnUiThread(() =>
                 {
-                    int scrollBarPosition = gameListView.FirstVisiblePosition;
+                    var scrollBarPosition = gameListView.FirstVisiblePosition;
                     gameListView.Adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1,
                         gameStringList.ToArray());
                     gameListView.SetSelectionFromTop(scrollBarPosition, 0);

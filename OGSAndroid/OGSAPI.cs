@@ -6,7 +6,6 @@ using System.IO;
 using System.Net;
 using System.Text;
 using Newtonsoft.Json;
-using Org.Json;
 using Newtonsoft.Json.Linq;
 
 #endregion
@@ -32,19 +31,18 @@ namespace OGSAndroid
             stringB.Append(pass);
 
             //Authenticate and store auth token.
-            var url = "http://private-anon-e536afebe-ogs.apiary-mock.com/oauth2/access_token";
+            const string url = "http://private-anon-e536afebe-ogs.apiary-mock.com/oauth2/access_token";
 
             var resp = UnAuthedPost(url, stringB.ToString());
 
             //TODO:Parse and set token.
-
         }
 
         public static string GetPlayerID(string username)
         {
-            string url = "https://online-go.com/api/v1/players?username=" + username;
-            JToken ds = JsonGet(url);
-            
+            var url = "https://online-go.com/api/v1/players?username=" + username;
+            var ds = JsonGet(url);
+
             //Player not found : Player found
             return ds["results"][0]["id"] == null ? "" : ds["results"][0]["id"].ToString();
         }
@@ -57,8 +55,8 @@ namespace OGSAndroid
             var gameList = new List<OGSGame>();
             //Just do the first page for now.
 
-            string url = "http://online-go.com/api/v1/players/" + id + "/games?ordering=-id&page=" + page;
-            JToken ds = JsonGet(url);
+            var url = "http://online-go.com/api/v1/players/" + id + "/games?ordering=-id&page=" + page;
+            var ds = JsonGet(url);
             var games = ds["results"];
 
             foreach (var g in games.Children())
@@ -84,7 +82,7 @@ namespace OGSAndroid
                 };
 
                 //Find result.
-                var white = (bool)g["black_lost"];
+                var white = (bool) g["black_lost"];
                 var outcome = g["outcome"].ToString();
 
                 if (white)
@@ -104,8 +102,8 @@ namespace OGSAndroid
 
         private static JToken JsonGet(string url)
         {
-            using(var reader = WebRequestWrapperRaw(url))
-            using(var jsonReader = new JsonTextReader(reader))        
+            using (var reader = WebRequestWrapperRaw(url))
+            using (var jsonReader = new JsonTextReader(reader))
                 return JToken.ReadFrom(jsonReader);
         }
 
@@ -125,13 +123,11 @@ namespace OGSAndroid
             using (var sw = new StreamWriter(str))
                 sw.Write(content);
 
-            using (var response = (HttpWebResponse)wr.GetResponse())
+            using (var response = (HttpWebResponse) wr.GetResponse())
             using (var responseStream = response.GetResponseStream())
             using (var streamReader = new StreamReader(responseStream))
                 return streamReader.ReadToEnd();
-            
         }
-
 
         private static string UnAuthedPost(string url, string content)
         {
@@ -142,16 +138,15 @@ namespace OGSAndroid
             using (var sw = new StreamWriter(str))
                 sw.Write(content);
 
-            using (var response = (HttpWebResponse)wr.GetResponse())
+            using (var response = (HttpWebResponse) wr.GetResponse())
             using (var responseStream = response.GetResponseStream())
             using (var streamReader = new StreamReader(responseStream))
                 return streamReader.ReadToEnd();
-
         }
 
         private static string DownloadSGF(string gid)
         {
-            string url = "http://online-go.com/api/v1/games/" + gid + "/sgf";
+            var url = "http://online-go.com/api/v1/games/" + gid + "/sgf";
             return WebRequestWrapper(url);
         }
 
@@ -160,7 +155,7 @@ namespace OGSAndroid
             var wr = WebRequest.Create(url);
             string result;
 
-            using (var hr = (HttpWebResponse)wr.GetResponse())
+            using (var hr = (HttpWebResponse) wr.GetResponse())
             using (var stream = hr.GetResponseStream())
             using (var reader = new StreamReader(stream))
                 result = reader.ReadToEnd();
@@ -189,8 +184,7 @@ namespace OGSAndroid
             var url = "http://online-go.com/api/v1/games/" + id + "/move/";
             var content = mv.ToXYString();
             var json = new JObject(new JProperty("move", content));
-            AuthedPost(url,json.ToString());
-
+            AuthedPost(url, json.ToString());
         }
     }
 }

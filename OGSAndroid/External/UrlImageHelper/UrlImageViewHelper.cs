@@ -6,7 +6,6 @@ using System.IO;
 using System.Net;
 using Android.App;
 using Android.Content;
-using Android.Content.Res;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Util;
@@ -16,7 +15,7 @@ using Path = System.IO.Path;
 
 #endregion
 
-namespace UrlImageViewHelper
+namespace OGSAndroid.External.UrlImageHelper
 {
     public class UrlImageViewHelper
     {
@@ -32,8 +31,7 @@ namespace UrlImageViewHelper
         protected static HashTable<ImageView, string> pendingViews = new HashTable<ImageView, string>();
         protected static HashTable<string, List<ImageView>> pendingDownloads = new HashTable<string, List<ImageView>>();
         private static bool hasCleaned;
-
-        private static Resources mResources;
+        private static Android.Content.Res.Resources mResources;
         private static DisplayMetrics mMetrics;
 
         public static void SetUrlDrawable(ImageView imageView, string url, int defaultResource)
@@ -131,15 +129,15 @@ namespace UrlImageViewHelper
             mMetrics = new DisplayMetrics();
             var act = (Activity) context;
             act.WindowManager.DefaultDisplay.GetMetrics(mMetrics);
-            AssetManager mgr = context.Assets;
-            mResources = new Resources(mgr, mMetrics, context.Resources.Configuration);
+            var mgr = context.Assets;
+            mResources = new Android.Content.Res.Resources(mgr, mMetrics, context.Resources.Configuration);
         }
 
         public static BitmapDrawable LoadDrawableFromFile(Context context, string filename)
         {
             PrepareResources(context);
 
-            Bitmap bitmap = BitmapFactory.DecodeFile(filename);
+            var bitmap = BitmapFactory.DecodeFile(filename);
 
             //var bitmap = Android.Graphics.BitmapFactory.DecodeStream(stream);
             //Log.i(LOGTAG, String.format("Loaded bitmap (%dx%d).", bitmap.getWidth(), bitmap.getHeight()));
@@ -155,9 +153,9 @@ namespace UrlImageViewHelper
 
             try
             {
-                string baseDir = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                var baseDir = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
 
-                string[] files = Directory.GetFiles(baseDir);
+                var files = Directory.GetFiles(baseDir);
 
                 if (files == null || files.Length <= 0)
                     return;
@@ -180,7 +178,7 @@ namespace UrlImageViewHelper
 
         private static string GetFilenameForUrl(string url)
         {
-            string hashCode = url.GetHashCode().ToString().Replace("-", "N");
+            var hashCode = url.GetHashCode().ToString().Replace("-", "N");
             return hashCode + ".urlimage";
         }
 
@@ -200,8 +198,8 @@ namespace UrlImageViewHelper
                 return;
             }
 
-            UrlImageCache cache = UrlImageCache.Instance;
-            Drawable drawable = cache.Get(url);
+            var cache = UrlImageCache.Instance;
+            var drawable = cache.Get(url);
 
             if (drawable != null)
             {
@@ -212,8 +210,8 @@ namespace UrlImageViewHelper
                 return;
             }
 
-            string baseDir = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            string filename = Path.Combine(baseDir, GetFilenameForUrl(url));
+            var baseDir = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            var filename = Path.Combine(baseDir, GetFilenameForUrl(url));
 
             var file = new FileInfo(filename);
             if (file.Exists)
@@ -254,7 +252,7 @@ namespace UrlImageViewHelper
                 pendingViews.Put(imageView, url);
 
             //Check to see if another view is already waiting for this url so we don't download it again
-            List<ImageView> currentDownload = pendingDownloads.Get(url);
+            var currentDownload = pendingDownloads.Get(url);
             if (currentDownload != null)
             {
                 if (imageView != null)
@@ -274,7 +272,7 @@ namespace UrlImageViewHelper
                 try
                 {
                     var client = new WebClient();
-                    byte[] data = client.DownloadData(url);
+                    var data = client.DownloadData(url);
 
                     File.WriteAllBytes(filename, data);
 
@@ -289,7 +287,7 @@ namespace UrlImageViewHelper
             {
                 try
                 {
-                    BitmapDrawable usableResult = bd;
+                    var usableResult = bd;
                     if (usableResult == null)
                         usableResult = (BitmapDrawable) defaultDrawable;
 
@@ -299,15 +297,15 @@ namespace UrlImageViewHelper
 
                     foreach (var iv in downloads)
                     {
-                        string pendingUrl = pendingViews.Get(iv);
+                        var pendingUrl = pendingViews.Get(iv);
                         if (!url.Equals(pendingUrl))
                             continue;
                         pendingViews.Remove(iv);
 
                         if (usableResult != null)
                         {
-                            BitmapDrawable fnewImage = usableResult;
-                            ImageView fimageView = iv;
+                            var fnewImage = usableResult;
+                            var fimageView = iv;
 
                             fimageView.SetImageDrawable(fnewImage);
 

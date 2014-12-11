@@ -4,7 +4,7 @@ using Android.Graphics.Drawables;
 
 #endregion
 
-namespace UrlImageViewHelper
+namespace OGSAndroid.External.UrlImageHelper
 {
     public class UrlImageCache : SoftReferenceHashTable<string, Drawable>
     {

@@ -10,8 +10,8 @@ namespace OGSAndroid
 {
     public class ListViewInfiniteScroll : Object, AbsListView.IOnScrollListener
     {
-        private readonly ListView listView;
         public Action HitBottom;
+        private readonly ListView listView;
 
         public ListViewInfiniteScroll(ListView lv)
         {
@@ -23,7 +23,7 @@ namespace OGSAndroid
         {
             if (listView == null || listView.Count == 0)
                 return;
-            int last = firstVisibleItem + visibleItemCount;
+            var last = firstVisibleItem + visibleItemCount;
             if (listView.Count > last) return; //Not at bottom.
             if (HitBottom != null)
                 HitBottom.Invoke();

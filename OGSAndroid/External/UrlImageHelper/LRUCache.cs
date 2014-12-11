@@ -6,15 +6,15 @@ using System.Collections.Generic;
 
 #endregion
 
-namespace UrlImageViewHelper
+namespace OGSAndroid.External.UrlImageHelper
 {
     public class LRUCache<TKey, TValue> : IDictionary<TKey, TValue>
     {
+        private object sync = new object();
         private readonly int capacity;
         private readonly Dictionary<TKey, TValue> data;
         private readonly ICollection<KeyValuePair<TKey, TValue>> dataAsCollection;
         private readonly IndexedLinkedList<TKey> lruList = new IndexedLinkedList<TKey>();
-        private object sync = new object();
 
         public LRUCache(int capacity)
         {
@@ -52,7 +52,7 @@ namespace UrlImageViewHelper
 
         public bool Remove(TKey key)
         {
-            bool existed = data.Remove(key);
+            var existed = data.Remove(key);
             lruList.Remove(key);
             return existed;
         }
@@ -71,7 +71,7 @@ namespace UrlImageViewHelper
         {
             get
             {
-                TValue value = data[key];
+                var value = data[key];
                 lruList.Remove(key);
                 lruList.Add(key);
                 return value;
@@ -123,7 +123,7 @@ namespace UrlImageViewHelper
 
         public bool Remove(KeyValuePair<TKey, TValue> item)
         {
-            bool removed = dataAsCollection.Remove(item);
+            var removed = dataAsCollection.Remove(item);
             if (removed)
             {
                 lruList.Remove(item.Key);
@@ -131,12 +131,10 @@ namespace UrlImageViewHelper
             return removed;
         }
 
-
         public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
         {
             return dataAsCollection.GetEnumerator();
         }
-
 
         IEnumerator IEnumerable.GetEnumerator()
         {

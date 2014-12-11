@@ -11,10 +11,9 @@ namespace OGSAndroid
     {
         public static readonly Stone Black = new Stone(true);
         public static readonly Stone White = new Stone(false);
-        private readonly bool val;
-
         public int x;
         public int y;
+        private readonly bool val;
 
         public Stone(bool _val)
         {
@@ -47,9 +46,9 @@ namespace OGSAndroid
         {
             return l.Where(v => s != null)
                 .Any(v => v
-                    .Equals(s) 
-                    && v.x == s.x 
-                    && v.y == s.y);
+                    .Equals(s)
+                          && v.x == s.x
+                          && v.y == s.y);
         }
     }
 }

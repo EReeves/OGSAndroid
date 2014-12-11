@@ -34,15 +34,15 @@ namespace OGSAndroid
 
         public string ToXYString()
         {
-            return ((char)(97 + x)).ToString() + ((char)(97 + y)).ToString();
+            return ((char) (97 + x)) + ((char) (97 + y)).ToString();
         }
 
         public static Move LettersToMove(string letter, Stone colour)
         {
             if (String.IsNullOrEmpty(letter))
                 return null; //pass
-            int x = letter[0]%32;
-            int y = letter[1]%32;
+            var x = letter[0]%32;
+            var y = letter[1]%32;
             return new Move(colour, x, y);
         }
 
