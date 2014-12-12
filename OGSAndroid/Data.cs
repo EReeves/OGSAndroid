@@ -11,7 +11,7 @@ namespace OGSAndroid
     {
         public SecureString[] CiDsEc(Context context)
         {
-            //Doesnt need to be secure, I just don't want it in plain text.
+            //Doesnt need to be secure, I just want it obfuscated.
 
             string text;
             using (var str = context.Resources.OpenRawResource(Resource.Raw.data))
