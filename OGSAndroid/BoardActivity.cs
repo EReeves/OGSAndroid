@@ -63,6 +63,10 @@ namespace OGSAndroid
             var hbr = new HoldButtonRepeat(next, 400);
             hbr.Invoke += () => RunOnUiThread(() => BoardView.Next());
 
+            //SumbitButton
+            var submitButton = FindViewById<Button>(Resource.Id.button4);
+            submitButton.Click += (sender, args) => BoardView.SubmitMove();
+
             //Previous
             var prev = FindViewById<Button>(Resource.Id.button3);
             prev.Click += (sender, e) => BoardView.Previous();
@@ -84,6 +88,11 @@ namespace OGSAndroid
             var chatDrawerView = FindViewById<SlidingDrawer>(Resource.Id.rightDrawer);
             var chatDrawerText = FindViewById<TextView>(Resource.Id.chatText);
             chatDrawer = new ChatDrawer(chatDrawerView, chatDrawerText);
+            BoardView.boardTouch.OnTouchEvent += (e) =>
+            {
+                chatDrawer.GestureDetector.OnTouchEvent(e);
+            };
+            
 
             //Apply chat text.
             chatDrawer.ChatText = ChatDrawer.StringListToString(PlayerGameListActivity.CurrentSGF.Info.ChatMessages);

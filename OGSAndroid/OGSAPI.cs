@@ -16,7 +16,15 @@ namespace OGSAndroid
     {
         //We only ever want one person authed.
 
-        private static string authToken;
+        private static string accessToken;
+        public static string AccessToken
+        {
+            get
+            {
+                if(accessToken == null) throw new Exception("Not authenticated.");
+                return accessToken;               
+            }
+        }
 
         public static void Authenticate(string clientid, string secret, string user, string pass)
         {
@@ -34,6 +42,10 @@ namespace OGSAndroid
             const string url = "http://private-anon-e536afebe-ogs.apiary-mock.com/oauth2/access_token";
 
             var resp = UnAuthedPost(url, stringB.ToString());
+
+            var json = JToken.Parse(resp);
+
+            accessToken = json.Children()["access_token"].ToString();
 
             //TODO:Parse and set token.
         }
@@ -116,7 +128,7 @@ namespace OGSAndroid
         private static string AuthedPost(string url, string content)
         {
             var wr = WebRequest.Create(url);
-            wr.Headers.Add("Authorization: Bearer " + authToken);
+            wr.Headers.Add("Authorization: Bearer " + accessToken);
             wr.Method = "POST";
 
             using (var str = wr.GetRequestStream())
@@ -179,7 +191,7 @@ namespace OGSAndroid
             //TODO: before this is implemented anywhere put a timer on it for something crazy like 1 hour until socket api is implemented.
             throw new NotImplementedException();
 
-            if (authToken == null) Console.WriteLine("Unauthed"); //TODO handle this somehow, not sure yet.
+            if (accessToken == null) Console.WriteLine("Unauthed"); //TODO handle this somehow, not sure yet.
 
             var url = "http://online-go.com/api/v1/games/" + id + "/move/";
             var content = mv.ToXYString();

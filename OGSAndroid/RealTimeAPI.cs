@@ -29,7 +29,13 @@ namespace OGSAndroid
             if (connecting) return;
 
             connecting = true;
-            ogsSocket = IO.Socket("http://ggsbeta.online-go.com/");
+            IO.Options op = new IO.Options();
+            op.Secure = true;
+            op.ForceJsonp = true;
+
+            Console.WriteLine("Protocol:" + IO.Protocol);
+
+            ogsSocket = IO.Socket("http://ggs.online-go.com/", op);
             ogsSocket.On(Socket.EVENT_CONNECT, () =>
             {
                 connected = true;

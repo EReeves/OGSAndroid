@@ -1,5 +1,6 @@
 using Android.Content;
 using Android.Util;
+using Android.Views;
 
 namespace OGSAndroid
 {
@@ -10,7 +11,7 @@ namespace OGSAndroid
             boardTouch.OnConfirmStone += boardTouch_OnConfirmStone;
         }
 
-        private static void boardTouch_OnConfirmStone(Stone stone)
+        private static void boardTouch_OnConfirmStone(Stone stone, MotionEvent e)
         {
             RealTimeAPI.I.Move((Move) stone);
         }

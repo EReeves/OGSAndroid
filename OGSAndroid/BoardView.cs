@@ -16,12 +16,13 @@ namespace OGSAndroid
     public class BoardView : View
     {
         public Stone CurrentTurn = Stone.Black;
+
         private bool firstDraw = true;
         private bool initialized;
         public Stone[,] stones;
         private readonly Paint bgPaint;
         private readonly Paint blackPaint;
-        protected readonly BoardTouch boardTouch;
+        public readonly BoardTouch boardTouch;
         private readonly Paint whitePaint;
 
         public BoardView(Context context, IAttributeSet attrs) : base(context)
@@ -63,6 +64,11 @@ namespace OGSAndroid
             Lines = lines;
             stones = new Stone[Lines, Lines];
             initialized = true;
+        }
+
+        public void SubmitMove()
+        {
+            boardTouch.SubmitMove();
         }
 
         protected override void OnDraw(Canvas canvas)

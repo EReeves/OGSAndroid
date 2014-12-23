@@ -53,7 +53,7 @@
                 android:layout_weight="1"
                 android:layout_marginRight="1dp" />
             <FlatUI.FlatButton
-                android:text="O"
+                android:text="Sumbit"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:id="@+id/button4"

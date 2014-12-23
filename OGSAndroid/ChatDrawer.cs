@@ -15,7 +15,7 @@ namespace OGSAndroid
 {
     public class ChatDrawer : Object, GestureDetector.IOnGestureListener, View.IOnTouchListener
     {
-        private const int VelocityMaxmin = 200;
+        private const int VelocityMaxmin = 100;
         private readonly TextView chatText;
         private readonly SlidingDrawer drawer;
         private readonly GestureDetector gDetector;
@@ -52,7 +52,7 @@ namespace OGSAndroid
 
         public bool OnFling(MotionEvent one, MotionEvent two, float vX, float vY)
         {
-            if (Math.Abs(vY) > VelocityMaxmin*4) //Probably scrolling, don't animate.
+            if (Math.Abs(vY) > VelocityMaxmin*15) //Probably scrolling, don't animate.
                 return false;
 
             if (!drawer.IsOpened && vX < -VelocityMaxmin)
@@ -94,7 +94,7 @@ namespace OGSAndroid
         public bool OnTouch(View v, MotionEvent e)
         {
             OnTouchEvent(e);
-            return false;
+            return true;
         }
 
         public static string StringListToString(List<String> l)
