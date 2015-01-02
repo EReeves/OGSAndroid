@@ -1,6 +1,8 @@
 #region
 
 using System;
+using System.Collections.Generic;
+using Android.Util;
 using Newtonsoft.Json.Linq;
 using Quobject.SocketIoClientDotNet.Client;
 
@@ -36,12 +38,18 @@ namespace OGSAndroid
             Console.WriteLine("Protocol:" + IO.Protocol);
 
             ogsSocket = IO.Socket("http://ggs.online-go.com/", op);
+            RegisterErrorMessages();
+            RegisterIncomingMessages();
             ogsSocket.On(Socket.EVENT_CONNECT, () =>
             {
                 connected = true;
                 connecting = false;
                 Console.WriteLine("OGSSocket connected.");
+                //Test TODO: Remove
+                RealTimeAPI.I.Connect("1216933");
             });
+
+            //RegisterIncomingMessages();
         }
 
         public void Stop()
@@ -53,7 +61,7 @@ namespace OGSAndroid
         //Connect to game.
         public void Connect(string gid)
         {
-            Info.GameID = gid;
+            //Info.GameID = gid;
 
             var jObj = new JObject
             {
@@ -207,5 +215,53 @@ namespace OGSAndroid
             public string ChatID { get; set; }
             public string AuthID { get; set; }
         }
+
+        //Incoming messages.
+
+        private readonly Dictionary<int,string> registeredMessages = new Dictionary<int, string>(); 
+
+        private void RegisterIncomingMessages()
+        {
+            //Incoming gamedata - 0
+            var gamedata = "game/" + Info.GameID + "/gamedata";
+            ogsSocket.On(gamedata, (data) =>
+            {
+                Log.Info("On/Gamedata", data.ToString());
+
+            });
+            registeredMessages.Add(0,gamedata);
+
+            ogsSocket.On(Socket.EVENT_MESSAGE, (data) =>
+                {
+                    Log.Info("message", data.ToString());
+                    Console.WriteLine(data);
+                });
+
+        }
+
+        private void RegisterErrorMessages()
+        {
+
+            ogsSocket.On(Socket.EVENT_CONNECT_ERROR, (data) =>
+            {
+                Log.Info("SocketError", data.ToString() + ":: Connect_Error");
+            });
+
+            ogsSocket.On(Socket.EVENT_CONNECT_TIMEOUT, (data) =>
+            {
+                Log.Info("SocketError", data.ToString() + ":: Connect_Error_Timeout");
+            });
+            ogsSocket.On(Socket.EVENT_ERROR, (data) =>
+            {
+                Log.Info("SocketError", data.ToString() + ":: Error");
+            });
+            ogsSocket.On(Socket.EVENT_DISCONNECT, (data) =>
+            {
+                Log.Info("SocketError", data.ToString() + ":: Disconnect");
+            });
+
+        }
+
+
     }
 }

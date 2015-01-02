@@ -1,6 +1,6 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.01498FC01800C00B" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="OGSAndroid\PlayerGameListActivity.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.015d1689511c2608" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="OGSAndroid\LoginActivity.cs">
     <Files>
       <File FileName="OGSAndroid\BoardView.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\BoardTouch.cs" Line="1" Column="1" />
@@ -13,11 +13,20 @@
       <File FileName="OGSAndroid\SGFTree.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\OGSAPI.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\OGSGame.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\PlayerGameListActivity.cs" Line="22" Column="22" />
-      <File FileName="OGSAndroid\obj\Debug\android\src\mono\android\support\v4\app\FragmentManager_OnBackStackChangedListenerImplementor.java" Line="1" Column="1" />
+      <File FileName="OGSAndroid\PlayerGameListActivity.cs" Line="1" Column="1" />
       <File FileName="..\..\..\..\..\Program Files (x86)\MSBuild\Xamarin\Android\Xamarin.Android.Common.targets" Line="1" Column="1" />
       <File FileName="OGSAndroid\SGF.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\HoldButtonRepeat.cs" Line="1" Column="1" />
+      <File FileName="OGSAndroid\RealTimeAPI.cs" Line="1" Column="1" />
+      <File FileName="OGSAndroid\CorrespondenceView.cs" Line="1" Column="1" />
+      <File FileName="OGSAndroid\BoardActivity.cs" Line="1" Column="1" />
+      <File FileName="OGSAndroid\External\UrlImageHelper\SoftReferenceHashTable.cs" Line="1" Column="1" />
+      <File FileName="OGSAndroid\Logging\Log.cs" Line="1" Column="1" />
+      <File FileName="OGSAndroid\External\UrlImageHelper\UrlImageViewCallback.cs" Line="1" Column="1" />
+      <File FileName="OGSAndroid\External\UrlImageHelper\UrlImageCache.cs" Line="1" Column="1" />
+      <File FileName="OGSAndroid\External\UrlImageHelper\SoftReference.cs" Line="1" Column="1" />
+      <File FileName="OGSAndroid\External\UrlImageHelper\LRUCache.cs" Line="1" Column="1" />
+      <File FileName="OGSAndroid\LoginActivity.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

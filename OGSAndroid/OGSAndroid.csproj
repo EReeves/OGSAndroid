@@ -9,8 +9,6 @@
     <RootNamespace>OGSAndroid</RootNamespace>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <AndroidUseLatestPlatformSdk>
-    </AndroidUseLatestPlatformSdk>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -30,17 +28,18 @@
     <AndroidLinkMode>None</AndroidLinkMode>
     <ConsolePause>false</ConsolePause>
     <AndroidLinkSkip>PullToRefresharp.dll</AndroidLinkSkip>
-    <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
-    <BundleAssemblies>False</BundleAssemblies>
-    <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
     <AndroidSupportedAbis>armeabi,armeabi-v7a,x86</AndroidSupportedAbis>
-    <AndroidStoreUncompressedFileExtensions />
-    <MandroidI18n />
-    <JavaMaximumHeapSize />
+    <AndroidStoreUncompressedFileExtensions>
+    </AndroidStoreUncompressedFileExtensions>
+    <MandroidI18n>
+    </MandroidI18n>
+    <JavaMaximumHeapSize>
+    </JavaMaximumHeapSize>
     <JavaOptions>
     </JavaOptions>
-    <MonoDroidExtraArgs />
+    <MonoDroidExtraArgs>
+    </MonoDroidExtraArgs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -105,6 +104,7 @@
     <Compile Include="HoldButtonRepeat.cs" />
     <Compile Include="ChatDrawer.cs" />
     <Compile Include="ListViewInfiniteScroll.cs" />
+    <Compile Include="RealTimeView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -149,8 +149,8 @@
       <Visible>False</Visible>
     </XamarinComponentReference>
     <XamarinComponentReference Include="json.net">
-      <Visible>False</Visible>
       <Version>4.5.11.1</Version>
+      <Visible>False</Visible>
     </XamarinComponentReference>
   </ItemGroup>
   <ItemGroup>
