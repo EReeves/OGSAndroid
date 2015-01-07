@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
+using Android.Util;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -26,6 +27,12 @@ namespace OGSAndroid
             }
         }
 
+        public static void DebugSetAccessToken(string token)
+        {
+            accessToken = token;
+            //TODO:Remove
+        }
+
         public static void Authenticate(string clientid, string secret, string user, string pass)
         {
             var stringB = new StringBuilder();
@@ -39,7 +46,7 @@ namespace OGSAndroid
             stringB.Append(pass);
 
             //Authenticate and store auth token.
-            const string url = "http://private-anon-e536afebe-ogs.apiary-mock.com/oauth2/access_token";
+            const string url = "http://private-anon-b773a146c-ogs.apiary-mock.com/oauth2/access_token";
 
             var resp = UnAuthedPost(url, stringB.ToString());
 
@@ -47,12 +54,12 @@ namespace OGSAndroid
 
             accessToken = json.Children()["access_token"].ToString();
 
-            //TODO:Parse and set token.
+            ALog.Info("OGSAPI", "Authenticated");
         }
 
         public static string GetPlayerID(string username)
         {
-            var url = "https://online-go.com/api/v1/players?username=" + username;
+            var url = "http://online-go.com/api/v1/players?username=" + username;
             var ds = JsonGet(url);
 
             //Player not found : Player found
@@ -112,11 +119,10 @@ namespace OGSAndroid
             return gameList.ToArray();
         }
 
-        private static JToken JsonGet(string url)
+        private static JObject JsonGet(string url)
         {
-            using (var reader = WebRequestWrapperRaw(url))
-            using (var jsonReader = new JsonTextReader(reader))
-                return JToken.ReadFrom(jsonReader);
+            var str = WebRequestWrapper(url);
+            return JObject.Parse(str);
         }
 
         public static SGF<Move> IDToSGF(string gid)
@@ -158,7 +164,7 @@ namespace OGSAndroid
 
         private static string DownloadSGF(string gid)
         {
-            var url = "http://online-go.com/api/v1/games/" + gid + "/sgf";
+            var url = "online-go.com/api/v1/games/" + gid + "/sgf";
             return WebRequestWrapper(url);
         }
 
@@ -193,7 +199,7 @@ namespace OGSAndroid
 
             if (accessToken == null) Console.WriteLine("Unauthed"); //TODO handle this somehow, not sure yet.
 
-            var url = "http://online-go.com/api/v1/games/" + id + "/move/";
+            var url = "online-go.com/api/v1/games/" + id + "/move/";
             var content = mv.ToXYString();
             var json = new JObject(new JProperty("move", content));
             AuthedPost(url, json.ToString());

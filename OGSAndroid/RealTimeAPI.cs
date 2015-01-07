@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Android.Util;
 using Newtonsoft.Json.Linq;
 using Quobject.SocketIoClientDotNet.Client;
+using OGSAndroid;
 
 #endregion
 
@@ -26,30 +27,27 @@ namespace OGSAndroid
 
         public Stone Turn { get; private set; }
 
-        public void Start()
+        public void Start(bool authed, string username = null)
         {
             if (connecting) return;
 
             connecting = true;
-            IO.Options op = new IO.Options();
-            op.Secure = true;
-            op.ForceJsonp = true;
-
-            Console.WriteLine("Protocol:" + IO.Protocol);
-
-            ogsSocket = IO.Socket("http://ggs.online-go.com/", op);
+                      
+            ogsSocket = IO.Socket("http://ggs.online-go.com/");
             RegisterErrorMessages();
             RegisterIncomingMessages();
             ogsSocket.On(Socket.EVENT_CONNECT, () =>
             {
                 connected = true;
                 connecting = false;
-                Console.WriteLine("OGSSocket connected.");
-                //Test TODO: Remove
-                RealTimeAPI.I.Connect("1216933");
+                ALog.Info("Socket", "OGSSocket connected.");    
             });
 
-            //RegisterIncomingMessages();
+            if(authed && username != null)
+                I.Info.PlayerID = OGSAPI.GetPlayerID(username);
+
+            ALog.Info("Socket", "Started");
+
         }
 
         public void Stop()
@@ -61,7 +59,7 @@ namespace OGSAndroid
         //Connect to game.
         public void Connect(string gid)
         {
-            //Info.GameID = gid;
+            Info.GameID = gid;
 
             var jObj = new JObject
             {
@@ -70,7 +68,9 @@ namespace OGSAndroid
                 {"chat", false}
             };
 
+            RegisterIncomingMessages();
             ogsSocket.Emit("game/connect", jObj);
+
         }
 
         //Disconnect from current game.
@@ -222,20 +222,25 @@ namespace OGSAndroid
 
         private void RegisterIncomingMessages()
         {
+            foreach (var o in registeredMessages)
+            {
+                ogsSocket.Off(o.Value);
+            }
+            registeredMessages.Clear();
+
             //Incoming gamedata - 0
+            if (Info.GameID == null)
+                return;
             var gamedata = "game/" + Info.GameID + "/gamedata";
             ogsSocket.On(gamedata, (data) =>
             {
-                Log.Info("On/Gamedata", data.ToString());
+                var json = JObject.Parse(data.ToString());
+                if(OnGameData != null)
+                    OnGameData.Invoke(json);
 
+                ALog.Info("Socket", data.ToString());
             });
             registeredMessages.Add(0,gamedata);
-
-            ogsSocket.On(Socket.EVENT_MESSAGE, (data) =>
-                {
-                    Log.Info("message", data.ToString());
-                    Console.WriteLine(data);
-                });
 
         }
 
@@ -244,23 +249,33 @@ namespace OGSAndroid
 
             ogsSocket.On(Socket.EVENT_CONNECT_ERROR, (data) =>
             {
-                Log.Info("SocketError", data.ToString() + ":: Connect_Error");
+                ALog.Info("SocketError", data.ToString() + ":: Connect_Error");
             });
 
             ogsSocket.On(Socket.EVENT_CONNECT_TIMEOUT, (data) =>
             {
-                Log.Info("SocketError", data.ToString() + ":: Connect_Error_Timeout");
+                ALog.Info("SocketError", data.ToString() + ":: Connect_Error_Timeout");
             });
             ogsSocket.On(Socket.EVENT_ERROR, (data) =>
             {
-                Log.Info("SocketError", data.ToString() + ":: Error");
+                    ALog.Info("SocketError", ((Quobject.EngineIoClientDotNet.Client.EngineIOException)data).Message + ":: Error");
             });
             ogsSocket.On(Socket.EVENT_DISCONNECT, (data) =>
             {
-                Log.Info("SocketError", data.ToString() + ":: Disconnect");
+                ALog.Info("SocketError", data.ToString() + ":: Disconnect");
             });
 
+            ogsSocket.On(Socket.EVENT_MESSAGE, (data) =>
+                {
+                    ALog.Info("SocketMessage", data.ToString() + ":: Message");
+                });
+
         }
+
+        public delegate void IncomingMessageDelegate(JObject data);
+
+        public IncomingMessageDelegate OnGameData;
+   
 
 
     }

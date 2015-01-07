@@ -1,6 +1,6 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.015d1689511c2608" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="OGSAndroid\LoginActivity.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\..\..\..\Program Files (x86)\MSBuild\Xamarin\Android\Xamarin.Android.Common.targets">
     <Files>
       <File FileName="OGSAndroid\BoardView.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\BoardTouch.cs" Line="1" Column="1" />
@@ -14,23 +14,25 @@
       <File FileName="OGSAndroid\OGSAPI.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\OGSGame.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\PlayerGameListActivity.cs" Line="1" Column="1" />
-      <File FileName="..\..\..\..\..\Program Files (x86)\MSBuild\Xamarin\Android\Xamarin.Android.Common.targets" Line="1" Column="1" />
+      <File FileName="..\..\..\..\..\Program Files (x86)\MSBuild\Xamarin\Android\Xamarin.Android.Common.targets" Line="3" Column="3" />
       <File FileName="OGSAndroid\SGF.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\HoldButtonRepeat.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\RealTimeAPI.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\CorrespondenceView.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\BoardActivity.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\External\UrlImageHelper\SoftReferenceHashTable.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\Logging\Log.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\External\UrlImageHelper\UrlImageViewCallback.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\External\UrlImageHelper\UrlImageCache.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\External\UrlImageHelper\SoftReference.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\External\UrlImageHelper\LRUCache.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\LoginActivity.cs" Line="1" Column="1" />
+      <File FileName="OGSAndroid\RealTimeView.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="C:\Users\Evan\Documents\Projects\OGSAndroid\OGSAndroid\OGSAPI.cs" line="51" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches>
     <Watch file="OGSAndroid\SGFView.cs" line="65" offsetX="242" offsetY="1024" expression="Moves" liveUpdate="False" />

@@ -14,11 +14,11 @@ using OGSAndroid.External.UrlImageHelper;
 
 namespace OGSAndroid
 {
-    [Activity(Label = "Main", Theme = "@android:style/Theme.Holo.Light", Icon = "@drawable/icon",
+    [Activity(Label = "Main", Theme = "@android:style/Theme.Holo.Light", Icon = "@drawable/icon", 
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class BoardActivity : Activity
     {
-        public SGFView BoardView;
+        public GameView GameView;
         private ChatDrawer chatDrawer;
 
         protected override void OnCreate(Bundle bundle)
@@ -28,26 +28,27 @@ namespace OGSAndroid
             SetContentView(Resource.Layout.Main);
             FlatUI.FlatUI.SetActivityTheme(this, FlatTheme.Dark());
 
-            BoardView = FindViewById<SGFView>(Resource.Id.SGFView);
-            //BoardView move text.
+            GameView = FindViewById<GameView>(Resource.Id.GameView);
+            //GameView move text.
             var moveText = FindViewById<TextView>(Resource.Id.moveText);
-            BoardView.MoveNumberText = moveText;
-            BoardView.SetSGF(PlayerGameListActivity.CurrentSGF);
+            GameView.MoveNumberText = moveText;
+            //GameView.SetSGF(PlayerGameListActivity.CurrentSGF);
+            GameView.Connect(PlayerGameListActivity.CurrentGame.ID);
             moveText.TextChanged += (sender, e) =>
             {
                 var i = 0;
                 if (int.TryParse(moveText.Text, out i))
-                    BoardView.PlaceUpTo(i);
+                    GameView.PlaceUpTo(i);
             };
 
             //MatchInfo
             var tvl = FindViewById<TextView>(Resource.Id.textBlack);
-            tvl.Text = BoardView.Moves.Info.LeftString();
+            tvl.Text = GameView.Moves.Info.LeftString();
             tvl.SetTextColor(Color.Black);
             tvl.Invalidate();
 
             var tvr = FindViewById<TextView>(Resource.Id.textWhite);
-            tvr.Text = BoardView.Moves.Info.RightString();
+            tvr.Text = GameView.Moves.Info.RightString();
             tvr.SetTextColor(Color.Black);
             tvr.Invalidate();
 
@@ -61,23 +62,23 @@ namespace OGSAndroid
             //NextMove
             var next = FindViewById<Button>(Resource.Id.button5);
             var hbr = new HoldButtonRepeat(next, 400);
-            hbr.Invoke += () => RunOnUiThread(() => BoardView.Next());
+            hbr.Invoke += () => RunOnUiThread(() => GameView.Next());
 
             //SumbitButton
             var submitButton = FindViewById<Button>(Resource.Id.button4);
-            submitButton.Click += (sender, args) => BoardView.SubmitMove();
+            submitButton.Click += (sender, args) => GameView.SubmitMove();
 
             //Previous
             var prev = FindViewById<Button>(Resource.Id.button3);
-            prev.Click += (sender, e) => BoardView.Previous();
+            prev.Click += (sender, e) => GameView.Previous();
 
             //Start
             var start = FindViewById<Button>(Resource.Id.button2);
-            start.Click += (sender, e) => BoardView.ToStart();
+            start.Click += (sender, e) => GameView.ToStart();
 
             //End
             var end = FindViewById<Button>(Resource.Id.button6);
-            end.Click += (sender, e) => BoardView.ToEnd();
+            end.Click += (sender, e) => GameView.ToEnd();
 
             //toolbar temp
             var tbb = FindViewById<Button>(Resource.Id.toolbarButton);
@@ -88,14 +89,14 @@ namespace OGSAndroid
             var chatDrawerView = FindViewById<SlidingDrawer>(Resource.Id.rightDrawer);
             var chatDrawerText = FindViewById<TextView>(Resource.Id.chatText);
             chatDrawer = new ChatDrawer(chatDrawerView, chatDrawerText);
-            BoardView.boardTouch.OnTouchEvent += (e) =>
+            GameView.boardTouch.OnTouchEvent += (e) =>
             {
                 chatDrawer.GestureDetector.OnTouchEvent(e);
             };
             
 
-            //Apply chat text.
-            chatDrawer.ChatText = ChatDrawer.StringListToString(PlayerGameListActivity.CurrentSGF.Info.ChatMessages);
+            //Apply chat text 
+            //chatDrawer.ChatText = ChatDrawer.StringListToString(PlayerGameListActivity.CurrentSGF.Info.ChatMessages);
 
             //Stop scrollview from consuming gesture events.
             chatDrawerScroll.SetOnTouchListener(chatDrawer);

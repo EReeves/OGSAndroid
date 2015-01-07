@@ -71,7 +71,7 @@ namespace OGSAndroid
                 ThreadPool.QueueUserWorkItem(thr =>
                 {
                     var gamePos = e.Position;
-                    CurrentSGF = OGSAPI.IDToSGF(gameList[gamePos].ID);
+                    //CurrentSGF = OGSAPI.IDToSGF(gameList[gamePos].ID);
                     CurrentGame = gameList[gamePos];
                     RunOnUiThread(() => StartActivity(typeof (BoardActivity)));
                 });

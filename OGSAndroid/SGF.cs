@@ -1,6 +1,8 @@
 ﻿#region
 
 using System.Collections.Generic;
+using Newtonsoft.Json.Bson;
+using Newtonsoft.Json.Linq;
 
 #endregion
 
@@ -39,6 +41,7 @@ namespace OGSAndroid
         {
             return White + " (" + WhiteRank + ")"; // + "\nDate: " + Date + "\nResult: " + Result;
         }
+
     }
 
 
@@ -53,5 +56,6 @@ namespace OGSAndroid
         }
 
         public SGFTree<T> Tree { get; set; }
+
     }
 }
