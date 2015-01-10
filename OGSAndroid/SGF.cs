@@ -23,14 +23,7 @@ namespace OGSAndroid
         public string Size;
         public string White;
         public string WhiteRank;
-
-        public string String()
-        {
-            return
-                "Black: " + Black + " (" + BlackRank + ")" + "\t\t White: " + White + " (" + WhiteRank + ")" + "\n" +
-                "Ruleset: " + Ruleset + "\t\t Date: " + Date + "\n" +
-                "Komi: " + Komi + " \t\t\t        Result: " + Result;
-        }
+        public Stone PlayerColour = null;       
 
         public string LeftString()
         {

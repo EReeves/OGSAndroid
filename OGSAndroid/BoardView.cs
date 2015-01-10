@@ -68,7 +68,7 @@ namespace OGSAndroid
 
         public void SubmitMove()
         {
-            boardTouch.SubmitMove();
+            boardTouch.SubmitMove(null);
         }
 
         protected override void OnDraw(Canvas canvas)
@@ -76,7 +76,7 @@ namespace OGSAndroid
             base.OnDraw(canvas);
 
             if (!initialized)
-                throw new Exception("BoardView must be Initialize()'d");
+                return;
 
             //Could remove these from every draw if we need to optimize;
             Size = Math.Min(canvas.Width, canvas.Height);

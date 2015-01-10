@@ -42,6 +42,14 @@ namespace OGSAndroid
             return s.val == val;
         }
 
+        public Move Move()
+        {
+            var mv = new Move(this);
+            mv.x = x;
+            mv.y = y;
+            return mv;
+        }
+
         public static bool InList(List<Stone> l, Stone s)
         {
             return l.Where(v => s != null)

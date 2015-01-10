@@ -1,42 +1,29 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.015d1689511c2608" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\..\..\..\Program Files (x86)\MSBuild\Xamarin\Android\Xamarin.Android.Common.targets">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.14" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="c:\Users\Evan\Documents\Projects\SocketIoDotNetPCL\EngineIoPCL\Client\Transport_net35.cs">
     <Files>
-      <File FileName="OGSAndroid\BoardView.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\BoardTouch.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\Resources\AboutResources.txt" Line="1" Column="1" />
-      <File FileName="OGSAndroid\Resources\Resource.designer.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\SGFView.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\Move.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\Stone.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\SGFParser.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\SGFTree.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\OGSAPI.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\OGSGame.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\PlayerGameListActivity.cs" Line="1" Column="1" />
-      <File FileName="..\..\..\..\..\Program Files (x86)\MSBuild\Xamarin\Android\Xamarin.Android.Common.targets" Line="3" Column="3" />
-      <File FileName="OGSAndroid\SGF.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\HoldButtonRepeat.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\RealTimeAPI.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\CorrespondenceView.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\BoardActivity.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\External\UrlImageHelper\SoftReferenceHashTable.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\External\UrlImageHelper\UrlImageViewCallback.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\External\UrlImageHelper\UrlImageCache.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\External\UrlImageHelper\SoftReference.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\External\UrlImageHelper\LRUCache.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\LoginActivity.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\RealTimeView.cs" Line="1" Column="1" />
+      <File FileName="c:\Users\Evan\Documents\Projects\OGSAndroid\OGSAndroid\OGSAPI.cs" Line="1" Column="1" />
+      <File FileName="OGSAndroid\RealTimeAPI.cs" Line="1" Column="1" />
+      <File FileName="OGSAndroid\LogExtensions.cs" Line="1" Column="1" />
+      <File FileName="OGSAndroid\BoardActivity.cs" Line="1" Column="1" />
+      <File FileName="c:\Users\Evan\Documents\Projects\OGSAndroid\OGSAndroid\BoardView.cs" Line="1" Column="1" />
+      <File FileName="c:\Users\Evan\Documents\Projects\OGSAndroid\OGSAndroid\GameView.cs" Line="1" Column="1" />
+      <File FileName="c:\Users\Evan\Documents\Projects\SocketIoDotNetPCL\EngineIoPCL\Client\Transport_net35.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="C:\Users\Evan\Documents\Projects\OGSAndroid\OGSAndroid\OGSAPI.cs" line="51" column="1" />
+      <Breakpoint file="C:\Users\Evan\Documents\Projects\OGSAndroid\OGSAndroid\RealTimeAPI.cs" line="239" column="1" />
+      <Breakpoint file="C:\Users\Evan\Documents\Projects\OGSAndroid\OGSAndroid\RealTimeAPI.cs" line="262" column="1" />
+      <Breakpoint file="c:\Users\Evan\Documents\Projects\SocketIoDotNetPCL\EngineIoPCL\Client\Transport_net35.cs" line="122" column="1" />
+      <Breakpoint file="C:\Users\Evan\Documents\Projects\OGSAndroid\OGSAndroid\RealTimeAPI.cs" line="238" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches>
     <Watch file="OGSAndroid\SGFView.cs" line="65" offsetX="242" offsetY="1024" expression="Moves" liveUpdate="False" />
     <Watch file="OGSAndroid\BoardView.cs" line="131" offsetX="340" offsetY="2080" expression="s" liveUpdate="False" />
+    <Watch file="OGSAndroid\RealTimeAPI.cs" line="261" offsetX="721" offsetY="4322" expression="data" liveUpdate="False" />
   </MonoDevelop.Ide.DebuggingService.PinnedWatches>
-  <MonoDevelop.Ide.ItemProperties.OGSAndroid MonoForAntroid.PreferredDevice="Nexus 4" MonoForAntroid.PreferredTheme="Theme.DeviceDefault.Light" />
+  <MonoDevelop.Ide.ItemProperties.OGSAndroid MonoForAntroid.PreferredDevice="Nexus 4" />
 </Properties>

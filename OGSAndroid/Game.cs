@@ -16,13 +16,12 @@ namespace OGSAndroid
 {
     class Game : SGF<Move>
     {
-
-        public void PopulateViaGameObject(JObject j)
+        public static SGF<Move> PopulateViaGameObject(SGF<Move> mv, JObject j)
         {
-            Info.Black = j["black"]["username"].ToString();
-            Info.BlackRank = j["black"]["rank"].ToString();
-            Info.White = j["white"]["username"].ToString();
-            Info.WhiteRank = j["white"]["rank"].ToString();
+            mv.Info.Black = j["players"]["black"]["username"].ToString();
+            mv.Info.BlackRank = j["players"]["black"]["rank"].ToString();
+            mv.Info.White = j["players"]["white"]["username"].ToString();
+            mv.Info.WhiteRank = j["players"]["white"]["rank"].ToString();
 
             var h = j["height"].ToString();
             var w = j["width"].ToString();
@@ -33,10 +32,10 @@ namespace OGSAndroid
                 throw new NotImplementedException("width/height must be the same.");
             }
 
-            Info.Size = w;
-            Info.Handicap = j["handicap"].ToString();
+            mv.Info.Size = w;
+            mv.Info.Handicap = j["handicap"].ToString();    
 
-           
+            return mv;
         }
     }
 }

@@ -33,6 +33,7 @@ namespace OGSAndroid
 
             connecting = true;
                       
+   
             ogsSocket = IO.Socket("http://ggs.online-go.com/");
             RegisterErrorMessages();
             RegisterIncomingMessages();
@@ -43,8 +44,12 @@ namespace OGSAndroid
                 ALog.Info("Socket", "OGSSocket connected.");    
             });
 
-            if(authed && username != null)
+            if (authed && username != null)
+            {
                 I.Info.PlayerID = OGSAPI.GetPlayerID(username);
+                I.Info.PlayerUsername = username;
+                I.Info.AuthedUser = true;               
+            }
 
             ALog.Info("Socket", "Started");
 
@@ -70,6 +75,8 @@ namespace OGSAndroid
 
             RegisterIncomingMessages();
             ogsSocket.Emit("game/connect", jObj);
+
+            Info.GameAuth = OGSAPI.GetGameAuth(gid);
 
         }
 
@@ -100,7 +107,7 @@ namespace OGSAndroid
         {
             var jObj = new JObject
             {
-                {"auth", Info.AuthID},
+                {"auth", Info.GameAuth},
                 {"game_id", Info.GameID},
                 {"player_id", Info.PlayerID},
                 {"move", mv.ToXYString()}
@@ -212,8 +219,11 @@ namespace OGSAndroid
         {
             public string GameID { get; set; }
             public string PlayerID { get; set; }
+            public string PlayerUsername { get; set; }
+            public bool AuthedUser { get; set;}
             public string ChatID { get; set; }
             public string AuthID { get; set; }
+            public string GameAuth { get; set; }
         }
 
         //Incoming messages.

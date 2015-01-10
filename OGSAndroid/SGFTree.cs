@@ -21,31 +21,55 @@ namespace OGSAndroid
         {
             Nodes = Node<T>.Enumerator(FirstNode).ToList();
         }
+
+        public Node<T> LastNode()
+        {
+            if (FirstNode == null)
+                return null;
+
+            Node<T> node = FirstNode;
+            while (node.HasChild)
+            {
+                node = node.Children.Last();
+            }
+            return node;
+        }
+
+        public void AddToEnd(T s)
+        {
+            var n = LastNode();
+            if (n == null)
+                FirstNode = new Node<T>(s, this);
+            else
+                n.AddChild(s);
+
+            Nodes.Add(LastNode());
+        }
     }
 
     public class Node<T>
     {
         public SGFTree<T> Parent;
-        private readonly List<Node<T>> children;
+        public readonly List<Node<T>> Children;
 
         public Node(T item, SGFTree<T> parent)
         {
-            children = new List<Node<T>>();
+            Children = new List<Node<T>>();
             Parent = parent;
             Data = item;
         }
 
         public T Data { get; set; }
 
-        public bool HasVariation
+        public bool HasChild
         {
-            get { return children.Count > 0; }
+            get { return Children.Count > 0; }
         }
 
         public Node<T> AddChild(T item)
         {
-            children.Add(new Node<T>(item, Parent));
-            return children.Last();
+           Children.Add(new Node<T>(item, Parent));
+            return Children.Last();
         }
 
         public override string ToString()
@@ -57,10 +81,12 @@ namespace OGSAndroid
         {
             yield return node;
 
-            foreach (var nn in node.children.SelectMany(Enumerator))
+            foreach (var nn in node.Children.SelectMany(Enumerator))
             {
                 yield return nn;
             }
         }
+
+
     }
 }

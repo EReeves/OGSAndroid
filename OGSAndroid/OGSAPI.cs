@@ -46,20 +46,20 @@ namespace OGSAndroid
             stringB.Append(pass);
 
             //Authenticate and store auth token.
-            const string url = "http://private-anon-b773a146c-ogs.apiary-mock.com/oauth2/access_token";
+            const string url = "http://beta.online-go.com/api/v1/oauth2/access_token";
 
             var resp = UnAuthedPost(url, stringB.ToString());
 
-            var json = JToken.Parse(resp);
+            var json = JObject.Parse(resp);
 
-            accessToken = json.Children()["access_token"].ToString();
+            accessToken = json["access_token"].ToString();
 
             ALog.Info("OGSAPI", "Authenticated");
         }
 
         public static string GetPlayerID(string username)
         {
-            var url = "http://online-go.com/api/v1/players?username=" + username;
+            var url = "http://online-go.com/api/v1/players?username=" + username + "&format=json";
             var ds = JsonGet(url);
 
             //Player not found : Player found
@@ -131,6 +131,15 @@ namespace OGSAndroid
             return parser.Parse(DownloadSGF(gid));
         }
 
+        public static string GetGameAuth(string gid)
+        {
+            var url = "http://online-go.com/api/v1/games/" + gid;
+            var json = AuthedGet(url);
+            var j = JObject.Parse(json);
+            var gAuth = j["auth"].ToString();
+            return gAuth;
+        }
+
         private static string AuthedPost(string url, string content)
         {
             var wr = WebRequest.Create(url);
@@ -141,6 +150,18 @@ namespace OGSAndroid
             using (var sw = new StreamWriter(str))
                 sw.Write(content);
 
+            using (var response = (HttpWebResponse) wr.GetResponse())
+            using (var responseStream = response.GetResponseStream())
+            using (var streamReader = new StreamReader(responseStream))
+                return streamReader.ReadToEnd();
+        }
+                    
+        private static string AuthedGet(string url)
+        {
+            var wr = WebRequest.Create(url);
+            wr.Headers.Add("Authorization: Bearer " + accessToken);
+            wr.Method = "GET";
+ 
             using (var response = (HttpWebResponse) wr.GetResponse())
             using (var responseStream = response.GetResponseStream())
             using (var streamReader = new StreamReader(responseStream))
