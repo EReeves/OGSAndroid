@@ -8,10 +8,9 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 
-
 #endregion
 
-namespace OGSAndroid
+namespace OGSAndroid.Game
 {
     public class BoardView : View
     {
@@ -25,26 +24,15 @@ namespace OGSAndroid
         public readonly BoardTouch boardTouch;
         private readonly Paint whitePaint;
 
+        public int Padding { get; set; }
+        public int Lines { get; set; }
+        public int Size { get; private set; }
+        public int Spacing { get; private set; }
+        public int ExtPad { get; private set; }
+
         public BoardView(Context context, IAttributeSet attrs) : base(context)
         {
-            blackPaint = new Paint
-            {
-                AntiAlias = true,
-                Color = Color.Black,
-                StrokeWidth = 2
-            };
-
-            whitePaint = new Paint
-            {
-                AntiAlias = true,
-                Color = new Color(180, 180, 180)
-            };
-
-            bgPaint = new Paint
-            {
-                AntiAlias = true,
-                Color = Color.SandyBrown
-            };
+            InitPaints(out blackPaint, out whitePaint, out bgPaint);
 
             var bmp = BitmapFactory.DecodeResource(Resources, Resource.Drawable.woodtex);
             bgPaint.SetShader(new BitmapShader(bmp, Shader.TileMode.Repeat, Shader.TileMode.Repeat));
@@ -53,11 +41,12 @@ namespace OGSAndroid
             Invalidate();
         }
 
-        public int Padding { get; set; }
-        public int Lines { get; set; }
-        public int Size { get; private set; }
-        public int Spacing { get; private set; }
-        public int ExtPad { get; private set; }
+        private static void InitPaints(out Paint black, out Paint white, out Paint bg)
+        {
+            black = new Paint {AntiAlias = true, Color = Color.Black, StrokeWidth = 2};
+            white = new Paint {AntiAlias = true, Color = new Color(180, 180, 180)};
+            bg = new Paint {AntiAlias = true, Color = Color.SandyBrown};
+        }
 
         public void Initialize(int lines)
         {
@@ -68,7 +57,7 @@ namespace OGSAndroid
 
         public void SubmitMove()
         {
-            boardTouch.SubmitMove(null);
+            boardTouch.SubmitMove();
         }
 
         protected override void OnDraw(Canvas canvas)

@@ -8,7 +8,7 @@ using Object = Java.Lang.Object;
 
 #endregion
 
-namespace OGSAndroid
+namespace OGSAndroid.Game
 {
     public class HoldButtonRepeat
     {

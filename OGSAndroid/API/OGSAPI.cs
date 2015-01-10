@@ -5,20 +5,20 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
-using Android.Util;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using OGSAndroid.Game;
 
 #endregion
 
-namespace OGSAndroid
+namespace OGSAndroid.API
 {
     public class OGSAPI
     {
         //We only ever want one person authed.
+        public static OGSAPI I = new OGSAPI();
 
-        private static string accessToken;
-        public static string AccessToken
+        private  string accessToken;
+        public  string AccessToken
         {
             get
             {
@@ -27,13 +27,13 @@ namespace OGSAndroid
             }
         }
 
-        public static void DebugSetAccessToken(string token)
+        public  void DebugSetAccessToken(string token)
         {
             accessToken = token;
             //TODO:Remove
         }
 
-        public static void Authenticate(string clientid, string secret, string user, string pass)
+        public void Authenticate(string clientid, string secret, string user, string pass)
         {
             var stringB = new StringBuilder();
             stringB.Append("client_id=");
@@ -47,26 +47,30 @@ namespace OGSAndroid
 
             //Authenticate and store auth token.
             const string url = "http://beta.online-go.com/api/v1/oauth2/access_token";
-
             var resp = UnAuthedPost(url, stringB.ToString());
-
             var json = JObject.Parse(resp);
-
             accessToken = json["access_token"].ToString();
 
             ALog.Info("OGSAPI", "Authenticated");
         }
 
-        public static string GetPlayerID(string username)
+        public string GetPlayerID(string username)
         {
             var url = "http://online-go.com/api/v1/players?username=" + username + "&format=json";
             var ds = JsonGet(url);
 
             //Player not found : Player found
-            return ds["results"][0]["id"] == null ? "" : ds["results"][0]["id"].ToString();
+            var id = ds["results"][0]["id"];
+            var playerFound = id != null;
+
+            if (playerFound) return id.ToString();
+
+            ALog.Info("OGSAPI", "Player " + username + " not found.");
+            return null;
         }
 
-        public static OGSGame[] PlayerGameList(string id, int page)
+        //Gets a list of games from a player.
+        public OGSGame[] PlayerGameList(string id, int page)
         {
             if (string.IsNullOrEmpty(id))
                 return null;
@@ -125,13 +129,13 @@ namespace OGSAndroid
             return JObject.Parse(str);
         }
 
-        public static SGF<Move> IDToSGF(string gid)
+        public static SGF<Move> IdToSGF(string gid)
         {
             var parser = new SGFParser();
             return parser.Parse(DownloadSGF(gid));
         }
 
-        public static string GetGameAuth(string gid)
+        public string GetGameAuth(string gid)
         {
             var url = "http://online-go.com/api/v1/games/" + gid;
             var json = AuthedGet(url);
@@ -140,7 +144,7 @@ namespace OGSAndroid
             return gAuth;
         }
 
-        private static string AuthedPost(string url, string content)
+        private string AuthedPost(string url, string content)
         {
             var wr = WebRequest.Create(url);
             wr.Headers.Add("Authorization: Bearer " + accessToken);
@@ -156,7 +160,7 @@ namespace OGSAndroid
                 return streamReader.ReadToEnd();
         }
                     
-        private static string AuthedGet(string url)
+        private string AuthedGet(string url)
         {
             var wr = WebRequest.Create(url);
             wr.Headers.Add("Authorization: Bearer " + accessToken);
@@ -205,25 +209,11 @@ namespace OGSAndroid
         private static StreamReader WebRequestWrapperRaw(string url)
         {
             var wr = WebRequest.Create(url);
-            string result;
-
             var hr = (HttpWebResponse) wr.GetResponse();
             var stream = hr.GetResponseStream();
             var reader = new StreamReader(stream);
             return reader;
         }
 
-        public static void SendMove(Move mv, string id)
-        {
-            //TODO: before this is implemented anywhere put a timer on it for something crazy like 1 hour until socket api is implemented.
-            throw new NotImplementedException();
-
-            if (accessToken == null) Console.WriteLine("Unauthed"); //TODO handle this somehow, not sure yet.
-
-            var url = "online-go.com/api/v1/games/" + id + "/move/";
-            var content = mv.ToXYString();
-            var json = new JObject(new JProperty("move", content));
-            AuthedPost(url, json.ToString());
-        }
     }
 }

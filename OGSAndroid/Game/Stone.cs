@@ -5,7 +5,7 @@ using System.Linq;
 
 #endregion
 
-namespace OGSAndroid
+namespace OGSAndroid.Game
 {
     public class Stone //Can be used statically like an enum.
     {

@@ -4,7 +4,7 @@ using System;
 
 #endregion
 
-namespace OGSAndroid
+namespace OGSAndroid.Game
 {
     public class Move : Stone
     {

@@ -1,15 +1,13 @@
 #region
 
-using System;
 using System.Collections.Generic;
-using Android.Util;
 using Newtonsoft.Json.Linq;
+using OGSAndroid.Game;
 using Quobject.SocketIoClientDotNet.Client;
-using OGSAndroid;
 
 #endregion
 
-namespace OGSAndroid
+namespace OGSAndroid.API
 {
     internal class RealTimeAPI
     {
@@ -46,7 +44,7 @@ namespace OGSAndroid
 
             if (authed && username != null)
             {
-                I.Info.PlayerID = OGSAPI.GetPlayerID(username);
+                I.Info.PlayerID = OGSAPI.I.GetPlayerID(username);
                 I.Info.PlayerUsername = username;
                 I.Info.AuthedUser = true;               
             }
@@ -76,7 +74,7 @@ namespace OGSAndroid
             RegisterIncomingMessages();
             ogsSocket.Emit("game/connect", jObj);
 
-            Info.GameAuth = OGSAPI.GetGameAuth(gid);
+            Info.GameAuth = OGSAPI.I.GetGameAuth(gid);
 
         }
 

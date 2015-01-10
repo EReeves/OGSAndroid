@@ -8,18 +8,18 @@ using Android.Views;
 using Android.Widget;
 using FlatUI;
 using OGSAndroid.External.UrlImageHelper;
-
+using OGSAndroid.Game;
 
 #endregion
 
-namespace OGSAndroid
+namespace OGSAndroid.Activities
 {
-    [Activity(Label = "Main", Theme = "@android:style/Theme.Holo.Light", Icon = "@drawable/icon", 
+    [Activity(Label = "Main", Theme = "@android:style/Theme.Holo.Light", Icon = "@drawable/icon",
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class BoardActivity : Activity
+    public class BoardActivity : Android.App.Activity
     {
-        public GameView GameView;
         private ChatDrawer chatDrawer;
+        public GameView GameView;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -43,12 +43,12 @@ namespace OGSAndroid
 
             //MatchInfo
             var tvl = FindViewById<TextView>(Resource.Id.textBlack);
-            tvl.Text = GameView.Moves.Info.LeftString();
+            tvl.Text = GameView.Moves.Info.PlayerString(Stone.Black);
             tvl.SetTextColor(Color.Black);
             tvl.Invalidate();
 
             var tvr = FindViewById<TextView>(Resource.Id.textWhite);
-            tvr.Text = GameView.Moves.Info.RightString();
+            tvr.Text = GameView.Moves.Info.PlayerString(Stone.White);
             tvr.SetTextColor(Color.Black);
             tvr.Invalidate();
 
@@ -89,17 +89,16 @@ namespace OGSAndroid
             var chatDrawerView = FindViewById<SlidingDrawer>(Resource.Id.rightDrawer);
             var chatDrawerText = FindViewById<TextView>(Resource.Id.chatText);
             chatDrawer = new ChatDrawer(chatDrawerView, chatDrawerText);
-            GameView.boardTouch.OnTouchEvent += (e) =>
-            {
-                chatDrawer.GestureDetector.OnTouchEvent(e);
-            };
-            
+            GameView.boardTouch.OnTouchEvent += e => { chatDrawer.GestureDetector.OnTouchEvent(e); };
+
 
             //Apply chat text 
             //chatDrawer.ChatText = ChatDrawer.StringListToString(PlayerGameListActivity.CurrentSGF.Info.ChatMessages);
 
             //Stop scrollview from consuming gesture events.
             chatDrawerScroll.SetOnTouchListener(chatDrawer);
+
+            ALog.Info("BoardActivity", "Created");
         }
 
         public override bool OnTouchEvent(MotionEvent e)

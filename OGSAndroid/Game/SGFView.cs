@@ -8,7 +8,7 @@ using Android.Widget;
 
 #endregion
 
-namespace OGSAndroid
+namespace OGSAndroid.Game
 {
     // ReSharper disable once InconsistentNaming
     public class SGFView : BoardView

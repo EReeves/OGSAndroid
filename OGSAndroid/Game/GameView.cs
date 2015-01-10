@@ -1,31 +1,34 @@
 using System;
-using System.Linq;
 using Android.Content;
 using Android.Util;
-using Android.Views;
 using Newtonsoft.Json.Linq;
-using Android.OS;
-using Android.App;
+using OGSAndroid.Activities;
+using OGSAndroid.API;
 
-namespace OGSAndroid
+namespace OGSAndroid.Game
 {
     public class GameView : SGFView
     {
         public GameView(Context context, IAttributeSet attrs) : base(context, attrs)
         {
+            RegisterTouchEvents();
+        }
+
+        private void RegisterTouchEvents()
+        {
             //Only allow placing of stones by the player.
-            boardTouch.OnConfirmStone += (stone, e) => {
+            boardTouch.OnConfirmStone += (stone, e) =>
+            {
                 var player = GetPlayerColour();
-                if(player == null || !stone.Equals(player))
+                if (player == null || !stone.Equals(player))
                     boardTouch.ConfirmStoneActive = false;
             };
 
             //Send move
-            boardTouch.OnPlaceStone += (m, e) => {
+            boardTouch.OnPlaceStone += (m, e) =>
+            {
                 RealTimeAPI.I.Move(m.Move());
-                //Add to tree.
                 Moves.Tree.AddToEnd(m.Move());
-
             };
         }
 
@@ -36,16 +39,16 @@ namespace OGSAndroid
             {
                 ((BoardActivity)Context).RunOnUiThread( () =>
                 {
-                    Moves = Game.PopulateViaGameObject(Moves, d);
+                    Moves = Moves.PopulateViaGameObject(d);
                     Initialize(Convert.ToInt32(Moves.Info.Size));
                     PopulateMovesViaGameObject(d);
                 });
-            };
-                    
+            };                   
         }
 
         public void Disconnect()
         {
+            RealTimeAPI.I.Disconnect();
             RealTimeAPI.I.OnGameData = null;
         }          
 
@@ -55,13 +58,11 @@ namespace OGSAndroid
             var turn = Stone.Black;
             for (var i = 0; i < moves.Length; i += 2)
             {
+                //Add move to tree.
                 var mv = "" + moves[i] + moves[i + 1];
                 var stone = Move.LettersToMove(mv, turn);
-
                 var node = new Node<Move>(stone, Moves.Tree);
-
                 Moves.Tree.AddToEnd(stone);
-
                 //Swap turns
                 turn = new Stone(!turn);
             }
@@ -70,6 +71,7 @@ namespace OGSAndroid
             ToEnd();
         }
 
+        //Gets the player colour you joined as, or null if spectating.
         private Stone GetPlayerColour()
         {
             if (RealTimeAPI.I.Info.PlayerUsername == Moves.Info.Black)

@@ -11,7 +11,7 @@ using StringBuilder = System.Text.StringBuilder;
 
 #endregion
 
-namespace OGSAndroid
+namespace OGSAndroid.Game
 {
     public class ChatDrawer : Object, GestureDetector.IOnGestureListener, View.IOnTouchListener
     {

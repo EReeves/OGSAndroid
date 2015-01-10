@@ -72,26 +72,27 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CorrespondenceView.cs" />
+    <Compile Include="Activities\BoardActivity.cs" />
+    <Compile Include="Activities\Ext\ListViewInfiniteScroll.cs" />
+    <Compile Include="Activities\LoginActivity.cs" />
+    <Compile Include="Activities\PlayerGameListActivity.cs" />
+    <Compile Include="API\OGSAPI.cs" />
+    <Compile Include="API\RealTimeAPI.cs" />
     <Compile Include="Data.cs" />
-    <Compile Include="Game.cs" />
-    <Compile Include="GameView.cs" />
-    <Compile Include="LoginActivity.cs" />
-    <Compile Include="BoardActivity.cs" />
-    <Compile Include="RealTimeAPI.cs" />
+    <Compile Include="Game\BoardTouch.cs" />
+    <Compile Include="Game\BoardView.cs" />
+    <Compile Include="Game\ChatDrawer.cs" />
+    <Compile Include="Game\GameView.cs" />
+    <Compile Include="Game\HoldButtonRepeat.cs" />
+    <Compile Include="Game\Move.cs" />
+    <Compile Include="Game\OGSGame.cs" />
+    <Compile Include="Game\SGF.cs" />
+    <Compile Include="Game\SGFParser.cs" />
+    <Compile Include="Game\SGFTree.cs" />
+    <Compile Include="Game\SGFView.cs" />
+    <Compile Include="Game\Stone.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BoardView.cs" />
-    <Compile Include="BoardTouch.cs" />
-    <Compile Include="Move.cs" />
-    <Compile Include="Stone.cs" />
-    <Compile Include="SGFParser.cs" />
-    <Compile Include="SGFTree.cs" />
-    <Compile Include="SGF.cs" />
-    <Compile Include="SGFView.cs" />
-    <Compile Include="OGSAPI.cs" />
-    <Compile Include="OGSGame.cs" />
-    <Compile Include="PlayerGameListActivity.cs" />
     <Compile Include="External\UrlImageHelper\DownloaderAsyncTask.cs" />
     <Compile Include="External\UrlImageHelper\ExtensionMethods.cs" />
     <Compile Include="External\UrlImageHelper\Hashset.cs" />
@@ -101,11 +102,7 @@
     <Compile Include="External\UrlImageHelper\UrlImageCache.cs" />
     <Compile Include="External\UrlImageHelper\UrlImageViewCallback.cs" />
     <Compile Include="External\UrlImageHelper\UrlImageViewHelper.cs" />
-    <Compile Include="HoldButtonRepeat.cs" />
-    <Compile Include="ChatDrawer.cs" />
-    <Compile Include="ListViewInfiniteScroll.cs" />
-    <Compile Include="RealTimeView.cs" />
-    <Compile Include="LogExtensions.cs" />
+    <Compile Include="ALog.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -157,6 +154,7 @@
   <ItemGroup>
     <AndroidResource Include="Resources\raw\data.txt" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>

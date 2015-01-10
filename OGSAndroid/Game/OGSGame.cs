@@ -1,4 +1,4 @@
-﻿namespace OGSAndroid
+﻿namespace OGSAndroid.Game
 {
     //Game representation taken from JSON.
     public class OGSGame

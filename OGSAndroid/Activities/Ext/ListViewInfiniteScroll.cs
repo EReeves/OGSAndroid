@@ -6,7 +6,7 @@ using Object = Java.Lang.Object;
 
 #endregion
 
-namespace OGSAndroid
+namespace OGSAndroid.Activities.Ext
 {
     public class ListViewInfiniteScroll : Object, AbsListView.IOnScrollListener
     {

@@ -1,23 +1,19 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.14" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="c:\Users\Evan\Documents\Projects\SocketIoDotNetPCL\EngineIoPCL\Client\Transport_net35.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="OGSAndroid\Game\SGF.cs">
     <Files>
-      <File FileName="OGSAndroid\LoginActivity.cs" Line="1" Column="1" />
-      <File FileName="c:\Users\Evan\Documents\Projects\OGSAndroid\OGSAndroid\OGSAPI.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\RealTimeAPI.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\LogExtensions.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\BoardActivity.cs" Line="1" Column="1" />
-      <File FileName="c:\Users\Evan\Documents\Projects\OGSAndroid\OGSAndroid\BoardView.cs" Line="1" Column="1" />
-      <File FileName="c:\Users\Evan\Documents\Projects\OGSAndroid\OGSAndroid\GameView.cs" Line="1" Column="1" />
-      <File FileName="c:\Users\Evan\Documents\Projects\SocketIoDotNetPCL\EngineIoPCL\Client\Transport_net35.cs" Line="1" Column="1" />
+      <File FileName="OGSAndroid\ALog.cs" Line="1" Column="1" />
+      <File FileName="OGSAndroid\Activities\LoginActivity.cs" Line="34" Column="34" />
+      <File FileName="OGSAndroid\Activities\Ext\ListViewInfiniteScroll.cs" Line="38" Column="38" />
+      <File FileName="OGSAndroid\Activities\BoardActivity.cs" Line="1" Column="1" />
+      <File FileName="OGSAndroid\Activities\PlayerGameListActivity.cs" Line="37" Column="37" />
+      <File FileName="OGSAndroid\Game\GameView.cs" Line="13" Column="13" />
+      <File FileName="OGSAndroid\Game\SGF.cs" Line="9" Column="9" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="C:\Users\Evan\Documents\Projects\OGSAndroid\OGSAndroid\RealTimeAPI.cs" line="239" column="1" />
-      <Breakpoint file="C:\Users\Evan\Documents\Projects\OGSAndroid\OGSAndroid\RealTimeAPI.cs" line="262" column="1" />
-      <Breakpoint file="c:\Users\Evan\Documents\Projects\SocketIoDotNetPCL\EngineIoPCL\Client\Transport_net35.cs" line="122" column="1" />
-      <Breakpoint file="C:\Users\Evan\Documents\Projects\OGSAndroid\OGSAndroid\RealTimeAPI.cs" line="238" column="1" />
+      <Breakpoint file="c:\Users\Evan\Documents\Projects\OGSAndroid\OGSAndroid\OGSAPI.cs" line="57" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches>
