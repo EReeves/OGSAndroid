@@ -6,6 +6,7 @@ using System.IO;
 using System.Net;
 using Android.App;
 using Android.Content;
+using Android.Content.Res;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Util;
@@ -31,7 +32,7 @@ namespace OGSAndroid.External.UrlImageHelper
         protected static HashTable<ImageView, string> pendingViews = new HashTable<ImageView, string>();
         protected static HashTable<string, List<ImageView>> pendingDownloads = new HashTable<string, List<ImageView>>();
         private static bool hasCleaned;
-        private static Android.Content.Res.Resources mResources;
+        private static Resources mResources;
         private static DisplayMetrics mMetrics;
 
         public static void SetUrlDrawable(ImageView imageView, string url, int defaultResource)
@@ -130,7 +131,7 @@ namespace OGSAndroid.External.UrlImageHelper
             var act = (Activity) context;
             act.WindowManager.DefaultDisplay.GetMetrics(mMetrics);
             var mgr = context.Assets;
-            mResources = new Android.Content.Res.Resources(mgr, mMetrics, context.Resources.Configuration);
+            mResources = new Resources(mgr, mMetrics, context.Resources.Configuration);
         }
 
         public static BitmapDrawable LoadDrawableFromFile(Context context, string filename)

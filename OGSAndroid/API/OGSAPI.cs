@@ -16,18 +16,18 @@ namespace OGSAndroid.API
     {
         //We only ever want one person authed.
         public static OGSAPI I = new OGSAPI();
+        private string accessToken;
 
-        private  string accessToken;
-        public  string AccessToken
+        public string AccessToken
         {
             get
             {
-                if(accessToken == null) throw new Exception("Not authenticated.");
-                return accessToken;               
+                if (accessToken == null) throw new Exception("Not authenticated.");
+                return accessToken;
             }
         }
 
-        public  void DebugSetAccessToken(string token)
+        public void DebugSetAccessToken(string token)
         {
             accessToken = token;
             //TODO:Remove
@@ -46,7 +46,7 @@ namespace OGSAndroid.API
             stringB.Append(pass);
 
             //Authenticate and store auth token.
-            const string url = "http://beta.online-go.com/api/v1/oauth2/access_token";
+            const string url = "https://beta.online-go.com/oauth2/access_token";
             var resp = UnAuthedPost(url, stringB.ToString());
             var json = JObject.Parse(resp);
             accessToken = json["access_token"].ToString();
@@ -56,7 +56,7 @@ namespace OGSAndroid.API
 
         public string GetPlayerID(string username)
         {
-            var url = "http://online-go.com/api/v1/players?username=" + username + "&format=json";
+            var url = "http://beta.online-go.com/api/v1/players?username=" + username + "&format=json";
             var ds = JsonGet(url);
 
             //Player not found : Player found
@@ -78,9 +78,21 @@ namespace OGSAndroid.API
             var gameList = new List<OGSGame>();
             //Just do the first page for now.
 
-            var url = "http://online-go.com/api/v1/players/" + id + "/games?ordering=-id&page=" + page;
-            var ds = JsonGet(url);
-            var games = ds["results"];
+            var url = "http://beta.online-go.com/api/v1/players/" + id + "/games?ordering=-id&page=" + page;
+
+            JObject json;
+
+            try
+            {
+                json = JsonGet(url);
+            }
+            catch (Exception ex)
+            {
+                ALog.Info("OGSAPI", "Player doesn't have any more pages of games");
+                return null;
+            }
+
+            var games = json["results"];
 
             foreach (var g in games.Children())
             {
@@ -104,6 +116,13 @@ namespace OGSAndroid.API
                     }
                 };
 
+                //Calculate rank.
+                var bRating = g["players"]["black"]["rating"].Value<float>();
+                var wRating = g["players"]["white"]["rating"].Value<float>();
+
+                temp.Black.Rank = RatingToRank(bRating);
+                temp.White.Rank = RatingToRank(wRating);
+
                 //Find result.
                 var white = (bool) g["black_lost"];
                 var outcome = g["outcome"].ToString();
@@ -123,6 +142,11 @@ namespace OGSAndroid.API
             return gameList.ToArray();
         }
 
+        private static string RatingToRank(float rating)
+        {
+            return rating < 30 ? (30 - rating) + " Kyu" : (rating - 30) + 1 + " Dan";
+        }
+
         private static JObject JsonGet(string url)
         {
             var str = WebRequestWrapper(url);
@@ -137,7 +161,7 @@ namespace OGSAndroid.API
 
         public string GetGameAuth(string gid)
         {
-            var url = "http://online-go.com/api/v1/games/" + gid;
+            var url = "https://beta.online-go.com/api/v1/games/" + gid;
             var json = AuthedGet(url);
             var j = JObject.Parse(json);
             var gAuth = j["auth"].ToString();
@@ -159,13 +183,13 @@ namespace OGSAndroid.API
             using (var streamReader = new StreamReader(responseStream))
                 return streamReader.ReadToEnd();
         }
-                    
+
         private string AuthedGet(string url)
         {
             var wr = WebRequest.Create(url);
             wr.Headers.Add("Authorization: Bearer " + accessToken);
             wr.Method = "GET";
- 
+
             using (var response = (HttpWebResponse) wr.GetResponse())
             using (var responseStream = response.GetResponseStream())
             using (var streamReader = new StreamReader(responseStream))
@@ -174,12 +198,21 @@ namespace OGSAndroid.API
 
         private static string UnAuthedPost(string url, string content)
         {
+            ServicePointManager.Expect100Continue = false;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
+            ServicePointManager.ServerCertificateValidationCallback = (s, c, cc, ssl) => true;
             var wr = WebRequest.Create(url);
             wr.Method = "POST";
+            wr.ContentType = "application/x-www-form-urlencoded";
+
 
             using (var str = wr.GetRequestStream())
             using (var sw = new StreamWriter(str))
+            {
                 sw.Write(content);
+                sw.Flush();
+            }
+
 
             using (var response = (HttpWebResponse) wr.GetResponse())
             using (var responseStream = response.GetResponseStream())
@@ -189,7 +222,7 @@ namespace OGSAndroid.API
 
         private static string DownloadSGF(string gid)
         {
-            var url = "online-go.com/api/v1/games/" + gid + "/sgf";
+            var url = "beta.online-go.com/api/v1/games/" + gid + "/sgf";
             return WebRequestWrapper(url);
         }
 
@@ -214,6 +247,5 @@ namespace OGSAndroid.API
             var reader = new StreamReader(stream);
             return reader;
         }
-
     }
 }

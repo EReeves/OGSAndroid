@@ -11,9 +11,9 @@ namespace OGSAndroid.Game
     {
         public static readonly Stone Black = new Stone(true);
         public static readonly Stone White = new Stone(false);
+        public bool val;
         public int x;
         public int y;
-        private readonly bool val;
 
         public Stone(bool _val)
         {

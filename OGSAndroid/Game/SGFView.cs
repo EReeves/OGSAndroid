@@ -63,7 +63,7 @@ namespace OGSAndroid.Game
         public void ToEnd()
         {
             PlaceUpTo(Moves.Tree.Nodes.Count);
-            CurrentMove = Moves.Tree.Nodes.Count - 1;
+            CurrentMove = Moves.Tree.Nodes.Count;
         }
 
         public void ToStart()

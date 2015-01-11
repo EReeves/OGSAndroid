@@ -30,10 +30,9 @@ namespace OGSAndroid.Activities
             if (guestButton != null)
                 guestButton.Click += (o, e) => StartActivity(typeof (PlayerGameListActivity));
 
-            OGSAPI.I.Authenticate("f1925834cd5d6f74ccbf", "c3c0ccac6bd38f1ddb8bdd55e4ebe4f6bf77f53d", "Rvzy",
-                "54126bb282c46d0043dcb178644b4da1"); //"84b11ca7f7c24e6174a3e2f6ecaa7d1f");
+            //OGSAPI.I.Authenticate("f1925834cd5d6f74ccbf", "c3c0ccac6bd38f1ddb8bdd55e4ebe4f6bf77f53d", "Rvzy", "54126bb282c46d0043dcb178644b4da1");
 
-            //OGSAPI.I.DebugSetAccessToken("8c201183a4332c3cc39d00614d7a8ff764214e7e");
+            OGSAPI.I.DebugSetAccessToken("7112c1a5a00f200d05a869e435e0bfd3439254c4");
 
             RealTimeAPI.I.Start(true, "Rvzy");
 

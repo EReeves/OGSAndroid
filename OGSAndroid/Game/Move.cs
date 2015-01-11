@@ -32,9 +32,13 @@ namespace OGSAndroid.Game
             Activation.Invoke();
         }
 
-        public string ToXYString()
+        public string ToXYString(bool @internal = true)
         {
-            return ((char) (97 + x)) + ((char) (97 + y)).ToString();
+            //OGS isn't 0 indexed so if not internal reduce by 1.
+            var xx = @internal ? x : x - 1;
+            var yy = @internal ? y : y - 1;
+
+            return ((char) (97 + xx)) + ((char) (97 + yy)).ToString();
         }
 
         public static Move LettersToMove(string letter, Stone colour)
@@ -43,6 +47,7 @@ namespace OGSAndroid.Game
                 return null; //pass
             var x = letter[0]%32;
             var y = letter[1]%32;
+
             return new Move(colour, x, y);
         }
 

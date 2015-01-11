@@ -1,9 +1,13 @@
+#region
+
 using System;
 using Android.Content;
 using Android.Util;
 using Newtonsoft.Json.Linq;
 using OGSAndroid.Activities;
 using OGSAndroid.API;
+
+#endregion
 
 namespace OGSAndroid.Game
 {
@@ -12,6 +16,7 @@ namespace OGSAndroid.Game
         public GameView(Context context, IAttributeSet attrs) : base(context, attrs)
         {
             RegisterTouchEvents();
+            RegisterAPIEvents();
         }
 
         private void RegisterTouchEvents()
@@ -28,29 +33,46 @@ namespace OGSAndroid.Game
             boardTouch.OnPlaceStone += (m, e) =>
             {
                 RealTimeAPI.I.Move(m.Move());
-                Moves.Tree.AddToEnd(m.Move());
+                //Moves.Tree.AddToEnd(m.Move());
+            };
+        }
+
+        private void RegisterAPIEvents()
+        {
+            RealTimeAPI.I.OnGameData += d =>
+            {
+                ((BoardActivity) Context).RunOnUiThread(() =>
+                {
+                    Moves = Moves.PopulateViaGameObject(d);
+                    Initialize(Convert.ToInt32(Moves.Info.Size));
+                    PopulateMovesViaGameObject(d);
+                });
+            };
+
+            RealTimeAPI.I.OnGameMove += d =>
+            {
+                var letters = d["move"];
+                if (letters == null) return;
+                var move = Move.LettersToMove(letters.ToString(), CurrentTurn);
+
+                ((BoardActivity) Context).RunOnUiThread(() =>
+                {
+                    Moves.Tree.AddToEnd(move);
+                    ToEnd();
+                });
             };
         }
 
         public void Connect(string gid)
         {
             RealTimeAPI.I.Connect(gid);
-            RealTimeAPI.I.OnGameData += (d) =>
-            {
-                ((BoardActivity)Context).RunOnUiThread( () =>
-                {
-                    Moves = Moves.PopulateViaGameObject(d);
-                    Initialize(Convert.ToInt32(Moves.Info.Size));
-                    PopulateMovesViaGameObject(d);
-                });
-            };                   
         }
 
         public void Disconnect()
         {
             RealTimeAPI.I.Disconnect();
             RealTimeAPI.I.OnGameData = null;
-        }          
+        }
 
         private void PopulateMovesViaGameObject(JObject json)
         {
@@ -76,9 +98,9 @@ namespace OGSAndroid.Game
         {
             if (RealTimeAPI.I.Info.PlayerUsername == Moves.Info.Black)
                 return Stone.Black;
-            else if (RealTimeAPI.I.Info.PlayerUsername == Moves.Info.White)
+            if (RealTimeAPI.I.Info.PlayerUsername == Moves.Info.White)
                 return Stone.White;
-            else return null;
+            return null;
         }
     }
 }

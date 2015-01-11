@@ -15,7 +15,6 @@ namespace OGSAndroid.Game
     public class BoardView : View
     {
         public Stone CurrentTurn = Stone.Black;
-
         private bool firstDraw = true;
         private bool initialized;
         public Stone[,] stones;
@@ -23,12 +22,6 @@ namespace OGSAndroid.Game
         private readonly Paint blackPaint;
         public readonly BoardTouch boardTouch;
         private readonly Paint whitePaint;
-
-        public int Padding { get; set; }
-        public int Lines { get; set; }
-        public int Size { get; private set; }
-        public int Spacing { get; private set; }
-        public int ExtPad { get; private set; }
 
         public BoardView(Context context, IAttributeSet attrs) : base(context)
         {
@@ -41,11 +34,17 @@ namespace OGSAndroid.Game
             Invalidate();
         }
 
+        public int Padding { get; set; }
+        public int Lines { get; set; }
+        public int Size { get; private set; }
+        public int Spacing { get; private set; }
+        public int ExtPad { get; private set; }
+
         private static void InitPaints(out Paint black, out Paint white, out Paint bg)
         {
             black = new Paint {AntiAlias = true, Color = Color.Black, StrokeWidth = 2};
             white = new Paint {AntiAlias = true, Color = new Color(180, 180, 180)};
-            bg = new Paint {AntiAlias = true, Color = Color.SandyBrown};
+            bg = new Paint {AntiAlias = true, Color = Color.SandyBrown, StrokeWidth = 3};
         }
 
         public void Initialize(int lines)
@@ -75,11 +74,14 @@ namespace OGSAndroid.Game
 
             DrawBoard(canvas);
 
+
             foreach (var s in stones)
             {
                 if (s != null)
                     DrawStone(canvas, s);
             }
+
+            DrawLastStoneCircle(canvas, CurrentTurn);
 
             if (boardTouch.ConfirmStoneActive)
             {
@@ -137,6 +139,17 @@ namespace OGSAndroid.Game
             //Todo: 19x points.
         }
 
+        private void DrawLastStoneCircle(Canvas canvas, Stone stone)
+        {
+            Paint col = stone ? blackPaint : whitePaint;
+            col.StrokeWidth = 3;
+            col.SetStyle(Paint.Style.Stroke);
+            canvas.DrawCircle(ExtPad + Padding + ((stone.x - 1)*Spacing), ExtPad + Padding + ((stone.y - 1)*Spacing),
+                (Spacing/3), col);
+            col.SetStyle(Paint.Style.Fill);
+            col.StrokeWidth = 2;
+        }
+
         private void DrawStone(Canvas canvas, Stone stone, bool alpha = true)
         {
             Paint col;
@@ -167,13 +180,17 @@ namespace OGSAndroid.Game
 
         public virtual void PlaceStone(Stone s)
         {
-            CurrentTurn = CurrentTurn ? Stone.White : Stone.Black;
-
+            s.val = CurrentTurn.val;
             stones[s.x - 1, s.y - 1] = s;
             Console.WriteLine(s.x + "," + s.y);
 
-            Invalidate();
             CapturePass(s);
+
+            CurrentTurn = CurrentTurn ? Stone.White : Stone.Black;
+            CurrentTurn.x = s.x;
+            CurrentTurn.y = s.y;
+
+            Invalidate();
         }
 
         public void ClearBoard()

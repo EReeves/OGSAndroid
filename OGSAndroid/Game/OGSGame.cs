@@ -20,6 +20,7 @@
             public string Country;
             public string Icon;
             public string Id;
+            public string Rank;
             public string Username;
         }
     }

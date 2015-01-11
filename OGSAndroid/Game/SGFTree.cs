@@ -68,7 +68,7 @@ namespace OGSAndroid.Game
 
         public Node<T> AddChild(T item)
         {
-           Children.Add(new Node<T>(item, Parent));
+            Children.Add(new Node<T>(item, Parent));
             return Children.Last();
         }
 
@@ -86,7 +86,5 @@ namespace OGSAndroid.Game
                 yield return nn;
             }
         }
-
-
     }
 }

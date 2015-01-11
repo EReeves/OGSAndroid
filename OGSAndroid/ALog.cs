@@ -1,4 +1,8 @@
-﻿using System;
+﻿#region
+
+using Android.Util;
+
+#endregion
 
 namespace OGSAndroid
 {
@@ -6,8 +10,7 @@ namespace OGSAndroid
     {
         public static void Info(string tag, string msg)
         {
-            Android.Util.Log.Info(" OGSALOG || " + tag, msg);
+            Log.Info(" OGSALOG || " + tag, msg);
         }
     }
 }
-

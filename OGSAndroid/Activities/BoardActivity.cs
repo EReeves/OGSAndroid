@@ -1,5 +1,6 @@
 ﻿#region
 
+using System;
 using Android.App;
 using Android.Content.PM;
 using Android.Graphics;
@@ -7,6 +8,8 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using FlatUI;
+using Newtonsoft.Json;
+using OGSAndroid.API;
 using OGSAndroid.External.UrlImageHelper;
 using OGSAndroid.Game;
 
@@ -16,7 +19,7 @@ namespace OGSAndroid.Activities
 {
     [Activity(Label = "Main", Theme = "@android:style/Theme.Holo.Light", Icon = "@drawable/icon",
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class BoardActivity : Android.App.Activity
+    public class BoardActivity : Activity
     {
         private ChatDrawer chatDrawer;
         public GameView GameView;
@@ -32,8 +35,7 @@ namespace OGSAndroid.Activities
             //GameView move text.
             var moveText = FindViewById<TextView>(Resource.Id.moveText);
             GameView.MoveNumberText = moveText;
-            //GameView.SetSGF(PlayerGameListActivity.CurrentSGF);
-            GameView.Connect(PlayerGameListActivity.CurrentGame.ID);
+
             moveText.TextChanged += (sender, e) =>
             {
                 var i = 0;
@@ -52,12 +54,22 @@ namespace OGSAndroid.Activities
             tvr.SetTextColor(Color.Black);
             tvr.Invalidate();
 
+            //Deserialize game object.
+            var gameObject = JsonConvert.DeserializeObject<OGSGame>(Intent.GetStringExtra("game"));
+
+            if (gameObject == null) throw new Exception("Gameobject not properly retrieved from ListViewActivity.");
+
             //Avatar
             var bimg = FindViewById<ImageView>(Resource.Id.blackImage);
             var wimg = FindViewById<ImageView>(Resource.Id.whiteImage);
 
-            bimg.SetUrlDrawable(PlayerGameListActivity.CurrentGame.Black.Icon, Resource.Drawable.defaultuser);
-            wimg.SetUrlDrawable(PlayerGameListActivity.CurrentGame.White.Icon, Resource.Drawable.defaultuser);
+            var bIcon = gameObject.Black.Icon;
+            if (bIcon != null)
+                bimg.SetUrlDrawable(bIcon, Resource.Drawable.defaultuser);
+
+            var wIcon = gameObject.White.Icon;
+            if (wIcon != null)
+                wimg.SetUrlDrawable(gameObject.White.Icon, Resource.Drawable.defaultuser);
 
             //NextMove
             var next = FindViewById<Button>(Resource.Id.button5);
@@ -98,7 +110,9 @@ namespace OGSAndroid.Activities
             //Stop scrollview from consuming gesture events.
             chatDrawerScroll.SetOnTouchListener(chatDrawer);
 
-            ALog.Info("BoardActivity", "Created");
+            ALog.Info("BoardActivity", "Created, Connecting...");
+
+            GameView.Connect(gameObject.ID);
         }
 
         public override bool OnTouchEvent(MotionEvent e)
@@ -106,6 +120,12 @@ namespace OGSAndroid.Activities
             chatDrawer.InvokeMotionEvent(e);
             base.OnTouchEvent(e);
             return false;
+        }
+
+        protected override void OnStop()
+        {
+            //Disconnect from game.
+            RealTimeAPI.I.Disconnect();
         }
     }
 }

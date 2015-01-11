@@ -48,9 +48,6 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\..\..\Desktop\stest\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="SocketIoDotNetPCL">
-      <HintPath>..\..\..\..\Desktop\stest\SocketIoDotNetPCL.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -63,9 +60,6 @@
     </Reference>
     <Reference Include="Xamarin.Android.Support.v13">
       <HintPath>..\packages\Xamarin.Android.Support.v13.21.0.3.0\lib\MonoAndroid32\Xamarin.Android.Support.v13.dll</HintPath>
-    </Reference>
-    <Reference Include="EngineIoPCL">
-      <HintPath>..\Extern\EngineIoPCL.dll</HintPath>
     </Reference>
     <Reference Include="WebSocket4Net">
       <HintPath>..\Extern\WebSocket4Net.dll</HintPath>
@@ -159,4 +153,14 @@
     <PreBuildEvent>
     </PreBuildEvent>
   </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EngineIoPCL\EngineIoPCL.csproj">
+      <Project>{4B29EC0E-FBD1-45EF-B418-563162DC51AB}</Project>
+      <Name>EngineIoPCL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SocketIoDotNetPCL\SocketIoDotNetPCL.csproj">
+      <Project>{6C5016F9-5484-47C1-B6E9-9320178C2118}</Project>
+      <Name>SocketIoDotNetPCL</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

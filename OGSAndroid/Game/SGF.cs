@@ -18,13 +18,13 @@ namespace OGSAndroid.Game
         public string ID;
         public string Komi;
         public string Link;
+        public Stone PlayerColour = null;
         public string Result;
         public string Ruleset;
         public string Size;
         public string White;
         public string WhiteRank;
-        public Stone PlayerColour = null;  
-     
+
         public string PlayerString(Stone colour)
         {
             var name = colour ? Black : White;
@@ -32,7 +32,6 @@ namespace OGSAndroid.Game
 
             return name + " (" + rank + ")";
         }
-
     }
 
 
@@ -50,10 +49,10 @@ namespace OGSAndroid.Game
 
         public SGF<T> PopulateViaGameObject(JObject j)
         {
-            this.Info.Black = j["players"]["black"]["username"].ToString();
-            this.Info.BlackRank = j["players"]["black"]["rank"].ToString();
-            this.Info.White = j["players"]["white"]["username"].ToString();
-            this.Info.WhiteRank = j["players"]["white"]["rank"].ToString();
+            Info.Black = j["players"]["black"]["username"].ToString();
+            Info.BlackRank = j["players"]["black"]["rank"].ToString();
+            Info.White = j["players"]["white"]["username"].ToString();
+            Info.WhiteRank = j["players"]["white"]["rank"].ToString();
 
             var h = j["height"].ToString();
             var w = j["width"].ToString();
@@ -64,11 +63,10 @@ namespace OGSAndroid.Game
                 throw new NotImplementedException("width/height must be the same.");
             }
 
-            this.Info.Size = w;
-            this.Info.Handicap = j["handicap"].ToString();
+            Info.Size = w;
+            Info.Handicap = j["handicap"].ToString();
 
             return this;
         }
-
     }
 }

@@ -13,7 +13,7 @@
         android:paddingRight="4dp"
         android:paddingLeft="4dp"
         android:paddingBottom="2dp">
-        <OGSAndroid.GameView
+        <OGSAndroid.Game.GameView
             android:id="@+id/GameView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

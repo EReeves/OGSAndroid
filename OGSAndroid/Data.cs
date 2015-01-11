@@ -1,9 +1,12 @@
-using System;
+#region
+
 using System.IO;
 using System.Security;
 using System.Security.Cryptography;
 using System.Text;
 using Android.Content;
+
+#endregion
 
 namespace OGSAndroid
 {
@@ -34,18 +37,18 @@ namespace OGSAndroid
 
         private static string Decrypt(string s)
         {
-            var bytes = System.Text.Encoding.UTF8.GetBytes(s);
+            var bytes = Encoding.UTF8.GetBytes(s);
 
             var tDes = new TripleDESCryptoServiceProvider
             {
-                Key = System.Text.Encoding.UTF8.GetBytes("Banana42hJ51F4z2"),
+                Key = Encoding.UTF8.GetBytes("Banana42hJ51F4z2"),
                 Mode = CipherMode.CFB,
                 Padding = PaddingMode.ISO10126
             };
             var cD = tDes.CreateDecryptor();
-            var outB = cD.TransformFinalBlock(bytes,0,bytes.Length);
+            var outB = cD.TransformFinalBlock(bytes, 0, bytes.Length);
 
-            tDes.Clear();        
+            tDes.Clear();
             return Encoding.UTF8.GetString(outB);
         }
     }
