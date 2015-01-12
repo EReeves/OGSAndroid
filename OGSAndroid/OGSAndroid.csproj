@@ -25,7 +25,7 @@
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>3</WarningLevel>
-    <AndroidLinkMode>None</AndroidLinkMode>
+    <AndroidLinkMode>Full</AndroidLinkMode>
     <ConsolePause>false</ConsolePause>
     <AndroidLinkSkip>PullToRefresharp.dll</AndroidLinkSkip>
     <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
@@ -36,12 +36,12 @@
     <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>full</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <AndroidLinkMode>None</AndroidLinkMode>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
   </PropertyGroup>
   <ItemGroup>
@@ -78,7 +78,6 @@
     <Compile Include="Game\ChatDrawer.cs" />
     <Compile Include="Game\GameView.cs" />
     <Compile Include="Game\HoldButtonRepeat.cs" />
-    <Compile Include="Game\Move.cs" />
     <Compile Include="Game\OGSGame.cs" />
     <Compile Include="Game\SGF.cs" />
     <Compile Include="Game\SGFParser.cs" />
@@ -97,6 +96,7 @@
     <Compile Include="External\UrlImageHelper\UrlImageViewCallback.cs" />
     <Compile Include="External\UrlImageHelper\UrlImageViewHelper.cs" />
     <Compile Include="ALog.cs" />
+    <Compile Include="HiddenReference.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

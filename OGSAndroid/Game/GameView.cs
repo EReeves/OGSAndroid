@@ -3,6 +3,7 @@
 using System;
 using Android.Content;
 using Android.Util;
+using Android.Graphics;
 using Newtonsoft.Json.Linq;
 using OGSAndroid.Activities;
 using OGSAndroid.API;
@@ -32,7 +33,7 @@ namespace OGSAndroid.Game
             //Send move
             boardTouch.OnPlaceStone += (m, e) =>
             {
-                RealTimeAPI.I.Move(m.Move());
+                RealTimeAPI.I.Move(m);
                 //Moves.Tree.AddToEnd(m.Move());
             };
         }
@@ -53,12 +54,12 @@ namespace OGSAndroid.Game
             {
                 var letters = d["move"];
                 if (letters == null) return;
-                var move = Move.LettersToMove(letters.ToString(), CurrentTurn);
+                var move = Stone.LettersToMove(letters.ToString(), CurrentTurn);
 
                 ((BoardActivity) Context).RunOnUiThread(() =>
                 {
                     Moves.Tree.AddToEnd(move);
-                    ToEnd();
+                    Next();
                 });
             };
         }
@@ -82,8 +83,8 @@ namespace OGSAndroid.Game
             {
                 //Add move to tree.
                 var mv = "" + moves[i] + moves[i + 1];
-                var stone = Move.LettersToMove(mv, turn);
-                var node = new Node<Move>(stone, Moves.Tree);
+                var stone = Stone.LettersToMove(mv, turn);
+                var node = new Node<Stone>(stone, Moves.Tree);
                 Moves.Tree.AddToEnd(stone);
                 //Swap turns
                 turn = new Stone(!turn);
@@ -93,14 +94,15 @@ namespace OGSAndroid.Game
             ToEnd();
         }
 
-        //Gets the player colour you joined as, or null if spectating.
+        //Gets the player colour you joined as, or inactive if spectating.
         private Stone GetPlayerColour()
         {
             if (RealTimeAPI.I.Info.PlayerUsername == Moves.Info.Black)
                 return Stone.Black;
             if (RealTimeAPI.I.Info.PlayerUsername == Moves.Info.White)
                 return Stone.White;
-            return null;
+            return new Stone(true,false);
         }
+            
     }
 }

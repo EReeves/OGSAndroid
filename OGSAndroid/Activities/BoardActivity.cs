@@ -38,6 +38,7 @@ namespace OGSAndroid.Activities
 
             moveText.TextChanged += (sender, e) =>
             {
+                if(!moveText.HasFocus) return;
                 var i = 0;
                 if (int.TryParse(moveText.Text, out i))
                     GameView.PlaceUpTo(i);
@@ -126,6 +127,7 @@ namespace OGSAndroid.Activities
         {
             //Disconnect from game.
             RealTimeAPI.I.Disconnect();
+            base.OnStop();
         }
     }
 }

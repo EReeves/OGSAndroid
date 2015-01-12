@@ -18,6 +18,9 @@ namespace OGSAndroid.API
         public static OGSAPI I = new OGSAPI();
         private string accessToken;
 
+        public bool Beta = false;
+        public bool Authed = false;
+
         public string AccessToken
         {
             get
@@ -46,17 +49,24 @@ namespace OGSAndroid.API
             stringB.Append(pass);
 
             //Authenticate and store auth token.
-            const string url = "https://beta.online-go.com/oauth2/access_token";
+
+            
+            string url = Beta ? "https://beta.online-go.com/oauth2/access_token" : "https://online-go.com/oauth2/access_token";
+
+           
             var resp = UnAuthedPost(url, stringB.ToString());
             var json = JObject.Parse(resp);
             accessToken = json["access_token"].ToString();
+
+            Authed = true;
 
             ALog.Info("OGSAPI", "Authenticated");
         }
 
         public string GetPlayerID(string username)
         {
-            var url = "http://beta.online-go.com/api/v1/players?username=" + username + "&format=json";
+            var url = Beta ? "http://beta.online-go.com/api/v1/players?username=" + username + "&format=json"
+                : "http://online-go.com/api/v1/players?username=" + username + "&format=json";
             var ds = JsonGet(url);
 
             //Player not found : Player found
@@ -78,7 +88,8 @@ namespace OGSAndroid.API
             var gameList = new List<OGSGame>();
             //Just do the first page for now.
 
-            var url = "http://beta.online-go.com/api/v1/players/" + id + "/games?ordering=-id&page=" + page;
+            var url = Beta ? "http://beta.online-go.com/api/v1/players/" + id + "/games?ordering=-id&page=" + page
+                : "http://online-go.com/api/v1/players/" + id + "/games?ordering=-id&page=" + page;
 
             JObject json;
 
@@ -153,7 +164,7 @@ namespace OGSAndroid.API
             return JObject.Parse(str);
         }
 
-        public static SGF<Move> IdToSGF(string gid)
+        public static SGF<Stone> IdToSGF(string gid)
         {
             var parser = new SGFParser();
             return parser.Parse(DownloadSGF(gid));
@@ -161,7 +172,8 @@ namespace OGSAndroid.API
 
         public string GetGameAuth(string gid)
         {
-            var url = "https://beta.online-go.com/api/v1/games/" + gid;
+            var url = Beta ? "https://beta.online-go.com/api/v1/games/" + gid 
+                : "https://beta.online-go.com/api/v1/games/" + gid;
             var json = AuthedGet(url);
             var j = JObject.Parse(json);
             var gAuth = j["auth"].ToString();

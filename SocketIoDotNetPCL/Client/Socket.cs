@@ -226,7 +226,8 @@ namespace Quobject.SocketIoClientDotNet.Client
 
             //var args = job.Select(token => token.Value<string>()).Cast<object>().ToList();
             var args = packet.GetDataAsList();
-
+            if (args == null)
+                return;
 
             log.Info(string.Format("emitting event {0}", args));
             if (packet.Id >= 0)

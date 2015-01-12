@@ -183,20 +183,20 @@ namespace OGSAndroid
 			// aapt resource value: 0x7f06000b
 			public const int box = 2131099659;
 			
-			// aapt resource value: 0x7f06001e
-			public const int button2 = 2131099678;
-			
 			// aapt resource value: 0x7f06001f
-			public const int button3 = 2131099679;
+			public const int button2 = 2131099679;
 			
 			// aapt resource value: 0x7f060020
-			public const int button4 = 2131099680;
+			public const int button3 = 2131099680;
 			
 			// aapt resource value: 0x7f060021
-			public const int button5 = 2131099681;
+			public const int button4 = 2131099681;
 			
 			// aapt resource value: 0x7f060022
-			public const int button6 = 2131099682;
+			public const int button5 = 2131099682;
+			
+			// aapt resource value: 0x7f060023
+			public const int button6 = 2131099683;
 			
 			// aapt resource value: 0x7f060032
 			public const int chatText = 2131099698;
@@ -237,8 +237,8 @@ namespace OGSAndroid
 			// aapt resource value: 0x7f060028
 			public const int linearLayout3 = 2131099688;
 			
-			// aapt resource value: 0x7f060023
-			public const int linearLayout4 = 2131099683;
+			// aapt resource value: 0x7f06001e
+			public const int linearLayout4 = 2131099678;
 			
 			// aapt resource value: 0x7f060030
 			public const int linearLayout5 = 2131099696;

@@ -23,7 +23,8 @@
             android:paddingTop="2dp"
             android:paddingBottom="4dp"
             android:paddingRight="4dp"
-            android:paddingLeft="2dp" />
+            android:paddingLeft="2dp"
+            android:layout_above="@+id/linearLayout4" />
         <LinearLayout
             android:orientation="horizontal"
             android:minWidth="25px"
@@ -116,7 +117,7 @@
                 android:id="@+id/linearLayout3"
                 android:visibility="visible"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 android:layout_weight="3"
                 android:paddingTop="1dp"
                 android:layout_marginTop="4dp"

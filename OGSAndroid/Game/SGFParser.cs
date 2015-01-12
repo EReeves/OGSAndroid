@@ -12,11 +12,11 @@ namespace OGSAndroid.Game
     {
         private int sgfCounter;
         private TreeState state = TreeState.Continue;
-        private readonly Stack<Node<Move>> currPos = new Stack<Node<Move>>();
+        private readonly Stack<Node<Stone>> currPos = new Stack<Node<Stone>>();
 
-        public SGF<Move> Parse(string sgf)
+        public SGF<Stone> Parse(string sgf)
         {
-            var temp = new SGF<Move>();
+            var temp = new SGF<Stone>();
 
             for (sgfCounter = 0; sgfCounter < sgf.Length; sgfCounter++)
             {
@@ -25,7 +25,7 @@ namespace OGSAndroid.Game
                     case '[':
                         if (sgf[sgfCounter - 1] == '\\')
                             break;
-                        temp = SortMove(sgf, sgfCounter, temp);
+                        temp = SortStone(sgf, sgfCounter, temp);
                         break;
                     case '(':
                         //Create variation on next move.
@@ -45,7 +45,7 @@ namespace OGSAndroid.Game
             return temp;
         }
 
-        public SGF<Move> SortMove(string sgf, int bPos, SGF<Move> temp)
+        public SGF<Stone> SortStone(string sgf, int bPos, SGF<Stone> temp)
         {
             var type = sgf.Substring(bPos - 2, 2);
             var data = "";
@@ -61,13 +61,13 @@ namespace OGSAndroid.Game
 
             switch (type)
             {
-                case ";B": //Black move
-                    var m = Move.LettersToMove(data, Stone.Black);
-                    InsertMove(m, ref temp);
+                case ";B": //Black Stone
+                    var m = Stone.LettersToMove(data, Stone.Black);
+                    InsertStone(m, ref temp);
                     break;
-                case ";W": //White Move
-                    var mw = Move.LettersToMove(data, Stone.White);
-                    InsertMove(mw, ref temp);
+                case ";W": //White Stone
+                    var mw = Stone.LettersToMove(data, Stone.White);
+                    InsertStone(mw, ref temp);
                     break;
                 case "AB": //Handicap stones. //Todo: WB, white stones.
                     GrabHandicapStones(sgf, bPos, ref temp, Stone.Black);
@@ -116,14 +116,14 @@ namespace OGSAndroid.Game
             return temp;
         }
 
-        public void InsertMove(Move mv, ref SGF<Move> sg)
+        public void InsertStone(Stone mv, ref SGF<Stone> sg)
         {
             if (mv == null)
                 return; //pass or error
 
             if (currPos.Count == 0)
             {
-                sg.Tree.FirstNode = new Node<Move>(mv, sg.Tree);
+                sg.Tree.FirstNode = new Node<Stone>(mv, sg.Tree);
                 currPos.Push(sg.Tree.FirstNode);
                 return;
             }
@@ -169,15 +169,15 @@ namespace OGSAndroid.Game
             return GrabData(sgf, bPos, out outDummy);
         }
 
-        private void GrabHandicapStones(string sgf, int bPos, ref SGF<Move> sg, Stone colour)
+        private void GrabHandicapStones(string sgf, int bPos, ref SGF<Stone> sg, Stone colour)
         {
             var ncr = GrabData(sgf, bPos);
 
-            foreach (var m in ncr.Select(mv => Move.LettersToMove(mv, colour)))
+            foreach (var m in ncr.Select(mv => Stone.LettersToMove(mv, colour)))
             {
                 if (currPos.Count == 0)
                 {
-                    sg.Tree.FirstNode = new Node<Move>(m, sg.Tree);
+                    sg.Tree.FirstNode = new Node<Stone>(m, sg.Tree);
                     currPos.Push(sg.Tree.FirstNode);
                     continue;
                 }

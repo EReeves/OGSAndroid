@@ -41,8 +41,8 @@ namespace OGSAndroid.API
 
             connecting = true;
 
-
-            ogsSocket = IO.Socket("http://ggsbeta.online-go.com/");
+            var url = OGSAPI.I.Beta ? "http://ggsbeta.online-go.com/" : "http://ggs.online-go.com/";
+            ogsSocket = IO.Socket(url);
             RegisterErrorMessages();
             RegisterIncomingMessages();
             ogsSocket.On(Socket.EVENT_CONNECT, () =>
@@ -82,7 +82,8 @@ namespace OGSAndroid.API
 
             RegisterIncomingMessages();
 
-            Info.GameAuth = OGSAPI.I.GetGameAuth(gid);
+            if(OGSAPI.I.Authed)
+                Info.GameAuth = OGSAPI.I.GetGameAuth(gid);
 
             ogsSocket.Emit("game/connect", jObj);
 
@@ -114,8 +115,11 @@ namespace OGSAndroid.API
         }
 
         //Make a move
-        public void Move(Move mv)
+        public void Move(Stone mv)
         {
+            if (!OGSAPI.I.Authed)
+                return;
+
             var jObj = new JObject
             {
                 {"auth", Info.GameAuth},

@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="OGSAndroid.OGSAndroid" android:configChanges="keyboardHidden|orientation|screenSize">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:largeHeap="true" android:versionName="1.0" package="OGSAndroid.OGSAndroid" android:configChanges="keyboardHidden|orientation|screenSize">
 	<uses-sdk />
 	<application android:label="OGSAndroid"></application>
+
+	<uses-permission android:name="android.permission.INTERNET" />
 </manifest>

@@ -34,7 +34,7 @@ namespace OGSAndroid.Activities
 
             OGSAPI.I.DebugSetAccessToken("7112c1a5a00f200d05a869e435e0bfd3439254c4");
 
-            RealTimeAPI.I.Start(true, "Rvzy");
+            RealTimeAPI.I.Start(false, "Rvzy");
 
             ALog.Info("LoginActivity", "Created");
         }

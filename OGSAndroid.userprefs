@@ -1,28 +1,41 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.015d1689511c2608" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="OGSAndroid\API\RealTimeAPI.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="OGSAndroid\Properties\AndroidManifest.xml">
     <Files>
       <File FileName="OGSAndroid\ALog.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\Activities\LoginActivity.cs" Line="37" Column="37" />
-      <File FileName="OGSAndroid\Activities\Ext\ListViewInfiniteScroll.cs" Line="2" Column="2" />
-      <File FileName="OGSAndroid\Activities\BoardActivity.cs" Line="15" Column="15" />
+      <File FileName="OGSAndroid\Activities\LoginActivity.cs" Line="13" Column="13" />
+      <File FileName="OGSAndroid\Activities\Ext\ListViewInfiniteScroll.cs" Line="1" Column="1" />
+      <File FileName="OGSAndroid\Activities\BoardActivity.cs" Line="38" Column="38" />
       <File FileName="OGSAndroid\Activities\PlayerGameListActivity.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\Game\GameView.cs" Line="1" Column="1" />
+      <File FileName="OGSAndroid\Game\GameView.cs" Line="13" Column="13" />
       <File FileName="OGSAndroid\Game\SGF.cs" Line="1" Column="1" />
-      <File FileName="c:\Users\Evan\Documents\Projects\OGSAndroid\OGSAndroid\API\OGSAPI.cs" Line="10" Column="10" />
-      <File FileName="OGSAndroid\API\RealTimeAPI.cs" Line="46" Column="46" />
-      <File FileName="OGSAndroid\Game\BoardView.cs" Line="48" Column="48" />
-      <File FileName="OGSAndroid\Game\SGFView.cs" Line="1" Column="1" />
+      <File FileName="c:\Users\Evan\Documents\Projects\OGSAndroid\OGSAndroid\API\OGSAPI.cs" Line="27" Column="27" />
+      <File FileName="OGSAndroid\Game\BoardView.cs" Line="39" Column="39" />
+      <File FileName="OGSAndroid\Game\SGFView.cs" Line="27" Column="27" />
       <File FileName="OGSAndroid\Game\Move.cs" Line="1" Column="1" />
+      <File FileName="OGSAndroid\API\RealTimeAPI.cs" Line="24" Column="24" />
+      <File FileName="OGSAndroid\Game\BoardTouch.cs" Line="1" Column="1" />
+      <File FileName="OGSAndroid\Game\Stone.cs" Line="1" Column="1" />
+      <File FileName="OGSAndroid\Properties\AndroidManifest.xml" Line="12" Column="12" />
+      <File FileName="OGSAndroid\HiddenReference.cs" Line="9" Column="9" />
+      <File FileName="c:\Users\Evan\Documents\Projects\OGSAndroid\SocketIoDotNetPCL\Parser\Packet.cs" Line="10" Column="10" />
+      <File FileName="c:\Users\Evan\Documents\Projects\OGSAndroid\SocketIoDotNetPCL\Client\Socket.cs" Line="42" Column="42" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="c:\Users\Evan\Documents\Projects\SocketIoDotNetPCL\SocketIoDotNetPCL\Client\Socket.cs" line="139" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches>
     <Watch file="OGSAndroid\SGFView.cs" line="65" offsetX="242" offsetY="1024" expression="Moves" liveUpdate="False" />
     <Watch file="OGSAndroid\BoardView.cs" line="131" offsetX="340" offsetY="2080" expression="s" liveUpdate="False" />
     <Watch file="OGSAndroid\RealTimeAPI.cs" line="261" offsetX="721" offsetY="4322" expression="data" liveUpdate="False" />
+    <Watch file="..\SocketIoDotNetPCL\EngineIoPCL\ComponentEmitter\Emitter.cs" line="40" offsetX="298" offsetY="624" expression="args" liveUpdate="False" />
+    <Watch file="c:\Users\Evan\Documents\Projects\SocketIoDotNetPCL\EngineIoPCL\Client\Socket_net35.cs" line="612" offsetX="305" offsetY="9776" expression="fn" liveUpdate="False" />
+    <Watch file="c:\Users\Evan\Documents\Projects\SocketIoDotNetPCL\SocketIoDotNetPCL\Client\Socket.cs" line="262" offsetX="445" offsetY="4176" expression="args" liveUpdate="False" />
+    <Watch file="c:\Users\Evan\Documents\Projects\SocketIoDotNetPCL\SocketIoDotNetPCL\Client\Socket.cs" line="251" offsetX="508" offsetY="4000" expression="args" liveUpdate="False" />
+    <Watch file="c:\Users\Evan\Documents\Projects\OGSAndroid\SocketIoDotNetPCL\Parser\Packet.cs" line="65" offsetX="1064" offsetY="1119" expression="Newtonsoft.Json.Linq.JArray" liveUpdate="False" />
   </MonoDevelop.Ide.DebuggingService.PinnedWatches>
   <MonoDevelop.Ide.ItemProperties.OGSAndroid MonoForAntroid.PreferredDevice="Nexus 4" />
 </Properties>

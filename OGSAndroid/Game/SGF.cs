@@ -18,7 +18,7 @@ namespace OGSAndroid.Game
         public string ID;
         public string Komi;
         public string Link;
-        public Stone PlayerColour = null;
+        public Stone PlayerColour;
         public string Result;
         public string Ruleset;
         public string Size;

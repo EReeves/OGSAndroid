@@ -8,29 +8,6 @@ namespace OGSAndroid.Game
 {
     public class Move : Stone
     {
-        public enum Type
-        {
-            Place,
-            Chat
-        }
-
-        public Type MType = Type.Place;
-
-        public Move(bool _val) : base(_val)
-        {
-        }
-
-        public Move(bool _val, int _x, int _y) : base(_val, _x, _y)
-        {
-        }
-
-        public string Message { get; set; }
-        public event Action Activation;
-
-        public void Invoke()
-        {
-            Activation.Invoke();
-        }
 
         public string ToXYString(bool @internal = true)
         {

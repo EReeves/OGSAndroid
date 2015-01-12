@@ -62,7 +62,15 @@ namespace Quobject.SocketIoClientDotNet.Parser
 
         public List<object> GetDataAsList()
         {
-            var jarray = Data is JArray ? (JArray) Data : JArray.Parse((string) ((JValue) Data).Value);
+            JArray jarray;
+            try{
+                jarray = Data is JArray ? (JArray) Data : JArray.Parse((string) ((JValue) Data).Value);
+            }
+            catch(Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Tried to parse unfinished packet");
+                return null;
+            }
             var args = new List<object>();
             foreach (var o in jarray)
             {
