@@ -294,23 +294,22 @@ namespace OGSAndroid.Game
 
                 if (s == null || !s.Active) 
                 {
+                    //Liberty free.
                     stgrp = null;
                     return true;
-                    //alive = true;
-                    //continue;
                 }
 
-                // ReSharper disable once InvertIf
-                if (!ReferenceEquals(s, st) && s.Equals(st)) //Same colour
-                {
-                    grp.Add(s);
-                    foreach (var adjStone in AdjacentStones(s))
-                        workGrp.Enqueue(adjStone);
-                }
+                //Enemy stone.
+                if (ReferenceEquals(s, st) || !s.Equals(st)) continue;
+
+                //Group stone.
+                grp.Add(s);
+                foreach (var adjStone in AdjacentStones(s))
+                    workGrp.Enqueue(adjStone);
             }
 
             stgrp = grp;
-            return true;
+            return false;
         }
     }
 }
