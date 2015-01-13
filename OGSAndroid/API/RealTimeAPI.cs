@@ -82,7 +82,7 @@ namespace OGSAndroid.API
 
             RegisterIncomingMessages();
 
-            if(OGSAPI.I.Authed)
+            if (OGSAPI.I.Authed)
                 Info.GameAuth = OGSAPI.I.GetGameAuth(gid);
 
             ogsSocket.Emit("game/connect", jObj);

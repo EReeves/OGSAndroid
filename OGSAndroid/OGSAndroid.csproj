@@ -72,6 +72,8 @@
     <Compile Include="Activities\PlayerGameListActivity.cs" />
     <Compile Include="API\OGSAPI.cs" />
     <Compile Include="API\RealTimeAPI.cs" />
+    <Compile Include="API\TimeControl.cs" />
+    <Compile Include="API\TimeSystem.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="Game\BoardTouch.cs" />
     <Compile Include="Game\BoardView.cs" />

@@ -3,7 +3,6 @@
 using System;
 using Android.Content;
 using Android.Util;
-using Android.Graphics;
 using Newtonsoft.Json.Linq;
 using OGSAndroid.Activities;
 using OGSAndroid.API;
@@ -101,8 +100,7 @@ namespace OGSAndroid.Game
                 return Stone.Black;
             if (RealTimeAPI.I.Info.PlayerUsername == Moves.Info.White)
                 return Stone.White;
-            return new Stone(true,false);
+            return new Stone(true, false);
         }
-            
     }
 }

@@ -1,25 +1,27 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.015d1689511c2608" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="OGSAndroid\Properties\AndroidManifest.xml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="OGSAndroid\Game\SGFView.cs">
     <Files>
       <File FileName="OGSAndroid\ALog.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\Activities\LoginActivity.cs" Line="13" Column="13" />
       <File FileName="OGSAndroid\Activities\Ext\ListViewInfiniteScroll.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\Activities\BoardActivity.cs" Line="38" Column="38" />
+      <File FileName="OGSAndroid\Activities\BoardActivity.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\Activities\PlayerGameListActivity.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\Game\GameView.cs" Line="13" Column="13" />
+      <File FileName="OGSAndroid\Game\GameView.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\Game\SGF.cs" Line="1" Column="1" />
-      <File FileName="c:\Users\Evan\Documents\Projects\OGSAndroid\OGSAndroid\API\OGSAPI.cs" Line="27" Column="27" />
-      <File FileName="OGSAndroid\Game\BoardView.cs" Line="39" Column="39" />
-      <File FileName="OGSAndroid\Game\SGFView.cs" Line="27" Column="27" />
+      <File FileName="c:\Users\Evan\Documents\Projects\OGSAndroid\OGSAndroid\API\OGSAPI.cs" Line="1" Column="1" />
+      <File FileName="OGSAndroid\Game\BoardView.cs" Line="1" Column="1" />
+      <File FileName="OGSAndroid\Game\SGFView.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\Game\Move.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\API\RealTimeAPI.cs" Line="24" Column="24" />
+      <File FileName="OGSAndroid\API\RealTimeAPI.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\Game\BoardTouch.cs" Line="1" Column="1" />
       <File FileName="OGSAndroid\Game\Stone.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\Properties\AndroidManifest.xml" Line="12" Column="12" />
-      <File FileName="OGSAndroid\HiddenReference.cs" Line="9" Column="9" />
+      <File FileName="OGSAndroid\Properties\AndroidManifest.xml" Line="41" Column="41" />
+      <File FileName="OGSAndroid\HiddenReference.cs" Line="1" Column="1" />
       <File FileName="c:\Users\Evan\Documents\Projects\OGSAndroid\SocketIoDotNetPCL\Parser\Packet.cs" Line="10" Column="10" />
       <File FileName="c:\Users\Evan\Documents\Projects\OGSAndroid\SocketIoDotNetPCL\Client\Socket.cs" Line="42" Column="42" />
+      <File FileName="OGSAndroid\Game\SGFParser.cs" Line="75" Column="75" />
+      <File FileName="OGSAndroid\Game\SGFTree.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

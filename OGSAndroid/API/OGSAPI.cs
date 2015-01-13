@@ -17,9 +17,8 @@ namespace OGSAndroid.API
         //We only ever want one person authed.
         public static OGSAPI I = new OGSAPI();
         private string accessToken;
-
+        public bool Authed;
         public bool Beta = false;
-        public bool Authed = false;
 
         public string AccessToken
         {
@@ -50,10 +49,12 @@ namespace OGSAndroid.API
 
             //Authenticate and store auth token.
 
-            
-            string url = Beta ? "https://beta.online-go.com/oauth2/access_token" : "https://online-go.com/oauth2/access_token";
 
-           
+            string url = Beta
+                ? "https://beta.online-go.com/oauth2/access_token"
+                : "https://online-go.com/oauth2/access_token";
+
+
             var resp = UnAuthedPost(url, stringB.ToString());
             var json = JObject.Parse(resp);
             accessToken = json["access_token"].ToString();
@@ -65,7 +66,8 @@ namespace OGSAndroid.API
 
         public string GetPlayerID(string username)
         {
-            var url = Beta ? "http://beta.online-go.com/api/v1/players?username=" + username + "&format=json"
+            var url = Beta
+                ? "http://beta.online-go.com/api/v1/players?username=" + username + "&format=json"
                 : "http://online-go.com/api/v1/players?username=" + username + "&format=json";
             var ds = JsonGet(url);
 
@@ -88,7 +90,8 @@ namespace OGSAndroid.API
             var gameList = new List<OGSGame>();
             //Just do the first page for now.
 
-            var url = Beta ? "http://beta.online-go.com/api/v1/players/" + id + "/games?ordering=-id&page=" + page
+            var url = Beta
+                ? "http://beta.online-go.com/api/v1/players/" + id + "/games?ordering=-id&page=" + page
                 : "http://online-go.com/api/v1/players/" + id + "/games?ordering=-id&page=" + page;
 
             JObject json;
@@ -172,7 +175,8 @@ namespace OGSAndroid.API
 
         public string GetGameAuth(string gid)
         {
-            var url = Beta ? "https://beta.online-go.com/api/v1/games/" + gid 
+            var url = Beta
+                ? "https://beta.online-go.com/api/v1/games/" + gid
                 : "https://beta.online-go.com/api/v1/games/" + gid;
             var json = AuthedGet(url);
             var j = JObject.Parse(json);

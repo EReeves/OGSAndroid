@@ -2,11 +2,11 @@
 
 using System;
 using System.Linq;
+using System.Timers;
 using Android.Content;
+using Android.Graphics;
 using Android.Util;
 using Android.Widget;
-using Android.Graphics;
-using System.Timers;
 
 #endregion
 
@@ -16,10 +16,9 @@ namespace OGSAndroid.Game
     public class SGFView : BoardView
     {
         private int currentMove = 1;
+        public Timer GCSuppressTimer = new Timer();
         public TextView MoveNumberText;
         public SGF<Stone> Moves = new SGF<Stone>();
-
-        public Timer GCSuppressTimer = new Timer();
 
         public SGFView(Context context, IAttributeSet attrs)
             : base(context, attrs)
@@ -69,7 +68,7 @@ namespace OGSAndroid.Game
 
                 PlaceStone(node.Data);
             }
-            Invalidate();           
+            Invalidate();
         }
 
         public void ToEnd()
@@ -84,7 +83,7 @@ namespace OGSAndroid.Game
         public void ToStart()
         {
             CurrentMove = Convert.ToInt32(Moves.Info.Handicap);
-            PlaceUpTo(CurrentMove);         
+            PlaceUpTo(CurrentMove);
         }
 
         public void Next()
@@ -110,10 +109,10 @@ namespace OGSAndroid.Game
             PlaceUpTo(CurrentMove);
         }
 
-        protected override void OnDraw(Android.Graphics.Canvas canvas)
+        protected override void OnDraw(Canvas canvas)
         {
             base.OnDraw(canvas);
-            if(CurrentMove != 0)
+            if (CurrentMove != 0)
                 DrawLastStoneCircle(canvas, CurrentTurn);
         }
 
@@ -122,7 +121,7 @@ namespace OGSAndroid.Game
             Paint col = stone ? blackPaint : whitePaint;
             col.StrokeWidth = 3;
             col.SetStyle(Paint.Style.Stroke);
-            canvas.DrawCircle(ExtPad + Padding + ((stone.x - 1)*Spacing), ExtPad + Padding + ((stone.y - 1)*Spacing),
+            canvas.DrawCircle(ExtPad + Padding + ((stone.X - 1)*Spacing), ExtPad + Padding + ((stone.Y - 1)*Spacing),
                 (Spacing/3), col);
             col.SetStyle(Paint.Style.Fill);
             col.StrokeWidth = 2;
