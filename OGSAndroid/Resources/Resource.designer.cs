@@ -171,11 +171,8 @@ namespace OGSAndroid
 			// aapt resource value: 0x7f060006
 			public const int Roboto = 2131099654;
 			
-			// aapt resource value: 0x7f060024
-			public const int SGFView = 2131099684;
-			
-			// aapt resource value: 0x7f060029
-			public const int blackImage = 2131099689;
+			// aapt resource value: 0x7f060025
+			public const int blackImage = 2131099685;
 			
 			// aapt resource value: 0x7f060007
 			public const int bold = 2131099655;
@@ -183,26 +180,29 @@ namespace OGSAndroid
 			// aapt resource value: 0x7f06000b
 			public const int box = 2131099659;
 			
+			// aapt resource value: 0x7f06001e
+			public const int button2 = 2131099678;
+			
 			// aapt resource value: 0x7f06001f
-			public const int button2 = 2131099679;
+			public const int button3 = 2131099679;
 			
 			// aapt resource value: 0x7f060020
-			public const int button3 = 2131099680;
+			public const int button4 = 2131099680;
 			
 			// aapt resource value: 0x7f060021
-			public const int button4 = 2131099681;
+			public const int button5 = 2131099681;
 			
 			// aapt resource value: 0x7f060022
-			public const int button5 = 2131099682;
-			
-			// aapt resource value: 0x7f060023
-			public const int button6 = 2131099683;
+			public const int button6 = 2131099682;
 			
 			// aapt resource value: 0x7f060032
 			public const int chatText = 2131099698;
 			
 			// aapt resource value: 0x7f060011
 			public const int clientIdText = 2131099665;
+			
+			// aapt resource value: 0x7f060024
+			public const int countDownTextBlack = 2131099684;
 			
 			// aapt resource value: 0x7f060000
 			public const int dark = 2131099648;
@@ -234,11 +234,11 @@ namespace OGSAndroid
 			// aapt resource value: 0x7f060019
 			public const int linearLayout2 = 2131099673;
 			
-			// aapt resource value: 0x7f060028
-			public const int linearLayout3 = 2131099688;
+			// aapt resource value: 0x7f060023
+			public const int linearLayout3 = 2131099683;
 			
-			// aapt resource value: 0x7f06001e
-			public const int linearLayout4 = 2131099678;
+			// aapt resource value: 0x7f06001d
+			public const int linearLayout4 = 2131099677;
 			
 			// aapt resource value: 0x7f060030
 			public const int linearLayout5 = 2131099696;
@@ -264,11 +264,8 @@ namespace OGSAndroid
 			// aapt resource value: 0x7f06000f
 			public const int main = 2131099663;
 			
-			// aapt resource value: 0x7f060026
-			public const int moveText = 2131099686;
-			
-			// aapt resource value: 0x7f06001d
-			public const int myButton = 2131099677;
+			// aapt resource value: 0x7f06002a
+			public const int moveText = 2131099690;
 			
 			// aapt resource value: 0x7f060002
 			public const int none = 2131099650;
@@ -276,11 +273,17 @@ namespace OGSAndroid
 			// aapt resource value: 0x7f060033
 			public const int pNameText = 2131099699;
 			
+			// aapt resource value: 0x7f06002b
+			public const int passButton = 2131099691;
+			
 			// aapt resource value: 0x7f06000a
 			public const int regular = 2131099658;
 			
 			// aapt resource value: 0x7f060013
 			public const int relativeLayout1 = 2131099667;
+			
+			// aapt resource value: 0x7f06002c
+			public const int resignButton = 2131099692;
 			
 			// aapt resource value: 0x7f06002f
 			public const int rightDrawer = 2131099695;
@@ -300,8 +303,8 @@ namespace OGSAndroid
 			// aapt resource value: 0x7f060034
 			public const int searchButton = 2131099700;
 			
-			// aapt resource value: 0x7f06002b
-			public const int textBlack = 2131099691;
+			// aapt resource value: 0x7f060027
+			public const int textBlack = 2131099687;
 			
 			// aapt resource value: 0x7f06001a
 			public const int textView1 = 2131099674;
@@ -309,20 +312,17 @@ namespace OGSAndroid
 			// aapt resource value: 0x7f06001b
 			public const int textView2 = 2131099675;
 			
-			// aapt resource value: 0x7f06002c
-			public const int textWhite = 2131099692;
+			// aapt resource value: 0x7f060028
+			public const int textWhite = 2131099688;
 			
-			// aapt resource value: 0x7f060027
-			public const int toolbarButton = 2131099687;
-			
-			// aapt resource value: 0x7f060025
-			public const int topToolbarLayout = 2131099685;
+			// aapt resource value: 0x7f060029
+			public const int topToolbarLayout = 2131099689;
 			
 			// aapt resource value: 0x7f06000d
 			public const int transparent = 2131099661;
 			
-			// aapt resource value: 0x7f06002a
-			public const int whiteImage = 2131099690;
+			// aapt resource value: 0x7f060026
+			public const int whiteImage = 2131099686;
 			
 			static Id()
 			{

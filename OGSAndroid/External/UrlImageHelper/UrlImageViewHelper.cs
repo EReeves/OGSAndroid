@@ -307,6 +307,8 @@ namespace OGSAndroid.External.UrlImageHelper
                         {
                             var fnewImage = usableResult;
                             var fimageView = iv;
+                                fnewImage.Bounds = new Rect(0,0,128,128);
+                            
 
                             fimageView.SetImageDrawable(fnewImage);
 

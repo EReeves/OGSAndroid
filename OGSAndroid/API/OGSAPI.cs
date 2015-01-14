@@ -131,8 +131,8 @@ namespace OGSAndroid.API
                 };
 
                 //Calculate rank.
-                var bRating = g["players"]["black"]["rating"].Value<float>();
-                var wRating = g["players"]["white"]["rating"].Value<float>();
+                var bRating = g["players"]["black"]["ranking"].Value<float>();
+                var wRating = g["players"]["white"]["ranking"].Value<float>();
 
                 temp.Black.Rank = RatingToRank(bRating);
                 temp.White.Rank = RatingToRank(wRating);
@@ -147,8 +147,8 @@ namespace OGSAndroid.API
                     temp.Result = "B+" + outcome;
 
                 //Change icon src size to 256px.
-                temp.Black.Icon = temp.Black.Icon.Replace("32.png", "256.png");
-                temp.White.Icon = temp.White.Icon.Replace("32.png", "256.png");
+                temp.Black.Icon = temp.Black.Icon.Replace("32.png", "128.png");
+                temp.White.Icon = temp.White.Icon.Replace("32.png", "128.png");
 
                 gameList.Add(temp);
             }

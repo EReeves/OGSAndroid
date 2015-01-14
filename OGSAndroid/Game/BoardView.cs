@@ -91,7 +91,7 @@ namespace OGSAndroid.Game
             if (firstDraw) //Draw again to fix padding/spacing dependency on eachother.
             {
                 firstDraw = false;
-                var par = new RelativeLayout.LayoutParams(Size, Size);
+                var par = new LinearLayout.LayoutParams(Size, Size);
                 LayoutParameters = par;
                 OnDraw(canvas);
             }

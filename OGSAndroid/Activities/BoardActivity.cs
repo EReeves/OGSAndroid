@@ -29,7 +29,15 @@ namespace OGSAndroid.Activities
             base.OnCreate(bundle);
             RequestWindowFeature(WindowFeatures.NoTitle); //Remove title. 
             SetContentView(Resource.Layout.Main);
-            FlatUI.FlatUI.SetActivityTheme(this, FlatTheme.Dark());
+
+            var theme = new FlatUI.FlatTheme () {
+                DarkAccentColor = Android.Graphics.Color.ParseColor("#00103f"),
+                BackgroundColor = Android.Graphics.Color.ParseColor("#424242"),
+                LightAccentColor = Android.Graphics.Color.ParseColor("#a5a5a5"),
+                VeryLightAccentColor = Android.Graphics.Color.ParseColor("#000000")
+            };
+
+            FlatUI.FlatUI.SetActivityTheme(this, theme);
 
             GameView = FindViewById<GameView>(Resource.Id.GameView);
             //GameView move text.
@@ -64,13 +72,22 @@ namespace OGSAndroid.Activities
             var bimg = FindViewById<ImageView>(Resource.Id.blackImage);
             var wimg = FindViewById<ImageView>(Resource.Id.whiteImage);
 
+
+
             var bIcon = gameObject.Black.Icon;
-            if (bIcon != null)
+            if (bIcon != null && !bIcon.Contains("default-user"))
                 bimg.SetUrlDrawable(bIcon, Resource.Drawable.defaultuser);
 
             var wIcon = gameObject.White.Icon;
-            if (wIcon != null)
+            if (wIcon != null && !wIcon.Contains("default-user"))
                 wimg.SetUrlDrawable(gameObject.White.Icon, Resource.Drawable.defaultuser);
+
+            //Player names/
+            var blackText = FindViewById<TextView>(Resource.Id.textBlack);
+            var whiteText = FindViewById<TextView>(Resource.Id.textWhite);
+
+            blackText.Text = gameObject.Black.Username + " " + gameObject.Black.Rank;
+            whiteText.Text = gameObject.White.Username + " " + gameObject.White.Rank;
 
             //NextMove
             var next = FindViewById<Button>(Resource.Id.button5);
@@ -93,9 +110,6 @@ namespace OGSAndroid.Activities
             var end = FindViewById<Button>(Resource.Id.button6);
             end.Click += (sender, e) => GameView.ToEnd();
 
-            //toolbar temp
-            var tbb = FindViewById<Button>(Resource.Id.toolbarButton);
-            tbb.Text = "ToolbarTemp";
 
             //Chat drawer
             var chatDrawerScroll = FindViewById<ScrollView>(Resource.Id.rightDrawerScroll);
