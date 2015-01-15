@@ -10,9 +10,9 @@ namespace OGSAndroid.Game
 {
     public class SGFParser
     {
+        private readonly Stack<Node<Stone>> currPos = new Stack<Node<Stone>>();
         private int sgfCounter;
         private TreeState state = TreeState.Continue;
-        private readonly Stack<Node<Stone>> currPos = new Stack<Node<Stone>>();
 
         public SGF<Stone> Parse(string sgf)
         {

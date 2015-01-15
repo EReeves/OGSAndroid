@@ -23,6 +23,8 @@ namespace OGSAndroid.Activities
         Icon = "@drawable/icon", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class PlayerGameListActivity : Activity
     {
+        private readonly List<OGSGame> gameList = new List<OGSGame>();
+        private readonly List<string> gameStringList = new List<string>();
         private OGSGame currentGame;
         private ListView gameListView;
         private bool infiniteLoading;
@@ -30,8 +32,6 @@ namespace OGSAndroid.Activities
         private RelativeLayout loadingPanel;
         private int pages = 1;
         private EditText playerNameText;
-        private readonly List<OGSGame> gameList = new List<OGSGame>();
-        private readonly List<string> gameStringList = new List<string>();
 
         protected override void OnCreate(Bundle bundle)
         {

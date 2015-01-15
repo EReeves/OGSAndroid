@@ -99,15 +99,18 @@
                     android:layout_gravity="left"
                     android:layout_weight="1">
                     <TextView
-                        android:text="0:00"
+                        android:text="0D:00H"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/countDownTextBlack"
                         android:layout_centerVertical="true"
-                        android:paddingLeft="30dp"
-                        android:textSize="50dp"
-                        android:textColor="@android:color/background_light" />
+                        android:paddingLeft="10dp"
+                        android:textSize="55dp"
+                        android:textColor="@android:color/background_light"
+                        android:layout_toLeftOf="@+id/blackImage"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center" />
                     <ImageView
                         android:src="@drawable/defaultuser"
                         android:layout_width="wrap_content"
@@ -148,17 +151,21 @@
                         android:layout_marginBottom="2dp"
                         android:layout_centerVertical="true"
                         android:paddingLeft="8dp"
-                        android:layout_marginLeft="10dp" />
+                        android:layout_marginLeft="10dp"
+                        android:layout_alignParentRight="false" />
                     <TextView
-                        android:text="0:00"
+                        android:text="0D:00H"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/countDownTextBlack"
-                        android:paddingRight="30dp"
+                        android:id="@+id/countDownTextWhite"
+                        android:paddingRight="10dp"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:textSize="50dp" />
+                        android:textSize="55dp"
+                        android:layout_toRightOf="@+id/whiteImage"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center" />
                 </RelativeLayout>
             </LinearLayout>
             <LinearLayout

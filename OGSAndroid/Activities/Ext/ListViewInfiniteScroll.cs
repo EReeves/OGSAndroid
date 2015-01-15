@@ -10,8 +10,8 @@ namespace OGSAndroid.Activities.Ext
 {
     public class ListViewInfiniteScroll : Object, AbsListView.IOnScrollListener
     {
-        public Action HitBottom;
         private readonly ListView listView;
+        public Action HitBottom;
 
         public ListViewInfiniteScroll(ListView lv)
         {

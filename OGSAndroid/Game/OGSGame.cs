@@ -8,6 +8,7 @@
         public string ID;
         public string Name;
         public string Result;
+        public string TimeControl;
         public Player White;
 
         public override string ToString()

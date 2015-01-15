@@ -12,10 +12,10 @@ namespace OGSAndroid.Game
 {
     public class HoldButtonRepeat
     {
-        public Action Invoke;
         private readonly Button button;
         private readonly OnTouchListener onTouchListener;
         private readonly Timer timer;
+        public Action Invoke;
         //param name="interval">Invoke interval in ms.</param>
         public HoldButtonRepeat(Button _button, double interval)
         {

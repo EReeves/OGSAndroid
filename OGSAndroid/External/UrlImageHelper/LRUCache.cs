@@ -10,11 +10,11 @@ namespace OGSAndroid.External.UrlImageHelper
 {
     public class LRUCache<TKey, TValue> : IDictionary<TKey, TValue>
     {
-        private object sync = new object();
         private readonly int capacity;
         private readonly Dictionary<TKey, TValue> data;
         private readonly ICollection<KeyValuePair<TKey, TValue>> dataAsCollection;
         private readonly IndexedLinkedList<TKey> lruList = new IndexedLinkedList<TKey>();
+        private object sync = new object();
 
         public LRUCache(int capacity)
         {

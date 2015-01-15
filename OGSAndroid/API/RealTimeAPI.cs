@@ -17,6 +17,9 @@ namespace OGSAndroid.API
 
         //Singleton.
         public static RealTimeAPI I = new RealTimeAPI();
+        //Incoming messages.
+
+        private readonly List<string> registeredMessages = new List<string>();
         private bool connected;
         private bool connecting;
         public APIInfo Info = new APIInfo();
@@ -24,9 +27,6 @@ namespace OGSAndroid.API
         public IncomingMessageDelegate OnGameClock;
         public IncomingMessageDelegate OnGameData;
         public IncomingMessageDelegate OnGameMove;
-        //Incoming messages.
-
-        private readonly List<string> registeredMessages = new List<string>();
 
         public RealTimeAPI()
         {
@@ -262,6 +262,16 @@ namespace OGSAndroid.API
                     OnGameMove.Invoke(json);
             });
             registeredMessages.Add(gameMove);
+
+
+            var gameClock = "game/" + Info.GameID + "/clock";
+            ogsSocket.On(gameClock, data =>
+                {
+                    var json = JObject.Parse(data.ToString());
+                    if (OnGameClock != null)
+                        OnGameClock.Invoke(json);
+                });
+            registeredMessages.Add(gameClock);
 
             ALog.Info("Socket", "Registered incoming messages");
         }

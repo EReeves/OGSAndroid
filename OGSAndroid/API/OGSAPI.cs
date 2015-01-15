@@ -130,6 +130,10 @@ namespace OGSAndroid.API
                     }
                 };
 
+                //Time control
+
+                temp.TimeControl = g["time_control"].ToString();
+
                 //Calculate rank.
                 var bRating = g["players"]["black"]["ranking"].Value<float>();
                 var wRating = g["players"]["white"]["ranking"].Value<float>();
@@ -177,7 +181,7 @@ namespace OGSAndroid.API
         {
             var url = Beta
                 ? "https://beta.online-go.com/api/v1/games/" + gid
-                : "https://beta.online-go.com/api/v1/games/" + gid;
+                : "https://online-go.com/api/v1/games/" + gid;
             var json = AuthedGet(url);
             var j = JObject.Parse(json);
             var gAuth = j["auth"].ToString();

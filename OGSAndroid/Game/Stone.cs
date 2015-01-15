@@ -36,7 +36,6 @@ namespace OGSAndroid.Game
         {
             return s.Val;
         }
-
 #pragma warning disable 659 //Bad design but we don't want a hash code.
         public override bool Equals(object obj)
         {

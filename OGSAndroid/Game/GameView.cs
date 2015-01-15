@@ -25,7 +25,7 @@ namespace OGSAndroid.Game
             boardTouch.OnConfirmStone += (stone, e) =>
             {
                 var player = GetPlayerColour();
-                if (player == null || !stone.Equals(player))
+                    if (!player.Active || !stone.Equals(player))
                     boardTouch.ConfirmStoneActive = false;
             };
 
@@ -61,6 +61,7 @@ namespace OGSAndroid.Game
                     Next();
                 });
             };
+                    
         }
 
         public void Connect(string gid)
@@ -97,9 +98,9 @@ namespace OGSAndroid.Game
         private Stone GetPlayerColour()
         {
             if (RealTimeAPI.I.Info.PlayerUsername == Moves.Info.Black)
-                return Stone.Black;
+                return new Stone(Stone.Black, true);
             if (RealTimeAPI.I.Info.PlayerUsername == Moves.Info.White)
-                return Stone.White;
+                return new Stone(Stone.White, true);
             return new Stone(true, false);
         }
     }

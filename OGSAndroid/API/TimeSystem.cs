@@ -1,33 +1,56 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+#region
 
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
+using System;
 using Newtonsoft.Json.Linq;
 using OGSAndroid.Game;
 
+#endregion
+
 namespace OGSAndroid.API
 {
-    class TimeSystem
+    public class TimeSystem
     {
-        public enum SystemType { Fischer, Byoyomi, Simple, Canadian, Absolute, None }
+        public enum SystemType
+        {
+            Fischer,
+            Byoyomi,
+            Simple,
+            Canadian,
+            Absolute,
+            None
+        }
 
-        public SystemType ClockType;
-        public Stone Player;
+        public TimeSystem(Stone player)
+        {
+            Player = player;
+        }
 
-        public FischerTime Fischer;
-        public ByoyomiTime Byoyomi;
-        public SimpleTime Simple;
-        public CanadianTime Canadian;
         public AbsoluteTime Absolute;
-
+        public ByoyomiTime Byoyomi;
+        public CanadianTime Canadian;
         public ClockObject Clock;
+        public SystemType ClockType;
+        public FischerTime Fischer;
+        public Stone Player;
+        public SimpleTime Simple;
+
+        public void SetTimeSystem(string time)
+        {
+            switch(time)
+            {
+                case "simple":
+                    break;
+                case "byoyomi":
+                    ClockType = SystemType.Byoyomi;
+                    break;
+                case "canadian":
+                    break;
+                case "absolute":
+                    break;
+                case "fischer":
+                    break;
+            }
+        }
 
         public void PopulateClock(JObject clock)
         {
@@ -35,10 +58,11 @@ namespace OGSAndroid.API
 
             switch (ClockType)
             {
-                case SystemType.Fischer: case SystemType.Absolute:
+                case SystemType.Fischer:
+                case SystemType.Absolute:
                     Clock.ThinkingTime = clock[playerString]["thinking_time"].Value<double>();
                     break;
-                
+
                 case SystemType.Byoyomi:
                     Clock.ThinkingTime = clock[playerString]["thinking_time"].Value<double>();
                     Clock.Periods = clock[playerString]["periods"].Value<int>();
@@ -57,10 +81,9 @@ namespace OGSAndroid.API
             }
 
             var epoch = DateTime.UtcNow - new DateTime(1970, 1, 1);
-            Clock.NowDelta = (int)epoch.TotalMilliseconds - clock["now"].Value<int>();
-            Clock.LastMove = clock["last_move"].Value<int>();
+            Clock.NowDelta = epoch.TotalMilliseconds - clock["now"].Value<double>();
+            Clock.LastMove = clock["last_move"].Value<double>();
             Clock.BaseTime = Clock.LastMove + Clock.NowDelta;
-
         }
 
         public string ClockString()
@@ -71,7 +94,7 @@ namespace OGSAndroid.API
             switch (ClockType)
             {
                 case SystemType.Fischer:
-                    
+
                     break;
                 case SystemType.Absolute:
 
@@ -90,7 +113,6 @@ namespace OGSAndroid.API
                             timeLeft = 0;
 
                         Clock.Periods = (int) ((Clock.Periods - periodOffset) - 1);
-                        
                     }
                     break;
 
@@ -106,22 +128,50 @@ namespace OGSAndroid.API
                     }
                     break;
             }
-            return "1";
+                    
+            var left = TimeSpan.FromMilliseconds(timeLeft);
+
+            Clock.TimeLeft = timeLeft;
+
+            return TimespanToString(left);
+
         }
 
+        public string TimespanToString(TimeSpan ts)
+        {
+            var result = "";
+           
+            if (ts.Days != 0)
+            {
+                return ts.Days + "D:" + ts.Hours + "H";
+            }
+
+            if (ts.Hours != 0)
+            {
+                return ts.Hours + "H:" + ts.Minutes + "M";
+            }
+
+            return ts.Minutes + ":" + ts.Seconds;
+        }
+
+        public string GuessTime()
+        {
+            var ts = TimeSpan.FromMilliseconds(Clock.TimeLeft);
+            return TimespanToString(ts);
+        }
 
         public struct FischerTime
         {
             public int InitialTime;
-            public int TimeIncrement;
             public int MaxTime;
+            public int TimeIncrement;
         }
 
         public struct ByoyomiTime
         {
             public int MainTime;
-            public int PeriodTime;
             public int Periods;
+            public int PeriodTime;
         }
 
         public struct SimpleTime
@@ -143,27 +193,22 @@ namespace OGSAndroid.API
 
         public struct ClockObject
         {
-
+            public double BaseTime;
+            public double BlockTime;
+            public double LastMove;
+            //Canadian
+            public int MovesLeft;
+            //Global
+            public double NowDelta;
+            //Byoyomi.
+            public int Periods;
+            public double PeriodTime;
+            //Simple
+            public double SimpleTime;
             //Used by Fischer, Boyoyomi, Canadian, Absolute.
             public double ThinkingTime;
 
-            //Byoyomi.
-            public int Periods;
-            public int PeriodTime;
-
-            //Simple
-            public int SimpleTime;
-
-            //Canadian
-            public int MovesLeft;
-            public int BlockTime;
-
-            //Global
-            public int NowDelta;
-            public int LastMove;
-            public int BaseTime;
-
+            public double TimeLeft;
         }
-
     }
 }

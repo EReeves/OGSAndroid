@@ -49,8 +49,8 @@ namespace OGSAndroid.Game
 
     public class Node<T>
     {
-        public SGFTree<T> Parent;
         public readonly List<Node<T>> Children;
+        public SGFTree<T> Parent;
 
         public Node(T item, SGFTree<T> parent)
         {

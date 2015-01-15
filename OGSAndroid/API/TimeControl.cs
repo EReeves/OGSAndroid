@@ -1,20 +1,42 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+using System.Timers;
 using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
 
 namespace OGSAndroid.API
 {
-    class TimeControl
+    public class TimeControl
     {
-        public TimeSystem CurrentTimeSystem;
-    }
+        public static TimeSystem Black = new TimeSystem(OGSAndroid.Game.Stone.Black);
+        public static TimeSystem White = new TimeSystem(OGSAndroid.Game.Stone.White);
 
+        private readonly static Timer countdown = new Timer(1000);
+
+        public static void Init(TextView black, TextView white, Activity act)
+        {
+            countdown.Elapsed += (o,e) =>
+            {
+                    if(((OGSAndroid.Activities.BoardActivity)act).GameView.CurrentTurn.Equals(Game.Stone.Black))
+                        Black.Clock.TimeLeft -= 1000;
+                    else
+                        White.Clock.TimeLeft -= 1000;
+
+                act.RunOnUiThread(() =>
+                {
+                    black.Text = Black.GuessTime();
+                    white.Text = White.GuessTime();
+                });
+            };
+        }
+
+        public static void StartEstimating()
+        {
+            countdown.Stop();
+            countdown.Start();
+        }
+
+        public static void StopEstimating()
+        {
+            countdown.Stop();
+        }
+    }
 }

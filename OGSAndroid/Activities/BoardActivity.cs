@@ -30,11 +30,12 @@ namespace OGSAndroid.Activities
             RequestWindowFeature(WindowFeatures.NoTitle); //Remove title. 
             SetContentView(Resource.Layout.Main);
 
-            var theme = new FlatUI.FlatTheme () {
-                DarkAccentColor = Android.Graphics.Color.ParseColor("#00103f"),
-                BackgroundColor = Android.Graphics.Color.ParseColor("#424242"),
-                LightAccentColor = Android.Graphics.Color.ParseColor("#a5a5a5"),
-                VeryLightAccentColor = Android.Graphics.Color.ParseColor("#000000")
+            var theme = new FlatTheme
+            {
+                DarkAccentColor = Color.ParseColor("#00103f"),
+                BackgroundColor = Color.ParseColor("#424242"),
+                LightAccentColor = Color.ParseColor("#a5a5a5"),
+                VeryLightAccentColor = Color.ParseColor("#000000")
             };
 
             FlatUI.FlatUI.SetActivityTheme(this, theme);
@@ -71,7 +72,6 @@ namespace OGSAndroid.Activities
             //Avatar
             var bimg = FindViewById<ImageView>(Resource.Id.blackImage);
             var wimg = FindViewById<ImageView>(Resource.Id.whiteImage);
-
 
 
             var bIcon = gameObject.Black.Icon;
@@ -118,9 +118,29 @@ namespace OGSAndroid.Activities
             chatDrawer = new ChatDrawer(chatDrawerView, chatDrawerText);
             GameView.boardTouch.OnTouchEvent += e => { chatDrawer.GestureDetector.OnTouchEvent(e); };
 
+            //Clock
+            TimeControl.Black.SetTimeSystem(gameObject.TimeControl);
+            TimeControl.White.SetTimeSystem(gameObject.TimeControl);
 
-            //Apply chat text 
-            //chatDrawer.ChatText = ChatDrawer.StringListToString(PlayerGameListActivity.CurrentSGF.Info.ChatMessages);
+            var blackClock = FindViewById<TextView>(Resource.Id.countDownTextBlack);
+            var whiteClock = FindViewById<TextView>(Resource.Id.countDownTextWhite);
+
+            RealTimeAPI.I.OnGameClock += d =>
+            {
+                    TimeControl.StopEstimating();
+
+                    TimeControl.Black.PopulateClock(d);
+                    TimeControl.White.PopulateClock(d);
+
+                    RunOnUiThread(() => {
+                        blackClock.Text = TimeControl.Black.ClockString();
+                        whiteClock.Text = TimeControl.White.ClockString();
+                    });
+
+                TimeControl.StartEstimating();
+            };
+
+            TimeControl.Init(blackClock,whiteClock, this);
 
             //Stop scrollview from consuming gesture events.
             chatDrawerScroll.SetOnTouchListener(chatDrawer);

@@ -14,14 +14,14 @@ namespace OGSAndroid.Game
 {
     public class BoardView : View
     {
-        public Stone CurrentTurn = Stone.Black;
-        private bool firstDraw = true;
-        private bool initialized;
-        public HiddenReference<Stone[,]> stones;
         protected readonly Paint bgPaint;
         protected readonly Paint blackPaint;
         public readonly BoardTouch boardTouch;
         protected readonly Paint whitePaint;
+        public Stone CurrentTurn = Stone.Black;
+        private bool firstDraw = true;
+        private bool initialized;
+        public HiddenReference<Stone[,]> stones;
 
         public BoardView(Context context, IAttributeSet attrs) : base(context)
         {
@@ -292,7 +292,7 @@ namespace OGSAndroid.Game
                 if (Stone.InList(grp, s))
                     continue;
 
-                if (s == null || !s.Active) 
+                if (s == null || !s.Active)
                 {
                     //Liberty free.
                     stgrp = null;
