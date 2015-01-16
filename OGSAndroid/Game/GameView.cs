@@ -13,6 +13,8 @@ namespace OGSAndroid.Game
 {
     public class GameView : SGFView
     {
+        public Stone CurrentAPIMove = Stone.Black;
+
         public GameView(Context context, IAttributeSet attrs) : base(context, attrs)
         {
             RegisterTouchEvents();
@@ -43,9 +45,12 @@ namespace OGSAndroid.Game
             {
                 ((BoardActivity) Context).RunOnUiThread(() =>
                 {
-                    Moves = Moves.PopulateViaGameObject(d);
+                    Moves = Moves.PopulateViaGameObject(d);   
                     Initialize(Convert.ToInt32(Moves.Info.Size));
                     PopulateMovesViaGameObject(d);
+                            var last = Moves.Tree.LastNode();
+                    if(last == null) return;
+                            CurrentAPIMove = new Stone(!((Node<Stone>)last).Data, true);
                 });
             };
 
@@ -54,6 +59,8 @@ namespace OGSAndroid.Game
                 var letters = d["move"];
                 if (letters == null) return;
                 var move = Stone.LettersToMove(letters.ToString(), CurrentTurn);
+
+                CurrentAPIMove = new Stone(!move, true);
 
                 ((BoardActivity) Context).RunOnUiThread(() =>
                 {

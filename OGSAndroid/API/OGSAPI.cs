@@ -162,7 +162,7 @@ namespace OGSAndroid.API
 
         private static string RatingToRank(float rating)
         {
-            return rating < 30 ? (30 - rating) + " Kyu" : (rating - 30) + 1 + " Dan";
+            return rating < 30 ? "(" + (30 - rating) + " Kyu)" : "(" + (rating - 30) + 1 + " Dan)";
         }
 
         private static JObject JsonGet(string url)

@@ -73,11 +73,11 @@
     <Folder Include="ImmutableCollections\" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="WebSocket4Net">
-      <HintPath>..\extern\WebSocket4Net.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\ioextern\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebSocket4Net">
+      <HintPath>..\Extern\WebSocket4Net.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

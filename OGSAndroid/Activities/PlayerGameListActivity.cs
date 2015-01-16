@@ -49,6 +49,9 @@ namespace OGSAndroid.Activities
 
             RegisterButtons(ref searchButton, ref gameListView);
 
+            ListViewInfiniteScroll lvis = new ListViewInfiniteScroll(gameListView);                     
+            InitInfiniteScroll(ref lvis);
+
             ALog.Info("PlayerGameListActivity", "Created");
         }
 

@@ -33,7 +33,9 @@ namespace Quobject.EngineIoClientDotNet.Client.Transports
             var log = LogManager.GetLogger(Global.CallerName());
             log.Info("DoOpen uri =" + Uri());
 
-            ws = new WebSocket4Net.WebSocket(Uri(), "", Cookies);
+            //ws = new WebSocket4Net.WebSocket(this.Uri(), "", Cookies);
+            ws = new WebSocket4Net.WebSocket(Uri(),"",WebSocketVersion.None);
+
             ws.EnableAutoSendPing = false;
             if (ServerCertificate.Ignore)
             {

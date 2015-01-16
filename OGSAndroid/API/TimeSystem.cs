@@ -1,6 +1,8 @@
 #region
 
 using System;
+using Android.Text;
+using Android.Text.Style;
 using Newtonsoft.Json.Linq;
 using OGSAndroid.Game;
 
@@ -33,6 +35,12 @@ namespace OGSAndroid.API
         public FischerTime Fischer;
         public Stone Player;
         public SimpleTime Simple;
+
+        public bool HideByoyomi = false;
+        public bool ByoyomiEstimateStart = false;
+     
+
+        public string ByoyomiString = "";
 
         public void SetTimeSystem(string time)
         {
@@ -84,12 +92,15 @@ namespace OGSAndroid.API
             Clock.NowDelta = epoch.TotalMilliseconds - clock["now"].Value<double>();
             Clock.LastMove = clock["last_move"].Value<double>();
             Clock.BaseTime = Clock.LastMove + Clock.NowDelta;
+
         }
 
         public string ClockString()
         {
             var epoch = DateTime.UtcNow - new DateTime(1970, 1, 1);
             var timeLeft = Clock.BaseTime + Clock.ThinkingTime*1000 - epoch.TotalMilliseconds;
+
+            bool byoyomi = false;
 
             switch (ClockType)
             {
@@ -103,6 +114,8 @@ namespace OGSAndroid.API
                 case SystemType.Byoyomi:
                     if (timeLeft < 0 || Clock.ThinkingTime == 0)
                     {
+                        HideByoyomi = true;
+
                         var periodOffset = Math.Floor((-timeLeft/1000)/Clock.PeriodTime);
                         periodOffset = Math.Max(0, periodOffset);
 
@@ -112,7 +125,9 @@ namespace OGSAndroid.API
                         if (Clock.Periods - periodOffset - 1 < 0)
                             timeLeft = 0;
 
-                        Clock.Periods = (int) ((Clock.Periods - periodOffset) - 1);
+                        //Clock.Periods = (int) ((Clock.Periods - periodOffset) - 1);
+
+                        byoyomi = true;
                     }
                     break;
 
@@ -123,8 +138,11 @@ namespace OGSAndroid.API
                 case SystemType.Canadian:
                     if (timeLeft < 0 || Clock.ThinkingTime == 0)
                     {
+                        HideByoyomi = true;
+
                         timeLeft = Clock.BaseTime + (Clock.ThinkingTime + Clock.BlockTime)*1000 -
                                    epoch.TotalMilliseconds;
+                        byoyomi = true;
                     }
                     break;
             }
@@ -133,31 +151,66 @@ namespace OGSAndroid.API
 
             Clock.TimeLeft = timeLeft;
 
-            return TimespanToString(left);
+            //In case of desync
+            if (ClockType == SystemType.Byoyomi && timeLeft > Clock.PeriodTime*1000)
+                HideByoyomi = false;
+
+            return TimespanToString(left, byoyomi);
 
         }
 
-        public string TimespanToString(TimeSpan ts)
+        public string TimespanToString(TimeSpan ts, bool byoyomi = false)
         {
             var result = "";
-           
+
             if (ts.Days != 0)
             {
-                return ts.Days + "D:" + ts.Hours + "H";
+                result = ts.Days + "D:" + ts.Hours + "H";
             }
-
-            if (ts.Hours != 0)
+            else if (ts.Hours != 0)
             {
-                return ts.Hours + "H:" + ts.Minutes + "M";
+                result = ts.Hours + "H:" + PrefixZero(ts.Minutes.ToString()) + "M";
+            }
+            else if (byoyomi)
+            {
+                result = TimespanToString(ts, false) + "x" + Clock.Periods;
+            }
+            else result = ts.Minutes + ":" +  PrefixZero((ts.Seconds+1).ToString());
+
+            if (ClockType == SystemType.Byoyomi )
+            {
+                ByoyomiString = "\n+" + Clock.PeriodTime + "x" + Clock.Periods ;
             }
 
-            return ts.Minutes + ":" + ts.Seconds;
+            return result;
         }
 
         public string GuessTime()
         {
             var ts = TimeSpan.FromMilliseconds(Clock.TimeLeft);
+
+            if (ClockType == SystemType.Byoyomi)
+            {
+
+
+                if (Clock.TimeLeft < 0)
+                {
+                    HideByoyomi = true;
+                    Clock.TimeLeft = Clock.PeriodTime*1000;
+
+                    if(ByoyomiEstimateStart)
+                        Clock.Periods -= 1;
+
+                    ByoyomiEstimateStart = true;
+                }
+                return Clock.Periods <= 0 ? TimespanToString(TimeSpan.FromMilliseconds(-1000)) : TimespanToString(ts, HideByoyomi);
+            }
             return TimespanToString(ts);
+        }
+
+        private string PrefixZero(string str)
+        {
+            return str.Length == 1 ? "0" + str : str;              
         }
 
         public struct FischerTime

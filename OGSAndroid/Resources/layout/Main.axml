@@ -85,7 +85,7 @@
                 android:visibility="visible"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="4"
+                android:layout_weight="5"
                 android:paddingTop="1dp"
                 android:layout_marginTop="4dp"
                 android:paddingRight="1dp"
@@ -110,7 +110,20 @@
                         android:textColor="@android:color/background_light"
                         android:layout_toLeftOf="@+id/blackImage"
                         android:layout_centerHorizontal="true"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:layout_marginBottom="-40dp" />
+                    <TextView
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/byoyomiTextBlack"
+                        android:layout_below="@+id/countDownTextBlack"
+                        android:textSize="30dp"
+                        android:textColor="@android:color/background_light"
+                        android:gravity="center_horizontal"
+                        android:layout_toLeftOf="@+id/blackImage"
+                        android:includeFontPadding="false" />
                     <ImageView
                         android:src="@drawable/defaultuser"
                         android:layout_width="wrap_content"
@@ -165,7 +178,20 @@
                         android:textSize="55dp"
                         android:layout_toRightOf="@+id/whiteImage"
                         android:layout_centerHorizontal="true"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:layout_marginBottom="-40dp" />
+                    <TextView
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/byoyomiTextWhite"
+                        android:gravity="center_horizontal"
+                        android:textSize="30dp"
+                        android:textColor="@android:color/background_dark"
+                        android:layout_below="@+id/countDownTextWhite"
+                        android:layout_toRightOf="@+id/whiteImage"
+                        android:includeFontPadding="false" />
                 </RelativeLayout>
             </LinearLayout>
             <LinearLayout
@@ -226,7 +252,7 @@
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="4dp" />
                 <FlatUI.FlatButton
-                    android:text="Resign"
+                    android:text="Cancel"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/resignButton"

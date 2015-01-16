@@ -45,9 +45,6 @@
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\..\Desktop\stest\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -63,6 +60,9 @@
     </Reference>
     <Reference Include="WebSocket4Net">
       <HintPath>..\Extern\WebSocket4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\ioextern\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -140,10 +140,6 @@
   <ItemGroup>
     <XamarinComponentReference Include="FlatUI">
       <Version>1.0</Version>
-      <Visible>False</Visible>
-    </XamarinComponentReference>
-    <XamarinComponentReference Include="json.net">
-      <Version>4.5.11.1</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
   </ItemGroup>

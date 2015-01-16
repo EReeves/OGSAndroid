@@ -155,7 +155,7 @@ namespace OGSAndroid.API
         {
             var jObj = new JObject
             {
-                {"auth", Info.AuthID},
+                    {"auth", Info.GameAuth},
                 {"game_id", Info.GameID},
                 {"player_id", Info.PlayerID}
             };
@@ -163,11 +163,23 @@ namespace OGSAndroid.API
             ogsSocket.Emit("game/cancel", jObj);
         }
 
+        public void Resign()
+        {
+            var jObj = new JObject
+                {
+                    {"auth", Info.GameAuth},
+                    {"game_id", Info.GameID},
+                    {"player_id", Info.PlayerID}
+                };
+
+            ogsSocket.Emit("game/resign", jObj);
+        }
+
         public void Annul()
         {
             var jObj = new JObject
             {
-                {"auth", Info.AuthID},
+                    {"auth", Info.GameAuth},
                 {"game_id", Info.GameID},
                 {"player_id", Info.PlayerID}
             };
@@ -179,7 +191,7 @@ namespace OGSAndroid.API
         {
             var jObj = new JObject
             {
-                {"auth", Info.AuthID},
+                    {"auth", Info.GameAuth},
                 {"game_id", Info.GameID},
                 {"player_id", Info.PlayerID},
                 {"move_number", moveno}
@@ -192,7 +204,7 @@ namespace OGSAndroid.API
         {
             var jObj = new JObject
             {
-                {"auth", Info.AuthID},
+                    {"auth", Info.GameAuth},
                 {"game_id", Info.GameID},
                 {"player_id", Info.PlayerID},
                 {"move_number", moveno}
@@ -205,7 +217,7 @@ namespace OGSAndroid.API
         {
             var jObj = new JObject
             {
-                {"auth", Info.AuthID},
+                    {"auth", Info.GameAuth},
                 {"game_id", Info.GameID},
                 {"player_id", Info.PlayerID}
             };
@@ -213,11 +225,27 @@ namespace OGSAndroid.API
             ogsSocket.Emit("game/pause", jObj);
         }
 
+        public void Pass()
+        {
+            if (!OGSAPI.I.Authed)
+                return;
+
+            var jObj = new JObject
+                {
+                    {"auth", Info.GameAuth},
+                    {"game_id", Info.GameID},
+                    {"player_id", Info.PlayerID},
+                    {"move", ".."}
+                };
+
+            ogsSocket.Emit("game/move", jObj);
+        }
+
         public void Resume()
         {
             var jObj = new JObject
             {
-                {"auth", Info.AuthID},
+                    {"auth", Info.GameAuth},
                 {"game_id", Info.GameID},
                 {"player_id", Info.PlayerID}
             };

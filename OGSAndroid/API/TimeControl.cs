@@ -9,13 +9,16 @@ namespace OGSAndroid.API
         public static TimeSystem Black = new TimeSystem(OGSAndroid.Game.Stone.Black);
         public static TimeSystem White = new TimeSystem(OGSAndroid.Game.Stone.White);
 
-        private readonly static Timer countdown = new Timer(1000);
+        private static Timer countdown;
 
-        public static void Init(TextView black, TextView white, Activity act)
+        public static void Init(TextView black, TextView white, OGSAndroid.Activities.BoardActivity act)
         {
+            if(countdown != null)
+                countdown.Dispose();
+            countdown = new Timer(1000);
             countdown.Elapsed += (o,e) =>
             {
-                    if(((OGSAndroid.Activities.BoardActivity)act).GameView.CurrentTurn.Equals(Game.Stone.Black))
+                    if(((OGSAndroid.Activities.BoardActivity)act).GameView.CurrentAPIMove.Equals(Game.Stone.Black))
                         Black.Clock.TimeLeft -= 1000;
                     else
                         White.Clock.TimeLeft -= 1000;
@@ -24,6 +27,8 @@ namespace OGSAndroid.API
                 {
                     black.Text = Black.GuessTime();
                     white.Text = White.GuessTime();
+                    act.SetByoyomiStrings(Black.ByoyomiString,White.ByoyomiString);
+
                 });
             };
         }

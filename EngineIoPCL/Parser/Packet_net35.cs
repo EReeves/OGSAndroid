@@ -47,7 +47,7 @@ namespace Quobject.EngineIoClientDotNet.Parser
         public string Type { get; set; }
         public object Data { get; set; }
 
-        internal void Encode(IEncodeCallback callback)
+        internal void Encode(IEncodeCallback callback, bool utf8encode = false)
         {
             if (Data is byte[])
             {
@@ -64,7 +64,7 @@ namespace Quobject.EngineIoClientDotNet.Parser
 
             if (Data != null)
             {
-                encodedStringBuilder.Append(UTF8.Encode((string) Data));
+                encodedStringBuilder.Append(utf8encode ? UTF8.Encode((string) Data) : (string)Data);
             }
 
             callback.Call(encodedStringBuilder.ToString());
@@ -99,7 +99,7 @@ namespace Quobject.EngineIoClientDotNet.Parser
             throw new Exception("byteData == null");
         }
 
-        internal static Packet DecodePacket(string data)
+        internal static Packet DecodePacket(string data, bool utf8encode = false)
         {
             Debug.WriteLine("Packet received: " + data);
 
@@ -115,14 +115,16 @@ namespace Quobject.EngineIoClientDotNet.Parser
                 type = -1;
             }
 
-
-            try
+            if(utf8encode)
             {
-                data = UTF8.Decode(data);
-            }
-            catch (Exception)
-            {
-                Debug.WriteLine("Decode error, passing anyway. " + data);
+                try
+                {
+                    data = UTF8.Decode(data);
+                }
+                catch (Exception)
+                {
+                    Debug.WriteLine("Decode error, passing anyway. " + data);
+                }
             }
 
             if (type < 0 || type >= _packetsList.Count)
@@ -174,7 +176,7 @@ namespace Quobject.EngineIoClientDotNet.Parser
             var encodePayloadCallback = new EncodePayloadCallback(results);
             foreach (var packet in packets)
             {
-                packet.Encode(encodePayloadCallback);
+                packet.Encode(encodePayloadCallback, true);
             }
 
             callback.Call(Buffer.Concat(results.ToArray())); //new byte[results.Count][]
@@ -224,7 +226,7 @@ namespace Quobject.EngineIoClientDotNet.Parser
 
                     if (msg.Length != 0)
                     {
-                        Packet packet = DecodePacket(msg);
+                        Packet packet = DecodePacket(msg, true);
                         if (_err.Type == packet.Type && _err.Data == packet.Data)
                         {
                             callback.Call(_err, 0, 1);
@@ -312,7 +314,7 @@ namespace Quobject.EngineIoClientDotNet.Parser
                 var buffer = buffers[i];
                 if (buffer is string)
                 {
-                    callback.Call(DecodePacket((string) buffer), i, total);
+                    callback.Call(DecodePacket((string) buffer, true), i, total);
                 }
                 else if (buffer is byte[])
                 {

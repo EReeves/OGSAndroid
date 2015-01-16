@@ -140,10 +140,32 @@ namespace OGSAndroid.Activities
                 TimeControl.StartEstimating();
             };
 
-            TimeControl.Init(blackClock,whiteClock, this);
+            TimeControl.Init(blackClock, whiteClock, this);
 
             //Stop scrollview from consuming gesture events.
             chatDrawerScroll.SetOnTouchListener(chatDrawer);
+
+            //Cancel/resign
+            var cancelResignButton = FindViewById<Button>(Resource.Id.resignButton);
+            cancelResignButton.Click += (sender, e) =>
+            {
+                    if(GameView.Moves.Tree == null) return;
+                    if(GameView.Moves.Tree.Nodes.Count < Convert.ToInt32(GameView.Moves.Info.Size))
+                        RealTimeAPI.I.Cancel();
+                    else
+                        RealTimeAPI.I.Resign();
+            };
+
+            GameView.boardTouch.OnPlaceStone += (stone, e) =>  
+            {
+                    if(GameView.Moves.Tree.Nodes.Count >= Convert.ToInt32(GameView.Moves.Info.Size))
+                        cancelResignButton.Text = "Resign";
+            };
+
+            //Pass
+            var passButton = FindViewById<Button>(Resource.Id.passButton);
+            passButton.Click += (object sender, EventArgs e) => RealTimeAPI.I.Pass();
+
 
             ALog.Info("BoardActivity", "Created, Connecting...");
 
@@ -162,6 +184,18 @@ namespace OGSAndroid.Activities
             //Disconnect from game.
             RealTimeAPI.I.Disconnect();
             base.OnStop();
+        }
+
+        public void SetByoyomiStrings(string bl, string wh)
+        {
+
+            var b = FindViewById<TextView>(Resource.Id.byoyomiTextBlack);
+            var w = FindViewById<TextView>(Resource.Id.byoyomiTextWhite);
+
+            if(!TimeControl.Black.HideByoyomi)
+                b.Text = bl;
+            if(!TimeControl.White.HideByoyomi)
+                w.Text = wh;
         }
     }
 }

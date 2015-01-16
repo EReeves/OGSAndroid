@@ -19,6 +19,8 @@ namespace OGSAndroid.Game
 
         public void PopulateNodesList()
         {
+            if (FirstNode == null)
+                return;
             Nodes = Node<T>.Enumerator(FirstNode).ToList();
         }
 
@@ -80,6 +82,9 @@ namespace OGSAndroid.Game
         public static IEnumerable<Node<T>> Enumerator(Node<T> node)
         {
             yield return node;
+
+            if (node == null)
+                yield return null;
 
             foreach (var nn in node.Children.SelectMany(Enumerator))
             {

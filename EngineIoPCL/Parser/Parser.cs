@@ -18,9 +18,9 @@
             packet.Encode(callback);
         }
 
-        public static Packet DecodePacket(string data)
+        public static Packet DecodePacket(string data, bool utf8decode = false)
         {
-            return Packet.DecodePacket(data);
+            return Packet.DecodePacket(data, utf8decode);
         }
 
         public static Packet DecodePacket(byte[] data)
