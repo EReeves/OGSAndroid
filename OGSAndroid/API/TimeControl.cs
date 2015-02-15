@@ -23,6 +23,8 @@ namespace OGSAndroid.API
                     else
                         White.Clock.TimeLeft -= 1000;
 
+                    ALog.Info("CLOCK", "Timeleft" + White.Clock.TimeLeft);
+
                 act.RunOnUiThread(() =>
                 {
                     black.Text = Black.GuessTime();

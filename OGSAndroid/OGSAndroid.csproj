@@ -49,20 +49,20 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
-    <Reference Include="FlatUI">
-      <HintPath>..\Components\FlatUI-1.0\lib\android\FlatUI.dll</HintPath>
-    </Reference>
     <Reference Include="Xamarin.Android.Support.v4">
       <HintPath>..\packages\Xamarin.Android.Support.v4.21.0.3.0\lib\MonoAndroid10\Xamarin.Android.Support.v4.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Android.Support.v13">
       <HintPath>..\packages\Xamarin.Android.Support.v13.21.0.3.0\lib\MonoAndroid32\Xamarin.Android.Support.v13.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="WebSocket4Net">
       <HintPath>..\Extern\WebSocket4Net.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\ioextern\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="FlatUI">
+      <HintPath>..\Components\FlatUI-1.0\lib\android\FlatUI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -138,12 +138,6 @@
     </MonoDevelop>
   </ProjectExtensions>
   <ItemGroup>
-    <XamarinComponentReference Include="FlatUI">
-      <Version>1.0</Version>
-      <Visible>False</Visible>
-    </XamarinComponentReference>
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\raw\data.txt" />
   </ItemGroup>
   <ItemGroup />
@@ -160,5 +154,11 @@
       <Project>{6C5016F9-5484-47C1-B6E9-9320178C2118}</Project>
       <Name>SocketIoDotNetPCL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <XamarinComponentReference Include="FlatUI">
+      <Version>1.0</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
   </ItemGroup>
 </Project>

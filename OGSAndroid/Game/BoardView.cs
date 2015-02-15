@@ -21,7 +21,7 @@ namespace OGSAndroid.Game
         public Stone CurrentTurn = Stone.Black;
         private bool firstDraw = true;
         private bool initialized;
-        public HiddenReference<Stone[,]> stones;
+        public HiddenReference<Stone[,]> stones;//Not sure why I did this, it's not a java object?
 
         public BoardView(Context context, IAttributeSet attrs) : base(context)
         {
@@ -163,7 +163,7 @@ namespace OGSAndroid.Game
             col.AntiAlias = true;
 
             canvas.DrawCircle(ExtPad + Padding + ((stone.X - 1)*Spacing), ExtPad + Padding + ((stone.Y - 1)*Spacing),
-                (Spacing/2), col);
+                (Spacing/2)+0.5f, col);
             col.Alpha = 255;
         }
 

@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>SocketIoDotNetPCL</RootNamespace>
     <AssemblyName>SocketIoDotNetPCL</AssemblyName>
-    <TargetFrameworkProfile>Profile78</TargetFrameworkProfile>
+    <TargetFrameworkProfile>Profile7</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -53,11 +53,11 @@
     <Folder Include="Parser\" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="WebSocket4Net">
-      <HintPath>..\extern\WebSocket4Net.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\ioextern\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\portable-net45+wp80+win8+wpa81+aspnetcore50\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebSocket4Net">
+      <HintPath>..\Extern\WebSocket4Net.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -65,5 +65,8 @@
       <Project>{4B29EC0E-FBD1-45EF-B418-563162DC51AB}</Project>
       <Name>EngineIoPCL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

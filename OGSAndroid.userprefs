@@ -1,67 +1,11 @@
 ﻿<Properties StartupItem="OGSAndroid\OGSAndroid.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.015d1689511c2608" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="EngineIoPCL\Client\Transports\WebSocket_net35.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.SelectDevice" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="C:\Program Files (x86)\MSBuild\Microsoft\VisualStudio\v12.0\AppxPackage\Microsoft.AppXPackage.Targets">
     <Files>
-      <File FileName="OGSAndroid\ALog.cs" Line="38" Column="38" />
-      <File FileName="OGSAndroid\Activities\LoginActivity.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\Activities\Ext\ListViewInfiniteScroll.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\Activities\BoardActivity.cs" Line="7" Column="7" />
-      <File FileName="OGSAndroid\Activities\PlayerGameListActivity.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\Game\GameView.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\Game\SGF.cs" Line="1" Column="1" />
-      <File FileName="c:\Users\Evan\Documents\Projects\OGSAndroid\OGSAndroid\API\OGSAPI.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\Game\BoardView.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\Game\SGFView.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\Game\Move.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\API\RealTimeAPI.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\Game\BoardTouch.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\Game\Stone.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\Properties\AndroidManifest.xml" Line="1" Column="1" />
-      <File FileName="OGSAndroid\HiddenReference.cs" Line="1" Column="1" />
-      <File FileName="c:\Users\Evan\Documents\Projects\OGSAndroid\SocketIoDotNetPCL\Parser\Packet.cs" Line="1" Column="1" />
-      <File FileName="c:\Users\Evan\Documents\Projects\OGSAndroid\SocketIoDotNetPCL\Client\Socket.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\Game\SGFParser.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\Game\SGFTree.cs" Line="1" Column="1" />
-      <File FileName="c:\Users\Evan\Documents\Projects\SocketIoDotNetPCL\SocketIoDotNetPCL\Client\Socket.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\Game\OGSGame.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\External\UrlImageHelper\UrlImageViewHelper.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\External\UrlImageHelper\UrlImageViewCallback.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\External\UrlImageHelper\UrlImageCache.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\External\UrlImageHelper\DownloaderAsyncTask.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\Resources\Resource.designer.cs" Line="1" Column="1" />
-      <File FileName="OGSAndroid\Resources\AboutResources.txt" Line="1" Column="1" />
-      <File FileName="EngineIoPCL\Parser\Packet_net35.cs" Line="24" Column="24" />
-      <File FileName="EngineIoPCL\Parser\Parser.cs" Line="10" Column="10" />
-      <File FileName="EngineIoPCL\Client\Transports\WebSocket_net35.cs" Line="13" Column="13" />
+      <File FileName="SocketIoDotNetPCL\SocketIoDotNetPCL.csproj" Line="1" Column="1" />
+      <File FileName="EngineIoPCL\EngineIoPCL.csproj" Line="1" Column="1" />
+      <File FileName="C:\Program Files (x86)\MSBuild\Microsoft\VisualStudio\v12.0\AppxPackage\Microsoft.AppXPackage.Targets" Line="1" Column="1" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State expanded="True">
-          <Node name="EngineIoPCL" expanded="True">
-            <Node name="References" expanded="True" />
-            <Node name="Client" expanded="True">
-              <Node name="Transports" expanded="True" />
-            </Node>
-            <Node name="Parser" expanded="True" />
-          </Node>
-          <Node name="OGSAndroid" expanded="True">
-            <Node name="References" expanded="True" selected="True" />
-            <Node name="ComponentReferenceFolder" expanded="True" />
-            <Node name="Packages" expanded="True" />
-            <Node name="Activities" expanded="True" />
-            <Node name="API" expanded="True" />
-            <Node name="External" expanded="True">
-              <Node name="UrlImageHelper" expanded="True" />
-            </Node>
-            <Node name="Game" expanded="True" />
-            <Node name="Resources" expanded="True">
-              <Node name="drawable" expanded="True" />
-              <Node name="layout" expanded="True" />
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
