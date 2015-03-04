@@ -47,15 +47,19 @@ namespace OGSAndroid.API
             switch(time)
             {
                 case "simple":
+                    ClockType = SystemType.Simple;
                     break;
                 case "byoyomi":
                     ClockType = SystemType.Byoyomi;
                     break;
                 case "canadian":
+                    ClockType = SystemType.Canadian;
                     break;
                 case "absolute":
+                    ClockType = SystemType.Absolute;
                     break;
                 case "fischer":
+                    ClockType = SystemType.Fischer;
                     break;
             }
         }

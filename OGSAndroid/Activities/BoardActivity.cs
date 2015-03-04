@@ -18,7 +18,7 @@ using OGSAndroid.Game;
 namespace OGSAndroid.Activities
 {
     [Activity(Label = "Main", Theme = "@android:style/Theme.Holo.Light", Icon = "@drawable/icon",
-        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+        ConfigurationChanges = ConfigChanges.ScreenSize)]
     public class BoardActivity : Activity
     {
         private ChatDrawer chatDrawer;
