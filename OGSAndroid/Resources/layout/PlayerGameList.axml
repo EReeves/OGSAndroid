@@ -14,12 +14,13 @@
         android:layout_marginLeft="4.5dp"
         android:layout_marginRight="4.5dp"
         android:layout_marginBottom="4.5dp">
-        <FlatUI.FlatEditText
+        <FlatUI.FlatText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/pNameText"
             android:hint="Player Name(Case Sensitive)"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:inputType="text" />
         <FlatUI.FlatButton
             android:text="Search"
             android:layout_width="match_parent"

@@ -45,9 +45,14 @@ namespace OGSAndroid.Activities
             loadingPanel = FindViewById<RelativeLayout>(Resource.Id.loadingPanel);
             infiniteLoadingPanel = FindViewById<RelativeLayout>(Resource.Id.loadingPanelInfinite);
 
-            var searchButton = FindViewById<Button>(Resource.Id.searchButton);
-
+            var searchButton = FindViewById<Button>(Resource.Id.searchButton);           
             RegisterButtons(ref searchButton, ref gameListView);
+
+            //Set enter to search on editText
+            var enterListener = new OnEnterEditTextListener();
+            enterListener.Action = new System.Action(() => searchButton.PerformClick());
+            playerNameText.SetOnKeyListener(enterListener);
+            
 
             ListViewInfiniteScroll lvis = new ListViewInfiniteScroll(gameListView);                     
             InitInfiniteScroll(ref lvis);

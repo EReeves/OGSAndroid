@@ -99,6 +99,7 @@
     <Compile Include="External\UrlImageHelper\UrlImageViewHelper.cs" />
     <Compile Include="ALog.cs" />
     <Compile Include="HiddenReference.cs" />
+    <Compile Include="OnEnterEditTextListener.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -112,6 +113,7 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <None Include="packages.config" />
+    <AndroidResource Include="Resources\layout-land\Main.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml" />
