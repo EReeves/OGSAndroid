@@ -21,7 +21,7 @@ namespace OGSAndroid.Game
         public Stone CurrentTurn = Stone.Black;
         private bool firstDraw = true;
         private bool initialized;
-        public HiddenReference<Stone[,]> stones;//Not sure why I did this, it's not a java object?
+        public Stone[,] stones;
 
         public BoardView(Context context, IAttributeSet attrs) : base(context)
         {
@@ -32,8 +32,6 @@ namespace OGSAndroid.Game
             boardTouch = new BoardTouch(this);
             Padding = 20;
             Invalidate();
-
-            stones = new HiddenReference<Stone[,]>();
         }
 
         public int Padding { get; set; }
@@ -45,14 +43,14 @@ namespace OGSAndroid.Game
         private static void InitPaints(out Paint black, out Paint white, out Paint bg)
         {
             black = new Paint {AntiAlias = true, Color = Color.Black, StrokeWidth = 2};
-            white = new Paint {AntiAlias = true, Color = new Color(180, 180, 180)};
+            white = new Paint {AntiAlias = true, Color = new Color(210, 210, 210)};
             bg = new Paint {AntiAlias = true, Color = Color.SandyBrown, StrokeWidth = 3};
         }
 
         public void Initialize(int lines)
         {
             Lines = lines;
-            stones.Value = new Stone[Lines, Lines];
+            stones = new Stone[Lines, Lines];
             initialized = true;
         }
 
@@ -77,7 +75,7 @@ namespace OGSAndroid.Game
             DrawBoard(canvas);
 
 
-            foreach (var s in stones.Value)
+            foreach (var s in stones)
             {
                 if (s != null && s.Active)
                     DrawStone(canvas, s);
@@ -146,7 +144,7 @@ namespace OGSAndroid.Game
             {
                 col = blackPaint;
                 col.SetShader(new RadialGradient(ExtPad + Padding + ((stone.X - 1.2f)*Spacing),
-                    ExtPad + Padding + ((stone.Y - 1.3f)*Spacing), 40, new Color(45, 45, 45), col.Color,
+                    ExtPad + Padding + ((stone.Y - 1.3f)*Spacing), 40, new Color(55, 55, 55), col.Color,
                     Shader.TileMode.Mirror));
             }
             else
@@ -171,8 +169,8 @@ namespace OGSAndroid.Game
         {
             s.Val = CurrentTurn.Val;
             s.Active = true;
-            stones.Value[s.X - 1, s.Y - 1] = s;
-            Console.WriteLine(s.X + "," + s.Y);
+            stones[s.X - 1, s.Y - 1] = s;
+            //Console.WriteLine(s.X + "," + s.Y);
 
             CapturePass(s);
 
@@ -188,7 +186,7 @@ namespace OGSAndroid.Game
         {
             CurrentTurn = Stone.Black;
             boardTouch.Reset();
-            stones.Value = new Stone[Lines, Lines];
+            stones = new Stone[Lines, Lines];
             Invalidate();
         }
 
@@ -196,11 +194,12 @@ namespace OGSAndroid.Game
 
         private void CapturePass(Stone s)
         {
+            //Console.WriteLine(stones[0,12].Active);
             //Foreach adjacent stone get group and check for life.
             var surr = AdjacentStones(s);
             foreach (var st in surr)
             {
-                if (st == null)
+                if (st == null || !st.Active)
                     continue;
 
                 List<Stone> grp;
@@ -210,7 +209,7 @@ namespace OGSAndroid.Game
                 {
                     foreach (var dst in grp)
                     {
-                        stones.Value[dst.X - 1, dst.Y - 1].Active = false;
+                        stones[dst.X - 1, dst.Y - 1].Active = false;
                     }
                 }
             }
@@ -231,7 +230,7 @@ namespace OGSAndroid.Game
 
                     if (!InBounds(xx - 1, yy - 1)) continue;
 
-                    var res = stones.Value[xx - 1, yy - 1];
+                    var res = stones[xx - 1, yy - 1];
 
                     if (remOwn)
                     {
@@ -254,20 +253,20 @@ namespace OGSAndroid.Game
             var st = new Stone(s, s.X - 1, s.Y - 1);
 
             if (InBounds(st.X - 1, st.Y))
-                adj.Add(stones.Value[st.X - 1, st.Y]); //Left
+                adj.Add(stones[st.X - 1, st.Y]); //Left
             if (InBounds(st.X + 1, st.Y))
-                adj.Add(stones.Value[st.X + 1, st.Y]); //Right
+                adj.Add(stones[st.X + 1, st.Y]); //Right
             if (InBounds(st.X, st.Y - 1))
-                adj.Add(stones.Value[st.X, st.Y - 1]); //Up
+                adj.Add(stones[st.X, st.Y - 1]); //Up
             if (InBounds(st.X, st.Y + 1))
-                adj.Add(stones.Value[st.X, st.Y + 1]); //Down
+                adj.Add(stones[st.X, st.Y + 1]); //Down
 
             return adj;
         }
 
         private bool NullOrActiveExist(int x, int y)
         {
-            return stones.Value[x, y] == null || stones.Value[x, y].Active;
+            return stones[x, y] == null || stones[x, y].Active;
         }
 
         private bool InBounds(int x, int y)

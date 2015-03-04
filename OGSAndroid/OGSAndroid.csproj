@@ -28,7 +28,7 @@
     <AndroidLinkMode>Full</AndroidLinkMode>
     <ConsolePause>false</ConsolePause>
     <AndroidLinkSkip>PullToRefresharp.dll</AndroidLinkSkip>
-    <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
+    <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
     <AndroidSupportedAbis>armeabi;armeabi-v7a;x86</AndroidSupportedAbis>
     <MonoDroidExtraArgs>
     </MonoDroidExtraArgs>

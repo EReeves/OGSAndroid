@@ -1,20 +1,12 @@
 ﻿<Properties StartupItem="OGSAndroid\OGSAndroid.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.320458a88b5db17f" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="OGSAndroid\Game\BoardView.cs">
     <Files>
       <File FileName="SocketIoDotNetPCL\SocketIoDotNetPCL.csproj" Line="1" Column="1" />
       <File FileName="EngineIoPCL\EngineIoPCL.csproj" Line="1" Column="1" />
       <File FileName="C:\Program Files (x86)\MSBuild\Microsoft\VisualStudio\v12.0\AppxPackage\Microsoft.AppXPackage.Targets" Line="1" Column="1" />
+      <File FileName="OGSAndroid\Game\BoardView.cs" Line="15" Column="15" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State expanded="True">
-          <Node name="OGSAndroid" expanded="True">
-            <Node name="References" expanded="True" />
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
@@ -29,5 +21,5 @@
     <Watch file="c:\Users\Evan\Documents\Projects\SocketIoDotNetPCL\SocketIoDotNetPCL\Client\Socket.cs" line="251" offsetX="508" offsetY="4000" expression="args" liveUpdate="False" />
     <Watch file="c:\Users\Evan\Documents\Projects\OGSAndroid\SocketIoDotNetPCL\Parser\Packet.cs" line="65" offsetX="1064" offsetY="1119" expression="Newtonsoft.Json.Linq.JArray" liveUpdate="False" />
   </MonoDevelop.Ide.DebuggingService.PinnedWatches>
-  <MonoDevelop.Ide.ItemProperties.OGSAndroid MonoForAntroid.PreferredDevice="Nexus 4" />
+  <MonoDevelop.Ide.ItemProperties.OGSAndroid MonoForAntroid.PreferredDevice="Nexus 4" AndroidDesignerPreferredDevice="Nexus 4" />
 </Properties>
